@@ -19,7 +19,7 @@ const { title, navbar_selected } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<Navbar selected={navbar_selected} />
+		<Navbar selected_page={navbar_selected} />
 		<slot />
 	</body>
 </html>

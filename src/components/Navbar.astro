@@ -1,12 +1,16 @@
 ---
 export interface Props {
-    selected: number;
+    selected_page: number;
 }
 
-const { selected } = Astro.props;
+const { selected_page } = Astro.props;
 
-const sections = ["Accueil", "Biographie", "Galerie", "Témoignages"];
-const selected_section = sections[selected];
+const pages = [
+    { name: "Accueil", url: "/" },
+    { name: "Biographie", url: "/biography" },
+    { name: "Galerie", url: "/galery" },
+    { name: "Témoignages", url: "/testimony" },
+];
 ---
 
 <header>
@@ -55,25 +59,25 @@ const selected_section = sections[selected];
                     class="flex flex-col mt-4 font-medium sm:flex-row sm:space-x-8 md:space-x-16 lg:space-x-24 sm:mt-0"
                 >
                     {
-                        sections.map((section) => (
+                        pages.map((page, index) => (
                             <>
-                                {section == selected_section ? (
+                                {index == selected_page ? (
                                     <li>
                                         <a
-                                            href="#"
+                                            href={page["url"]}
                                             class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl rounded bg-orange-700 sm:bg-transparent sm:text-orange-950 sm:p-0 font-bold"
                                             aria-current="page"
                                         >
-                                            {section}
+                                            {page["name"]}
                                         </a>
                                     </li>
                                 ) : (
                                     <li>
                                         <a
-                                            href="#"
+                                            href={page["url"]}
                                             class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl hover:bg-orange-700 rounded sm:hover:bg-transparent sm:hover:text-orange-950 sm:p-0"
                                         >
-                                            {section}
+                                            {page["name"]}
                                         </a>
                                     </li>
                                 )}
