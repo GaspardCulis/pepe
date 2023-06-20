@@ -11,7 +11,7 @@ const selected_section = sections[selected];
 
 <header>
     <nav
-        class="bg-orange-600 border-gray-200 px-4 sm:px-6 py-2.5 dark:bg-gray-800"
+        class="bg-orange-600 border-gray-200 px-4 sm:px-6 py-2.5 lg:py-4 dark:bg-gray-800"
     >
         <div
             class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
@@ -52,7 +52,7 @@ const selected_section = sections[selected];
                 id="mobile-menu-2"
             >
                 <ul
-                    class="flex flex-col mt-4 font-medium sm:flex-row sm:space-x-8 sm:mt-0"
+                    class="flex flex-col mt-4 font-medium sm:flex-row sm:space-x-8 md:space-x-16 lg:space-x-24 sm:mt-0"
                 >
                     {
                         sections.map((section) => (
@@ -61,7 +61,7 @@ const selected_section = sections[selected];
                                     <li>
                                         <a
                                             href="#"
-                                            class="block py-2 pr-4 pl-3 text-white rounded bg-orange-700 sm:bg-transparent sm:text-orange-950 sm:p-0 font-bold"
+                                            class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl rounded bg-orange-700 sm:bg-transparent sm:text-orange-950 sm:p-0 font-bold"
                                             aria-current="page"
                                         >
                                             {section}
@@ -71,7 +71,7 @@ const selected_section = sections[selected];
                                     <li>
                                         <a
                                             href="#"
-                                            class="block py-2 pr-4 pl-3 text-white hover:bg-orange-700 rounded sm:hover:bg-transparent sm:hover:text-orange-950 sm:p-0"
+                                            class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl hover:bg-orange-700 rounded sm:hover:bg-transparent sm:hover:text-orange-950 sm:p-0"
                                         >
                                             {section}
                                         </a>
