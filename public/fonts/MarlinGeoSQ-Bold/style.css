@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Marlin Geo SQ';
+    src: local('Marlin Geo SQ Bold'), local('Marlin-Geo-SQ-Bold'),
+        url('MarlinGeoSQ-Bold.woff2') format('woff2'),
+        url('MarlinGeoSQ-Bold.woff') format('woff'),
+        url('MarlinGeoSQ-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
