@@ -1,5 +1,5 @@
 ---
-import Header from "../components/Header.astro";
+import Navbar from "../components/Navbar.astro";
 export interface Props {
 	title: string;
 	navbar_selected: number;
@@ -19,8 +19,14 @@ const { title, navbar_selected } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<Header selected_page={navbar_selected} />
+		<header>
+			<Navbar selected_page={navbar_selected} />
+		</header>
 		<slot />
 	</body>
 </html>
-<style></style>
+<style>
+	body {
+		background-color: #f2eee9;
+	}
+</style>
