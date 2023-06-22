@@ -42,7 +42,7 @@ import Layout from "../layouts/Layout.astro";
 				<h2 class="text-white text-2xl pb-8 sm:pb-0 sm:text-xl">
 					Galerie
 				</h2>
-				<div class="flex flex-col w-4/6">
+				<div class="flex flex-col w-4/6" id="galery-text">
 					<h2
 						class="text-white text-4xl sm:text-6xl md:text-8xl mb-8"
 					>
@@ -74,5 +74,11 @@ import Layout from "../layouts/Layout.astro";
 <style>
 	h2 {
 		font-family: "Marlin Geo SQ";
+	}
+
+	@media only screen and (max-width: 500px) {
+		#galery-text {
+			display: none;
+		}
 	}
 </style>
