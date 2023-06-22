@@ -7,3 +7,15 @@
 	font-weight: 800;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: "Marlin Geo SQ";
+	src: local("Marlin Geo SQ Extra Bold"), local("Marlin-Geo-SQ-Extra-Bold"),
+		url("fonts/MarlinGeoSQ-ExtraBold/MarlinGeoSQ-ExtraBold.woff2")
+			format("woff2"),
+		url("fonts/MarlinGeoSQ-ExtraBold/MarlinGeoSQ-ExtraBold.woff") format("woff"),
+		url("fonts/MarlinGeoSQ-ExtraBold/MarlinGeoSQ-ExtraBold.ttf")
+			format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
