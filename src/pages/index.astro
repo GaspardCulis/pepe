@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="Daniel Culis | Accueil" navbar_selected={0}>
 	<Hero />
 	<main
-		class="flex flex-col space-y-10 sm:py-16"
+		class="flex flex-col space-y-10 sm:pt-16"
 		style=" transform-style: preserve-3d;"
 	>
 		<section class="px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32">
@@ -14,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
 				<article class="flex flex-col">
 					<h2 class="text-2xl pb-8 sm:pb-0 sm:text-xl">Biographie</h2>
 					<div class="flex flex-col justify-center flex-grow">
-						<h2 class="text-xl sm:text-4xl pb-6 pr-4">
+						<h2 class="section-header pb-6 pr-4">
 							Lorem ipsum dolor sit amet
 						</h2>
 						<p class="pb-4 sm:pb-4 md:pb-6 lg:pb-8">
@@ -39,13 +39,9 @@ import Layout from "../layouts/Layout.astro";
 			<div
 				class="h-full w-full flex flex-col justify-between absolute p-10"
 			>
-				<h2 class="text-white text-2xl pb-8 sm:pb-0 sm:text-xl">
-					Galerie
-				</h2>
+				<h2 class="section-title">Galerie</h2>
 				<div class="flex flex-col w-4/6" id="galery-text">
-					<h2
-						class="text-white text-4xl sm:text-6xl md:text-8xl mb-8"
-					>
+					<h2 class="text-white section-header mb-8">
 						Lorem ipsum dolor sit amet
 					</h2>
 					<p class="text-white pb-4 sm:pb-4 md:pb-6 lg:pb-8">
@@ -65,13 +61,24 @@ import Layout from "../layouts/Layout.astro";
 				src="/img/email.jpg"
 			/>
 		</section>
-		<section>
-			<h2 class="text-2xl sm:text-4xl">Témoignages</h2>
-		</section>
 	</main>
 </Layout>
 
 <style>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	@layer components {
+		.section-title {
+			@apply text-white text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl pb-8 sm:pb-0;
+		}
+
+		.section-header {
+			@apply text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
+		}
+	}
+
 	h2 {
 		font-family: "Marlin Geo SQ";
 	}
