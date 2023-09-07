@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Hero from "../components/index/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 
 import tourImage from "../assets/img/tour.png";
 import emailImage from "../assets/img/email.jpg";
@@ -36,6 +37,7 @@ import emailImage from "../assets/img/email.jpg";
 				<Image src={tourImage} alt="Tour" />
 			</div>
 		</section>
+
 		<section
 			class="h-fit -z-10 overflow-visible"
 			style=" transform-style: preserve-3d;"
@@ -66,6 +68,8 @@ import emailImage from "../assets/img/email.jpg";
 				style="transform: translateZ(-10px)"
 			/>
 		</section>
+
+		<Footer />
 	</main>
 </Layout>
 
