@@ -1,77 +1,80 @@
 ---
+import { Image } from "astro:assets";
+import jarreImage from "../../assets/img/giga_jarre.jpg";
 ---
 
 <div class="h-fit -z-10 down-gradient overflow-visible">
-    <div
-        class="bg-black w-full h-full absolute z-10 load-animate"
-        id="black-overlay"
-    >
-    </div>
-    <div class="h-full w-full flex flex-col justify-center absolute p-10">
-        <h1 class="text-white text-6xl sm:text-8xl md:text-9xl load-animate">
-            Daniel Culis
-        </h1>
-        <h2 class="text-white text-4xl sm:text-5xl md:text-6xl load-animate">
-            potier d'art
-        </h2>
-    </div>
-    <img
-        src="/img/giga_jarre.jpg"
-        class="w-full -z-10"
-        style="transform: translateZ(-10px)"
-    />
+	<div
+		class="bg-black w-full h-full absolute z-10 load-animate"
+		id="black-overlay"
+	>
+	</div>
+	<div class="h-full w-full flex flex-col justify-center absolute p-10">
+		<h1 class="text-white text-6xl sm:text-8xl md:text-9xl load-animate">
+			Daniel Culis
+		</h1>
+		<h2 class="text-white text-4xl sm:text-5xl md:text-6xl load-animate">
+			potier d'art
+		</h2>
+	</div>
+	<Image
+		src={jarreImage}
+		alt="Jarre en terre cuite"
+		class="w-full -z-10"
+		style="transform: translateZ(-10px)"
+	/>
 </div>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
-    .down-gradient {
-        background-image: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.2) 10%,
-            rgba(0, 0, 0, 1)
-        );
-        transform-style: preserve-3d;
-    }
+	.down-gradient {
+		background-image: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.2) 10%,
+			rgba(0, 0, 0, 1)
+		);
+		transform-style: preserve-3d;
+	}
 
-    h1 {
-        font-family: "Great Vibes", cursive;
-    }
+	h1 {
+		font-family: "Great Vibes", cursive;
+	}
 
-    #black-overlay:not(.load-animate) {
-        visibility: hidden;
-    }
+	#black-overlay:not(.load-animate) {
+		visibility: hidden;
+	}
 
-    @media screen and (min-width: 1030px) {
-        #black-overlay.load-animate {
-            animation: reveal 3s linear forwards;
-        }
+	@media screen and (min-width: 1030px) {
+		#black-overlay.load-animate {
+			animation: reveal 3s linear forwards;
+		}
 
-        h1.load-animate {
-            opacity: 0;
-            animation: reveal 3s linear reverse forwards;
-            animation-delay: 1s;
-        }
+		h1.load-animate {
+			opacity: 0;
+			animation: reveal 3s linear reverse forwards;
+			animation-delay: 1s;
+		}
 
-        h2.load-animate {
-            opacity: 0;
-            animation: reveal 3s linear reverse forwards;
-            animation-delay: 3s;
-        }
+		h2.load-animate {
+			opacity: 0;
+			animation: reveal 3s linear reverse forwards;
+			animation-delay: 3s;
+		}
 
-        @keyframes reveal {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-    }
-    @media screen and (max-width: 1030px) {
-        #black-overlay {
-            visibility: hidden;
-        }
-    }
+		@keyframes reveal {
+			0% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+	}
+	@media screen and (max-width: 1030px) {
+		#black-overlay {
+			visibility: hidden;
+		}
+	}
 </style>

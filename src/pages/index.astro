@@ -1,6 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import Hero from "../components/index/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+
+import tourImage from "../assets/img/tour.png";
+import emailImage from "../assets/img/email.jpg";
 ---
 
 <Layout title="Daniel Culis | Accueil" navbar_selected={0}>
@@ -29,7 +33,7 @@ import Layout from "../layouts/Layout.astro";
 						>
 					</div>
 				</article>
-				<img class="" src="/img/tour.png" />
+				<Image src={tourImage} alt="Tour" />
 			</div>
 		</section>
 		<section
@@ -55,10 +59,11 @@ import Layout from "../layouts/Layout.astro";
 					>Voir plus</a
 				>
 			</div>
-			<img
+			<Image
+				src={emailImage}
+				alt="Prise de vue d'un email"
 				class="w-full -z-10 pointer-events-none"
 				style="transform: translateZ(-10px)"
-				src="/img/email.jpg"
 			/>
 		</section>
 	</main>
