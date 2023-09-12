@@ -6,6 +6,7 @@
 		url("fonts/MarlinGeoSQ-Bold/MarlinGeoSQ-Bold.ttf") format("truetype");
 	font-weight: 800;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -18,4 +19,5 @@
 			format("truetype");
 	font-weight: 800;
 	font-style: normal;
+	font-display: swap;
 }
