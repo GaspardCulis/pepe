@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import jarreImage from "../../assets/img/giga_jarre.jpg";
+import { Content } from "../../content/acceuil/citation.md";
 ---
 
 <div class="h-fit -z-10 down-gradient overflow-visible">
@@ -9,18 +10,25 @@ import jarreImage from "../../assets/img/giga_jarre.jpg";
 		id="black-overlay"
 	>
 	</div>
-	<div
-		class="h-full w-full flex justify-end absolute px-4 lg:px-10 xl:px-32 space-x-8"
-	>
-		<div class="flex flex-col justify-top text-white w-fit pt-16 2xl:pt-32">
-			<h1
-				class="text-4xl sm:text-8xl md:text-9xl load-animate whitespace-nowrap w-fit"
+	<div class="h-full w-full flex flex-col absolute">
+		<div class="flex justify-end">
+			<div
+				class="flex flex-col text-white w-fit pt-16 2xl:pt-32 pr-16 lg:pr-24 xl:pr-32"
 			>
-				Daniel Culis
-			</h1>
-			<h2 class="text-xl sm:text-5xl md:text-6xl load-animate w-fit">
-				potier d'art
-			</h2>
+				<h1
+					class="text-6xl sm:text-8xl lg:text-9xl load-animate whitespace-nowrap w-fit"
+				>
+					Daniel Culis
+				</h1>
+				<h2 class="text-xl sm:text-5xl md:text-6xl load-animate w-fit">
+					potier d'art
+				</h2>
+			</div>
+		</div>
+		<div
+			class="md-container load-animate hidden lg:flex flex-col flex-grow my-4 pt-0 sm:pt-1 lg:pt-2 xl:pt-12 px-12 xl:px-44 prose max-w-none text-white text-center"
+		>
+			<Content />
 		</div>
 	</div>
 	<Image
@@ -47,6 +55,11 @@ import jarreImage from "../../assets/img/giga_jarre.jpg";
 		font-family: "Great Vibes", cursive;
 	}
 
+	.md-container {
+		overflow: hidden;
+		overflow-x: hidden;
+	}
+
 	#black-overlay:not(.load-animate) {
 		visibility: hidden;
 	}
@@ -68,6 +81,14 @@ import jarreImage from "../../assets/img/giga_jarre.jpg";
 			animation-delay: 3s;
 		}
 
+		.md-container.load-animate {
+			opacity: 0;
+			animation:
+				reveal 3s linear reverse forwards,
+				scroll 40s ease-in-out infinite;
+			animation-delay: 5s;
+		}
+
 		@keyframes reveal {
 			0% {
 				opacity: 1;
@@ -81,6 +102,30 @@ import jarreImage from "../../assets/img/giga_jarre.jpg";
 	@media screen and (max-width: 1030px) {
 		#black-overlay {
 			visibility: hidden;
+		}
+	}
+</style>
+<style is:inline>
+	.md-container p {
+		margin-block: 0.5rem;
+	}
+
+	@media screen and (min-width: 1450px) {
+		.md-container p {
+			font-size: 1.2rem;
+		}
+	}
+
+	@media screen and (min-width: 1650px) {
+		.md-container p {
+			font-size: 1.5rem;
+		}
+	}
+
+	@media screen and (min-width: 2030px) {
+		.md-container p {
+			font-size: 2rem;
+			margin-block: 1rem;
 		}
 	}
 </style>
