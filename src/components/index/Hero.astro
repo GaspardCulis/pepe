@@ -26,7 +26,7 @@ import { Content } from "../../content/acceuil/citation.md";
 			</div>
 		</div>
 		<div
-			class="md-container load-animate hidden lg:flex flex-col flex-grow my-4 pt-0 sm:pt-1 lg:pt-2 xl:pt-12 px-12 xl:px-44 prose max-w-none text-white text-center"
+			class="md-container load-animate hidden lg:block flex-grow my-4 pt-1 lg:pt-2 xl:pt-12 px-12 xl:px-44 prose max-w-none text-white text-center"
 		>
 			<Content />
 		</div>
@@ -107,7 +107,7 @@ import { Content } from "../../content/acceuil/citation.md";
 </style>
 <style is:inline>
 	.md-container p {
-		margin-block: 0.5rem;
+		margin-block: 1rem;
 	}
 
 	@media screen and (min-width: 1450px) {
@@ -124,8 +124,17 @@ import { Content } from "../../content/acceuil/citation.md";
 
 	@media screen and (min-width: 2030px) {
 		.md-container p {
+			font-size: 1.75rem;
+			margin-block: 2rem;
+		}
+	}
+
+	@media screen and (min-width: 2300px) {
+		.md-container {
+			padding-top: 6%;
+		}
+		.md-container p {
 			font-size: 2rem;
-			margin-block: 1rem;
 		}
 	}
 </style>
