@@ -30,8 +30,12 @@ Il reçoit le titre de Maître Artisan en 1991.
 A cette époque, il participe à de nombreuses expositions céramiques prestigieuses aux cotés de potiers renommés comme Robert Deblander, Dominique Pouchain, Denis Caraty, Marc Uzan et d’autres encore… 
 Il participera ainsi à de nombreuses reprises au marché des Tupiniers de Lyon et exposera aux différentes éditions de la biennale des métiers d’art de Villeurbanne.
 
-Dans ces années 90, ne souhaitant pas se borner à un seul horizon, aussi cristallisé soit-il, sa curiosité l’amène à s’intéresser à la technique des jarres à la corde. Son goût pour les défis le conduit à réaliser pour différentes communes des jarres monumentales nécessitant jusqu’à 600kg de terre. La taille de ces pièces imposent une cuisson au bois dans des fosses creusées spécialement. Réalisée en public la cuisson assure un spectacle et une animation inoubliable !
-Cette période de production artistique prolifique ne l’empêche pas de continuer à enseigner, à transmettre. Sa passion il va notamment la transmettre à sa fille Elodie qui s’installera comme potière en 1994 et ensuite à son fils Florian qui ouvrira son atelier en 2006 rejoint par sa compagne Anaïs en 2009. Tous vont à leur tour créer et enseigner.
+Dans ces années 90, ne souhaitant pas se borner à un seul horizon, aussi cristallisé soit-il, sa curiosité l’amène à s’intéresser à la technique des jarres à la corde. Son goût pour les défis le conduit à réaliser pour différentes communes des jarres monumentales nécessitant jusqu’à 600kg de terre. La taille de ces pièces impose une cuisson au bois dans des fosses creusées spécialement. Réalisée en public la cuisson assure un spectacle et une animation inoubliable !
+
+Cette période de production artistique prolifique ne l’empêche pas de continuer à enseigner et à transmettre. 
+En plus des cours qu’il continue à donner dans son atelier, il sera formateur pour la maison de la terre à Dieulefit pendant quelques années.
+
+Enseigner et transmettre sa passion il va le faire aussi avec sa fille Elodie qui s’installera comme potière en 1994 et ensuite avec son fils Florian qui ouvrira son atelier en 2006 rejoint par sa compagne Anaïs en 2009. Tous vont à leur tour créer et enseigner.
 
 Après une première exposition en 2011 où Daniel présente ses cristallisations aux cotés de Georges Lanteri et Alain Fichot, la maison de la céramique de saint Uze organisera en 2018 une exposition regroupant des œuvres de Daniel, Elodie, Florian et Anaïs intitulée : «Les Culis une famille de Potiers d’art».
 
