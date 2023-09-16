@@ -3,8 +3,8 @@ import { Image } from "astro:assets";
 import Hero from "../components/index/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 
-import tourImage from "../assets/img/tour.png";
-import emailImage from "../assets/img/email.jpg";
+import tourImage from "../assets/img/tournage.jpg";
+import emailImage from "../assets/img/critallisation_macro.png";
 ---
 
 <Layout title="Daniel Culis | Accueil" navbar_selected={0}>
@@ -13,23 +13,26 @@ import emailImage from "../assets/img/email.jpg";
 		class="flex flex-col space-y-10 sm:pt-16"
 		style=" transform-style: preserve-3d;"
 	>
-		<section class="px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32">
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-8">
+		<section class="section-section">
+			<div
+				class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-8 lg:mb-12 xl:mb-24 2xl:mb-24"
+			>
 				<article class="flex flex-col">
-					<h2 class="text-2xl pb-8 sm:pb-0 sm:text-xl">Parcours</h2>
+					<a
+						href="/parcours"
+						class="text-2xl pb-8 sm:pb-4 sm:text-xl hover:underline underline-offset-4 font-bold"
+						>Parcours</a
+					>
 					<div class="flex flex-col justify-center flex-grow">
-						<h2 class="section-header pb-6 pr-4">
-							Lorem ipsum dolor sit amet
+						<h2
+							class="text-lg md:text-3xl lg:text-4xl xl:text-5xl pb-4 pr-4"
+						>
+							Si de tes mains ma poterie tu palpes, sache que
+							c'est mon coeur que tu caresses.
 						</h2>
-						<p class="pb-4 sm:pb-4 md:pb-6 lg:pb-8">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Tempore aliquam beatae ad voluptatibus,
-							maiores excepturi sint quibusdam perferendis.
-						</p>
-						<a
-							href="/parcours"
-							class="underline underline-offset-4 font-bold"
-							>Son histoire</a
+						<i
+							class="pb-4 sm:pb-4 md:pb-6 lg:pb-8 text-lg xl:text-xl"
+							>- Daniel Culis</i
 						>
 					</div>
 				</article>
@@ -42,7 +45,7 @@ import emailImage from "../assets/img/email.jpg";
 			style=" transform-style: preserve-3d;"
 		>
 			<div
-				class="h-full w-full flex flex-col justify-between absolute p-10"
+				class="h-full w-full flex flex-col justify-between absolute py-10 section-section"
 			>
 				<h2 class="section-title">Galerie</h2>
 				<div class="flex flex-col w-4/6" id="galery-text">
@@ -81,7 +84,11 @@ import emailImage from "../assets/img/email.jpg";
 		}
 
 		.section-header {
-			@apply text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
+			@apply text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
+		}
+
+		.section-section {
+			@apply px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32;
 		}
 	}
 
