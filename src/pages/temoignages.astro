@@ -1,11 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const temoignages = await Astro.glob("../content/temoignages/*.md");
+console.log(temoignages);
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
-    <main>
-        <h1>Helo</h1>
-    </main>
-</Layout>
+	<main
+		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
+	>
+		{
+			temoignages.map((md) => {
+				return <md.Content />;
+			})
+		}
+	</main>
 
-<style></style>
+	<style></style>
+</Layout>
