@@ -1,20 +1,37 @@
 ---
+import TestimonyForm from "../components/TestimonyForm.astro";
 import Layout from "../layouts/Layout.astro";
 
+import "swiper/css";
+
 const temoignages = await Astro.glob("../content/temoignages/*.md");
-console.log(temoignages);
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
-	<main
-		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
-	>
-		{
-			temoignages.map((md) => {
-				return <md.Content />;
-			})
-		}
+	<main class="swiper m-auto pt-12 text-justify">
+		<div class="swiper-wrapper prose lg:prose-xl">
+			{
+				temoignages.map((md) => (
+					<div class="swiper-slide">
+						<md.Content />
+					</div>
+				))
+			}
+		</div>
 	</main>
 
+	<TestimonyForm />
+
+	<script>
+		import Swiper from "swiper";
+
+		const swiper = new Swiper(".swiper", {
+			slidesPerView: "auto",
+			centeredSlides: true,
+			spaceBetween: 30,
+			rewind: true,
+			autoHeight: true,
+		});
+	</script>
 	<style></style>
 </Layout>
