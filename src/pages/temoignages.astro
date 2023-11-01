@@ -12,7 +12,7 @@ const temoignages = await Astro.glob("../content/temoignages/*.md");
 		<div class="swiper-wrapper prose lg:prose-xl">
 			{
 				temoignages.map((md) => (
-					<div class="swiper-slide">
+					<div class="swiper-slide px-3">
 						<md.Content />
 					</div>
 				))
@@ -28,7 +28,7 @@ const temoignages = await Astro.glob("../content/temoignages/*.md");
 		const swiper = new Swiper(".swiper", {
 			slidesPerView: "auto",
 			centeredSlides: true,
-			spaceBetween: 30,
+			spaceBetween: 12,
 			rewind: true,
 			autoHeight: true,
 		});
