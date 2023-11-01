@@ -1,0 +1,19 @@
+---
+const { frontmatter } = Astro.props;
+---
+
+<div class="testimony shadow-lg rounded-lg">
+	<div class="content border-b-2 px-16 py-8 text-center"><slot /></div>
+	<div class="author_info text-center mb-12 p-6">
+		<h2 class="author not-prose text-3xl font-bold">
+			{frontmatter.author}
+		</h2>
+		<p class="not-prose text-gray-500 text-sm">{frontmatter.author_role}</p>
+	</div>
+</div>
+<style>
+	.testimony {
+		width: inherit;
+		height: inherit;
+	}
+</style>
