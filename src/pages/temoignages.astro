@@ -1,17 +1,24 @@
 ---
+import { getCollection } from "astro:content";
+
 import TestimonyForm from "../components/TestimonyForm.astro";
 import Layout from "../layouts/Layout.astro";
 
 import "swiper/css";
 
-const temoignages = await Astro.glob("../content/temoignages/*.md");
+const content = (await getCollection("temoignages")) || [];
+const testimonies = await Promise.all(
+	content.map(async (t) => {
+		return await t.render();
+	}),
+);
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
-	<main class="swiper m-auto pt-12 text-justify">
+	<main class="swiper m-auto text-justify">
 		<div class="swiper-wrapper prose lg:prose-xl">
 			{
-				temoignages.map((md) => (
+				testimonies.map((md) => (
 					<div class="swiper-slide px-3 pt-6">
 						<md.Content />
 					</div>
