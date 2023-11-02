@@ -17,7 +17,26 @@
 			doloremque, iusto, pariatur possimus magnam iure odit explicabo,
 			dicta facere?
 		</p>
-		<form action="#" class="space-y-8">
+		<form
+			action="https://api.emailjs.com/api/v1.0/email/send-form"
+			method="post"
+			class="space-y-8"
+		>
+			<div>
+				<label
+					for="name"
+					class="block mb-2 text-sm font-medium text-gray-900"
+					>Nom</label
+				>
+				<input
+					type="text"
+					id="email"
+					name="from_name"
+					class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+					placeholder="Jean Dupont"
+					required
+				/>
+			</div>
 			<div>
 				<label
 					for="email"
@@ -27,6 +46,7 @@
 				<input
 					type="email"
 					id="email"
+					name="from_email"
 					class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
 					placeholder="exemple@mail.com"
 					required
@@ -40,10 +60,26 @@
 				>
 				<textarea
 					id="message"
+					name="message"
 					rows="6"
 					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
 					placeholder="Laissez un message..."></textarea>
 			</div>
+			<input
+				hidden
+				name="user_id"
+				value={import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY}
+			/>
+			<input
+				hidden
+				name="service_id"
+				value={import.meta.env.PUBLIC_EMAILJS_SERVICE_ID}
+			/>
+			<input
+				hidden
+				name="template_id"
+				value={import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID}
+			/>
 			<button
 				type="submit"
 				class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
@@ -52,7 +88,11 @@
 		</form>
 	</div>
 </section>
+<script>
+	import emailjs from "@emailjs/browser";
 
+	emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+</script>
 <style>
 	#testimony-form {
 		background-color: #ffe2c3;
