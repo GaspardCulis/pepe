@@ -106,7 +106,7 @@
 		emailjs
 			.sendForm(
 				import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID + "jaaj",
+				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
 				"#form",
 			)
 			.then((_) => {
