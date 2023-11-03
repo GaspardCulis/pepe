@@ -62,6 +62,7 @@
 					placeholder="Laissez un message..."></textarea>
 			</div>
 			<button
+				id="submit-button"
 				type="submit"
 				class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
 				>Envoyer</button
@@ -76,13 +77,29 @@
 	emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
 
 	const form = document.getElementById("form") as HTMLFormElement;
+	const button = document.getElementById(
+		"submit-button",
+	) as HTMLButtonElement;
 
 	form.addEventListener("submit", (ev) => {
-		emailjs.sendForm(
-			import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-			import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-			"#form",
-		);
+		button.disabled = true;
+
+		emailjs
+			.sendForm(
+				import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+				"#form",
+			)
+			.then((_) => {
+				button.classList.add("success");
+				button.innerText = "Témoignage envoyé !";
+			})
+			.catch((err) => {
+				button.classList.add("error");
+				console.error(err);
+
+				button.innerText = "Erreur !";
+			});
 
 		ev.preventDefault();
 	});
@@ -94,6 +111,24 @@
 	}
 
 	button {
-		background-color: #fdba74;
+		background: linear-gradient(
+			110deg,
+			#fc4250 33%,
+			#fdba74 33%,
+			#fdba74 66%,
+			#a8df8e 66%
+		);
+		background-position-x: 50%;
+		background-size: 340%;
+
+		transition: background-position-x ease-in-out 1s;
+	}
+
+	button.success {
+		background-position-x: 100%;
+	}
+
+	button.error {
+		background-position-x: 0%;
 	}
 </style>
