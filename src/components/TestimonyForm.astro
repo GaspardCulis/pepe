@@ -26,7 +26,7 @@
 				>
 				<input
 					type="text"
-					id="email"
+					id="name"
 					name="from_name"
 					class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
 					placeholder="Jean Dupont"
@@ -68,6 +68,13 @@
 				>Envoyer</button
 			>
 		</form>
+		<div id="manual-mail-msg" class="overflow-hidden mt-4">
+			Si ce formulaire ne fonctionne pas correctement vous pouvez <a
+				id="manual-mail-link"
+				href="#"
+				class="underline">directement nous envoyer un mail</a
+			>.
+		</div>
 	</div>
 </section>
 
@@ -77,30 +84,58 @@
 	emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
 
 	const form = document.getElementById("form") as HTMLFormElement;
-	const button = document.getElementById(
+	const name_input = document.getElementById("name") as HTMLInputElement;
+	const message_input = document.getElementById(
+		"message",
+	) as HTMLTextAreaElement;
+
+	const submit_button = document.getElementById(
 		"submit-button",
 	) as HTMLButtonElement;
 
+	const manual_mail_msg = document.getElementById(
+		"manual-mail-msg",
+	) as HTMLDivElement;
+	const manual_mail_link = document.getElementById(
+		"manual-mail-link",
+	) as HTMLLinkElement;
+
 	form.addEventListener("submit", (ev) => {
-		button.disabled = true;
+		submit_button.disabled = true;
 
 		emailjs
 			.sendForm(
 				import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID + "jaaj",
 				"#form",
 			)
 			.then((_) => {
-				button.classList.add("success");
-				button.innerText = "Témoignage envoyé !";
+				submit_button.classList.add("success");
+				submit_button.innerText = "Témoignage envoyé !";
 			})
 			.catch((err) => {
-				button.classList.add("error");
+				submit_button.classList.add("error");
 				console.error(err);
 
-				button.innerText = "Erreur !";
+				submit_button.innerText = "Erreur !";
+
+				setTimeout(
+					() => manual_mail_msg.classList.add("visible"),
+					1000,
+				);
 			});
 
+		ev.preventDefault();
+	});
+
+	manual_mail_link.addEventListener("click", (ev) => {
+		window.open(
+			`mailto:${
+				import.meta.env.PUBLIC_CONTACT_MAIL
+			}?subject=Témoignage de ${name_input.value}&body=${
+				message_input.value
+			}`,
+		);
 		ev.preventDefault();
 	});
 </script>
@@ -130,5 +165,14 @@
 
 	button.error {
 		background-position-x: 0%;
+	}
+
+	#manual-mail-msg {
+		height: 0px;
+		transition: height ease-in-out 1s;
+	}
+
+	#manual-mail-msg.visible {
+		height: 24px;
 	}
 </style>
