@@ -68,12 +68,14 @@
 				>Envoyer</button
 			>
 		</form>
-		<div id="manual-mail-msg" class="overflow-hidden mt-4">
-			Si ce formulaire ne fonctionne pas correctement vous pouvez <a
-				id="manual-mail-link"
-				href="#"
-				class="underline">directement nous envoyer un mail</a
-			>.
+		<div class="overflow-y-hidden mt-4">
+			<p id="manual-mail-msg">
+				Si ce formulaire ne fonctionne pas correctement vous pouvez <a
+					id="manual-mail-link"
+					href="#"
+					class="underline">directement nous envoyer un mail</a
+				>.
+			</p>
 		</div>
 	</div>
 </section>
@@ -164,11 +166,11 @@
 	}
 
 	#manual-mail-msg {
-		height: 0px;
-		transition: height ease-in-out 1s;
+		transform: translateY(-100%);
+		transition: transform ease-in-out 1s;
 	}
 
 	#manual-mail-msg.visible {
-		height: 24px;
+		transform: translateY(0%);
 	}
 </style>
