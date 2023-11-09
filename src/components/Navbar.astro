@@ -7,11 +7,11 @@ export interface Props {
 
 const { selected_page } = Astro.props;
 
-const pages = [
-	{ name: "Accueil", url: "/index.html" },
-	{ name: "Parcours", url: "/parcours" },
-	{ name: "Galerie", url: "/galerie" },
-	{ name: "Témoignages", url: "/temoignages" },
+const pages: NavbarMenu[] = [
+	{ name: "Accueil", href: "/index.html" },
+	{ name: "Parcours", href: "/parcours" },
+	{ name: "Galerie", href: "/galerie" },
+	{ name: "Témoignages", href: "/temoignages" },
 ];
 ---
 
@@ -61,8 +61,7 @@ const pages = [
 					pages.map((page, index) => (
 						<NavbarItem
 							selected={index == selected_page}
-							text={page["name"]}
-							href={page["url"]}
+							data={page}
 						/>
 					))
 				}
@@ -74,7 +73,7 @@ const pages = [
 <script>
 	document
 		.getElementsByTagName("button")[0]
-		.addEventListener("click", (event) => {
+		.addEventListener("click", (_event) => {
 			document.querySelectorAll(".mobile-menu-toggle").forEach((e) => {
 				e.classList.toggle("hidden");
 			});

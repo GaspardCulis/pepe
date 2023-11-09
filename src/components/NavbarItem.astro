@@ -1,31 +1,30 @@
 ---
 export interface Props {
 	selected: boolean;
-	text: string;
-	href: string;
+	data: NavbarMenu;
 }
 
-const { selected, text, href } = Astro.props;
+const { selected, data } = Astro.props;
 ---
 
 {
 	selected ? (
 		<li>
 			<a
-				href={href}
+				href={data.href}
 				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl rounded bg-gray-900 sm:bg-transparent sm:text-orange-300 sm:p-0 font-bold"
 				aria-current="page"
 			>
-				{text}
+				{data.name}
 			</a>
 		</li>
 	) : (
 		<li>
 			<a
-				href={href}
+				href={data.href}
 				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl hover:bg-gray-900 rounded sm:hover:bg-transparent sm:hover:text-orange-300 sm:p-0"
 			>
-				{text}
+				{data.name}
 			</a>
 		</li>
 	)
