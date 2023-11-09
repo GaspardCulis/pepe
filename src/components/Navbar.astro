@@ -1,4 +1,6 @@
 ---
+import NavbarItem from "./NavbarItem.astro";
+
 export interface Props {
 	selected_page: number;
 }
@@ -26,7 +28,7 @@ const pages = [
 				aria-expanded="false"
 			>
 				<span class="sr-only">Open main menu</span>
-				<svg
+				<svgname
 					class="w-6 h-6 mobile-menu-toggle"
 					fill="currentColor"
 					viewBox="0 0 20 20"
@@ -34,7 +36,7 @@ const pages = [
 					><path
 						fill-rule="evenodd"
 						d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-						clip-rule="evenodd"></path></svg
+						clip-rule="evenodd"></path></svgname
 				>
 				<svg
 					class="hidden w-6 h-6 mobile-menu-toggle"
@@ -57,28 +59,11 @@ const pages = [
 			>
 				{
 					pages.map((page, index) => (
-						<>
-							{index == selected_page ? (
-								<li>
-									<a
-										href={page["url"]}
-										class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl rounded bg-gray-900 sm:bg-transparent sm:text-orange-300 sm:p-0 font-bold"
-										aria-current="page"
-									>
-										{page["name"]}
-									</a>
-								</li>
-							) : (
-								<li>
-									<a
-										href={page["url"]}
-										class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl hover:bg-gray-900 rounded sm:hover:bg-transparent sm:hover:text-orange-300 sm:p-0"
-									>
-										{page["name"]}
-									</a>
-								</li>
-							)}
-						</>
+						<NavbarItem
+							selected={index == selected_page}
+							text={page["name"]}
+							href={page["url"]}
+						/>
 					))
 				}
 			</ul>
