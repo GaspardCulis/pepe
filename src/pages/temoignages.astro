@@ -8,9 +8,7 @@ import "swiper/css";
 
 const content = (await getCollection("temoignages")) || [];
 const testimonies = await Promise.all(
-	content.map(async (t) => {
-		return await t.render();
-	}),
+	content.map(async (t) => await t.render()),
 );
 ---
 
