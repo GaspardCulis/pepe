@@ -7,9 +7,9 @@ export interface Props {
 const { selected, data } = Astro.props;
 ---
 
-{
-	selected ? (
-		<li>
+<li class="navbar-item flex flex-col justify-start items-center">
+	{
+		selected ? (
 			<a
 				href={data.href}
 				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl rounded bg-gray-900 sm:bg-transparent sm:text-orange-300 sm:p-0 font-bold"
@@ -17,15 +17,43 @@ const { selected, data } = Astro.props;
 			>
 				{data.name}
 			</a>
-		</li>
-	) : (
-		<li>
+		) : (
 			<a
 				href={data.href}
 				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl hover:bg-gray-900 rounded sm:hover:bg-transparent sm:hover:text-orange-300 sm:p-0"
 			>
 				{data.name}
 			</a>
-		</li>
-	)
-}
+		)
+	}
+	{
+		data.submenus && (
+			<div class="hidden submenu absolute min-w-[8rem] pt-12 pb-3 px-2 z-50 flex flex-col items-center text-white truncate">
+				{data.submenus.map((sub) => (
+					<a
+						href={sub.href}
+						class="mx-6 py-2 w-full text-center bg-[#FFE2C3] text-black hover:text-white hover:bg-[#FDBA74]"
+					>
+						{sub.name}
+					</a>
+				))}
+			</div>
+		)
+	}
+</li>
+<style>
+	.submenu a:first-child {
+		border-radius: 8px 8px 0px 0px;
+	}
+
+	.submenu a:last-child {
+		border-radius: 0px 0px 8px 8px;
+	}
+
+	.navbar-item:hover .submenu {
+		display: flex;
+	}
+	.submenu:hover {
+		display: flex;
+	}
+</style>

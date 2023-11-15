@@ -10,8 +10,38 @@ const { selected_page } = Astro.props;
 const pages: NavbarMenu[] = [
 	{ name: "Accueil", href: "/index.html" },
 	{ name: "Parcours", href: "/parcours" },
-	{ name: "Galerie", href: "/galerie" },
-	{ name: "Témoignages", href: "/temoignages" },
+	{
+		name: "Galerie",
+		href: "/galerie",
+		submenus: [
+			{
+				name: "Jarre à la corde",
+				href: "/galerie/jarre-a-la-corde",
+			},
+			{
+				name: "Modelage et Contemporain",
+				href: "/galerie/modelage-et-contemporain",
+			},
+			{
+				name: "Cristallisations",
+				href: "/galerie/cristallisations",
+			},
+		],
+	},
+	{
+		name: "Témoignages",
+		href: "/temoignages",
+		submenus: [
+			{
+				name: "Lire",
+				href: "/temoignages",
+			},
+			{
+				name: "Écrire",
+				href: "/temoignages/ecrire",
+			},
+		],
+	},
 ];
 ---
 
