@@ -28,11 +28,11 @@ const { selected, data } = Astro.props;
 	}
 	{
 		data.submenus && (
-			<div class="hidden submenu absolute min-w-[8rem] pt-12 pb-3 px-2 z-50 flex flex-col items-center text-white truncate">
+			<div class="sm:hidden submenu sm:absolute min-w-[8rem] sm:pt-12 sm:pb-3 px-2 z-50 flex flex-col items-center truncate">
 				{data.submenus.map((sub) => (
 					<a
 						href={sub.href}
-						class="mx-6 py-2 w-full text-center bg-[#FFE2C3] text-black hover:text-white hover:bg-[#FDBA74]"
+						class="mx-6 py-2 w-full text-center text-sm sm:text-md sm:bg-[#FFE2C3] text-[#FDBA74] sm:text-black sm:hover:bg-[#FDBA74]"
 					>
 						{sub.name}
 					</a>
