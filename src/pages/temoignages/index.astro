@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-import TestimonyForm from "../components/TestimonyForm.astro";
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 
 import "swiper/css";
 
@@ -24,8 +23,6 @@ const testimonies = await Promise.all(
 			}
 		</div>
 	</main>
-
-	<TestimonyForm />
 
 	<script>
 		import Swiper from "swiper";
