@@ -8,7 +8,7 @@ export interface Props {
 const { selected_page } = Astro.props;
 
 const pages: NavbarMenu[] = [
-	{ name: "Accueil", href: "/index.html" },
+	{ name: "Accueil", href: "/" },
 	{ name: "Parcours", href: "/parcours" },
 	{
 		name: "Galerie",
@@ -85,7 +85,7 @@ const pages: NavbarMenu[] = [
 			id="mobile-menu-2"
 		>
 			<ul
-				class="load-animate flex flex-col mt-4 font-medium sm:flex-row sm:space-x-8 md:space-x-16 lg:space-x-24 sm:mt-0"
+				class="flex flex-col mt-4 font-medium sm:flex-row sm:space-x-8 md:space-x-16 lg:space-x-24 sm:mt-0"
 			>
 				{
 					pages.map((page, index) => (
@@ -108,30 +108,4 @@ const pages: NavbarMenu[] = [
 				e.classList.toggle("hidden");
 			});
 		});
-
-	// Check Needs Animation
-	if (new URL(document.URL).pathname != "/")
-		document
-			.querySelectorAll(".load-animate")
-			.forEach((e) => e.classList.toggle("load-animate"));
 </script>
-
-<style>
-	@media screen and (min-width: 1030px) {
-		ul.load-animate {
-			opacity: 0;
-			animation: reveal 2s linear reverse forwards;
-			animation-delay: 4s;
-		}
-	}
-
-	@keyframes reveal {
-		0% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-			visibility: hidden;
-		}
-	}
-</style>
