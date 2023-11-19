@@ -3,8 +3,6 @@ import { getCollection } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 
-import "swiper/css";
-
 const content = (await getCollection("temoignages")) || [];
 const testimonies = await Promise.all(
 	content.map(async (t) => await t.render()),
@@ -12,27 +10,15 @@ const testimonies = await Promise.all(
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
-	<main class="swiper m-auto text-justify">
-		<div class="swiper-wrapper prose lg:prose-xl">
+	<main class="w-full flex flex-col items-center">
+		<div class="prose lg:prose-xl">
 			{
 				testimonies.map((md) => (
-					<div class="swiper-slide px-3 pt-6">
+					<div class="px-3 pt-6">
 						<md.Content />
 					</div>
 				))
 			}
 		</div>
 	</main>
-
-	<script>
-		import Swiper from "swiper";
-
-		const swiper = new Swiper(".swiper", {
-			slidesPerView: "auto",
-			centeredSlides: true,
-			spaceBetween: 12,
-			rewind: true,
-		});
-	</script>
-	<style></style>
 </Layout>
