@@ -32,14 +32,6 @@ const { frontmatter } = Astro.props;
 	</div>
 </div>
 <script>
-	const observer = new window.IntersectionObserver(([entry]) => {
-		if (entry.isIntersecting) {
-			entry.target.classList.add("inview");
-		} else {
-			entry.target.classList.remove("inview");
-		}
-	});
-
 	for (let testimony of document.querySelectorAll(".testimony")) {
 		const content = testimony.querySelector(".content") as HTMLDivElement;
 
@@ -48,6 +40,14 @@ const { frontmatter } = Astro.props;
 			content.scrollWidth > content.clientWidth
 		) {
 			testimony.classList.add("overflows");
+
+			const observer = new window.IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("inview");
+				} else {
+					entry.target.classList.remove("inview");
+				}
+			});
 			observer.observe(testimony);
 		}
 	}
