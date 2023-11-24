@@ -9,7 +9,7 @@ export interface Props {
 const { title, navbar_selected } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
@@ -20,16 +20,13 @@ const { title, navbar_selected } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="flex flex-col h-[100vh] bg-[#f2eee9]">
 		<header>
 			<Navbar selected_page={navbar_selected} />
 		</header>
 		<slot />
-		<Footer />
+		<div class="grow flex flex-col justify-end w-full">
+			<Footer />
+		</div>
 	</body>
 </html>
-<style>
-	body {
-		background-color: #f2eee9;
-	}
-</style>
