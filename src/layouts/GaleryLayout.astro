@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+export interface Props {
+	name: string;
+	category: "jarre" | "modelage" | "cristallisation";
+}
+
+const { name, category } = Astro.props;
+
+const images = (await getCollection("galerie")).filter(
+	(value) => value.data.category == category,
+);
+---
+
+<div class="flex w-full">
+	{images.length}
+	<div class="left">{name}</div>
+	<div class="right"></div>
+</div>
