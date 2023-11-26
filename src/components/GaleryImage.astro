@@ -5,12 +5,17 @@ export interface Props {
 	imgAlt: string;
 	title: string;
 	href?: string;
+	hoverAnimation?: boolean;
 }
 
-const { img, imgAlt, title, href } = Astro.props;
+const { img, imgAlt, title, href, hoverAnimation } = Astro.props;
 ---
 
-<a href={href} class="category flex-1 flex flex-col m-4 pb-8">
+<a
+	href={href}
+	class={"category flex-1 flex flex-col m-4 pb-8" +
+		(hoverAnimation ? "animate" : "")}
+>
 	<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
 		<Image src={img} alt={imgAlt} class="w-full h-full object-cover" />
 	</div>
@@ -22,3 +27,12 @@ const { img, imgAlt, title, href } = Astro.props;
 		</h2>
 	</div>
 </a>
+<style>
+	.category.animate {
+		transition: transform ease-in-out 0.3s;
+	}
+
+	.category.category.animate:hover {
+		transform: translateY(-10px);
+	}
+</style>
