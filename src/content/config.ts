@@ -4,7 +4,7 @@ const galeryCollection = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
-			image: image().refine((img) => img.width >= 1080, {
+			image: image().refine((img) => img.width >= 512, {
 				message: "Cover image must be at least 1080 pixels wide!",
 			}),
 			imageAlt: z.string(),
