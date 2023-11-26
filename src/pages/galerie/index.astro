@@ -23,7 +23,10 @@ const posters = [pot, contemporain, cristallisation];
 		<div class="flex flex-wrap xl:space-x-8">
 			{
 				categories?.map((value, index) => (
-					<a href={value.href} class="flex-1 flex flex-col m-4 pb-8">
+					<a
+						href={value.href}
+						class="category flex-1 flex flex-col m-4 pb-8"
+					>
 						<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
 							<Image
 								src={posters[index]}
@@ -46,5 +49,13 @@ const posters = [pot, contemporain, cristallisation];
 	h1,
 	h2 {
 		font-family: "Marlin Geo SQ";
+	}
+
+	.category {
+		transition: transform ease-in-out 0.3s;
+	}
+
+	.category:hover {
+		transform: translateY(-10px);
 	}
 </style>
