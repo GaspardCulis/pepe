@@ -4,12 +4,13 @@ export interface Props {
 	img: ImageMetadata;
 	imgAlt: string;
 	title: string;
+	href?: string;
 }
 
-const { img, imgAlt, title } = Astro.props;
+const { img, imgAlt, title, href } = Astro.props;
 ---
 
-<a href="#tkt" class="category flex-1 flex flex-col m-4 pb-8">
+<a href={href} class="category flex-1 flex flex-col m-4 pb-8">
 	<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
 		<Image src={img} alt={imgAlt} class="w-full h-full object-cover" />
 	</div>
