@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
+import GaleryImage from "../components/GaleryImage.astro";
+
 export interface Props {
 	name: string;
 	category: "jarre" | "modelage" | "cristallisation";
@@ -14,8 +16,38 @@ const images = (await getCollection("galerie")).filter(
 );
 ---
 
-<div class="flex w-full">
-	{images.length}
-	<div class="left">{name}</div>
-	<div class="right"></div>
+<div
+	class="flex flex-col lg:flex-row-reverse w-3/4 lg:w-3/5 2xl:w-2/5 m-auto lg:mt-24 lg:space-x-12"
+>
+	<div class="left">
+		<h1
+			class="pt-16 pb-6 ml-4 xl:pb-12 text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold"
+		>
+			{name}
+		</h1>
+		{
+			images
+				.filter((_, i) => i % 2 === 0)
+				.map((img) => (
+					<GaleryImage
+						img={img.data.image}
+						imgAlt={img.data.imageAlt}
+						title={img.data.title}
+					/>
+				))
+		}
+	</div>
+	<div class="right">
+		{
+			images
+				.filter((_, i) => i % 2 === 1)
+				.map((img) => (
+					<GaleryImage
+						img={img.data.image}
+						imgAlt={img.data.imageAlt}
+						title={img.data.title}
+					/>
+				))
+		}
+	</div>
 </div>
