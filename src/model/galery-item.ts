@@ -26,7 +26,7 @@ export default class GaleryItem {
 				new GaleryItem(
 					result.attributes.title,
 					result.attributes.description,
-					toImage(result.attributes.image.data),
+					toImage(result.attributes.image.data, "webp"),
 				),
 			);
 		}

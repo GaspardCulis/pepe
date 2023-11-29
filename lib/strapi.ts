@@ -40,9 +40,13 @@ export function toAbsoluteURL(url: string): string {
 	return import.meta.env.STRAPI_URL + url;
 }
 
-export function toImage(strapi_image: StrapiImage): Image {
+export function toImage(
+	strapi_image: StrapiImage,
+	format?: "png" | "jpg" | "webp",
+): Image {
 	return new Image(
-		toAbsoluteURL(strapi_image.attributes.url),
+		toAbsoluteURL(strapi_image.attributes.url) +
+			(format ? `?format=${format}` : ""),
 		strapi_image.attributes.width,
 		strapi_image.attributes.height,
 		strapi_image.attributes.name,

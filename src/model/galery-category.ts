@@ -24,7 +24,7 @@ export default class GaleryCategory {
 					result.attributes.name,
 					result.attributes.slug,
 					query_vignette
-						? toImage(result.attributes.vignette.data)
+						? toImage(result.attributes.vignette.data, "webp")
 						: Image.default(),
 				),
 			);
@@ -55,7 +55,7 @@ export default class GaleryCategory {
 			result.attributes.name,
 			result.attributes.slug,
 			query_vignette
-				? toImage(result.attributes.vignette.data)
+				? toImage(result.attributes.vignette.data, "webp")
 				: Image.default(),
 		);
 	}
