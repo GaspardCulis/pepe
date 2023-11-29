@@ -6,6 +6,9 @@ interface ImportMetaEnv {
 	readonly PUBLIC_EMAILJS_TEMPLATE_ID: string;
 
 	readonly PUBLIC_CONTACT_MAIL: string;
+
+	readonly STRAPI_URL: string;
+	readonly STRAPI_API_KEY: string;
 }
 
 interface ImportMeta {
