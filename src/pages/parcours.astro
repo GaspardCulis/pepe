@@ -1,12 +1,23 @@
 ---
+import { marked } from "marked";
+
 import Layout from "../layouts/Layout.astro";
 import { Content } from "../content/parcours/main.md";
+import fetchApi from "../../lib/strapi";
+import type Parcours from "../interfaces/Parcours";
+
+const content_raw = await fetchApi<Parcours>({
+	endpoint: "parcours",
+	wrappedByKey: "data",
+});
+
+const content = marked.parse(content_raw.attributes.content);
 ---
 
 <Layout title="Daniel Culis | Parcours" navbar_selected={1}>
 	<main
 		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
 	>
-		<Content />
+		<article set:html={content} />
 	</main>
 </Layout>

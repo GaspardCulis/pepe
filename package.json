@@ -13,6 +13,7 @@
     "@astrojs/tailwind": "^5.0.0",
     "@emailjs/browser": "^3.11.0",
     "astro": "^3.0.10",
+    "marked": "^11.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.1",
     "sass": "^1.66.1",
