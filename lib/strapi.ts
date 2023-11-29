@@ -1,3 +1,5 @@
+import Image from "../src/model/image";
+
 interface Props {
 	endpoint: string;
 	query?: Record<string, string>;
@@ -13,12 +15,10 @@ interface Props {
  * @param wrappedByList - If the response is a list, unwrap it
  * @returns
  */
-export default async function fetchApi<T>({
+export default async function fetchStrapiApi({
 	endpoint,
 	query,
-	wrappedByKey,
-	wrappedByList,
-}: Props): Promise<T> {
+}: Props): Promise<any> {
 	if (endpoint.startsWith("/")) {
 		endpoint = endpoint.slice(1);
 	}
@@ -33,15 +33,20 @@ export default async function fetchApi<T>({
 	const res = await fetch(url.toString());
 	let data = await res.json();
 
-	if (wrappedByKey) {
-		data = data[wrappedByKey];
-	}
+	return data;
+}
 
-	if (wrappedByList) {
-		data = data[0];
-	}
+export function toAbsoluteURL(url: string): string {
+	return import.meta.env.STRAPI_URL + url;
+}
 
-	return data as T;
+export function toImage(strapi_image: StrapiImage): Image {
+	return new Image(
+		toAbsoluteURL(strapi_image.attributes.url),
+		strapi_image.attributes.width,
+		strapi_image.attributes.height,
+		strapi_image.attributes.name,
+	);
 }
 
 export interface StrapiImageAttributes {
