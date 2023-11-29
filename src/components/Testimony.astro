@@ -1,12 +1,18 @@
 ---
-const { frontmatter } = Astro.props;
+import type Testimony from "../interfaces/Testimony";
+
+export interface Props {
+	data: Testimony;
+}
+
+const data = Astro.props.data.attributes;
 ---
 
 <div class="testimony shadow-lg rounded-lg select-none">
 	<div
 		class="content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem]"
 	>
-		<slot />
+		{data.content}
 	</div>
 	<div
 		class="expand-wrapper w-full relative hidden -translate-y-10 cursor-pointer"
@@ -26,9 +32,9 @@ const { frontmatter } = Astro.props;
 	</div>
 	<div class="author_info text-center mb-12 p-6">
 		<h2 class="author not-prose text-3xl font-bold">
-			{frontmatter.author}
+			{data.author}
 		</h2>
-		<p class="not-prose text-gray-500 text-sm">{frontmatter.author_role}</p>
+		<p class="not-prose text-gray-500 text-sm">{data.author_role}</p>
 	</div>
 </div>
 <script>

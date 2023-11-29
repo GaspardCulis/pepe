@@ -2,20 +2,23 @@
 import { getCollection } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
+import Testimony from "../../components/Testimony.astro";
+import fetchApi from "../../../lib/strapi";
+import type { default as TTestimony } from "../../interfaces/Testimony";
 
-const content = (await getCollection("temoignages")) || [];
-const testimonies = await Promise.all(
-	content.map(async (t) => await t.render()),
-);
+const testimonies = await fetchApi<TTestimony[]>({
+	endpoint: "testimonies",
+	wrappedByKey: "data",
+});
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
 	<main class="w-full flex flex-col items-center">
 		<div class="prose lg:prose-xl">
 			{
-				testimonies.map((md) => (
+				(testimonies || []).map((data) => (
 					<div class="px-3 pt-6">
-						<md.Content />
+						<Testimony data={data} />
 					</div>
 				))
 			}
