@@ -2,16 +2,9 @@
 import { Image } from "astro:assets";
 
 import Layout from "../../layouts/Layout.astro";
-import { pages } from "../../components/Navbar.astro";
+import GaleryCategory from "../../model/galery-category";
 
-import pot from "../../assets/img/pot.jpg";
-import contemporain from "../../assets/galery/culis-poterie-3810.jpg";
-import cristallisation from "../../assets/galery/culis-poterie-3788.jpg";
-import GaleryImage from "../../components/GaleryImage.astro";
-
-const categories = pages.find((v) => v.href == "/galerie")?.submenus;
-
-const posters = [pot, contemporain, cristallisation];
+const categories = await GaleryCategory.getAll(true);
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
@@ -23,14 +16,26 @@ const posters = [pot, contemporain, cristallisation];
 		</h1>
 		<div class="flex flex-wrap xl:space-x-8">
 			{
-				categories?.map((value, index) => (
-					<GaleryImage
-						img={posters[index]}
-						imgAlt={value.name}
-						title={value.name}
-						href={value.href}
-						hoverAnimation
-					/>
+				categories.map((cat) => (
+					<a
+						href={`/galerie/${cat.slug}`}
+						class="category flex-1 flex flex-col m-4 pb-8"
+					>
+						<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
+							<Image
+								src={cat.vignette.src}
+								width={cat.vignette?.width}
+								height={cat.vignette?.height}
+								alt={cat.name}
+								class="w-full h-full object-cover"
+							/>
+						</div>
+						<div class="flex flex-col">
+							<h2 class="text-md pt-3 xl:pt-5 xl:text-xl hover:underline hover:underline-offset-4 font-bold">
+								{cat.name}
+							</h2>
+						</div>
+					</a>
 				))
 			}
 		</div>
@@ -40,5 +45,13 @@ const posters = [pot, contemporain, cristallisation];
 	h1,
 	h2 {
 		font-family: "Marlin Geo SQ";
+	}
+
+	.category {
+		transition: transform ease-in-out 0.3s;
+	}
+
+	.category:hover {
+		transform: translateY(-10px);
 	}
 </style>

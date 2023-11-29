@@ -32,4 +32,31 @@ export default class GaleryCategory {
 
 		return out;
 	}
+
+	public static async getBySlug(
+		slug: string,
+		query_vignette: boolean = false,
+	): Promise<GaleryCategory> {
+		const query: any = {
+			"filters[slug][$eq]": slug,
+		};
+		if (query_vignette) {
+			query.populate = "vignette";
+		}
+
+		const result = (
+			await fetchStrapiApi({
+				endpoint: "galery-categories",
+				query,
+			})
+		).data[0];
+
+		return new GaleryCategory(
+			result.attributes.name,
+			result.attributes.slug,
+			query_vignette
+				? toImage(result.attributes.vignette.data)
+				: Image.default(),
+		);
+	}
 }
