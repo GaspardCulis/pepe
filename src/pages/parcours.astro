@@ -1,17 +1,10 @@
 ---
 import { marked } from "marked";
+import Itinerary from "../model/itinerary";
 
 import Layout from "../layouts/Layout.astro";
-import { Content } from "../content/parcours/main.md";
-import fetchApi from "../../lib/strapi";
-import type Parcours from "../interfaces/Parcours";
 
-const content_raw = await fetchApi<Parcours>({
-	endpoint: "parcours",
-	wrappedByKey: "data",
-});
-
-const content = marked.parse(content_raw.attributes.content);
+const content = marked.parse((await Itinerary.get()).content);
 ---
 
 <Layout title="Daniel Culis | Parcours" navbar_selected={1}>
