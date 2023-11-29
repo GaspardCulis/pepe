@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import fetchApi from "../../lib/strapi";
+import type GaleryItem from "../interfaces/GaleryItem";
 
 import GaleryImage from "../components/GaleryImage.astro";
 
@@ -11,9 +11,14 @@ export interface Props {
 
 const { name, category } = Astro.props;
 
-const images = (await getCollection("galerie")).filter(
-	(value) => value.data.category == category,
-);
+const items = (
+	await fetchApi<GaleryItem[]>({
+		endpoint: "galery-items?populate=image",
+		wrappedByKey: "data",
+	})
+).filter((item) => {
+	return item.attributes.category === category;
+});
 ---
 
 <div
@@ -26,26 +31,26 @@ const images = (await getCollection("galerie")).filter(
 			{name}
 		</h1>
 		{
-			images
+			items
 				.filter((_, i) => i % 2 === 0)
-				.map((img) => (
+				.map((item) => (
 					<GaleryImage
-						img={img.data.image}
-						imgAlt={img.data.imageAlt}
-						title={img.data.title}
+						img={item.attributes.image.data.attributes}
+						imgAlt={item.attributes.title}
+						title={item.attributes.title}
 					/>
 				))
 		}
 	</div>
 	<div class="right lg:mr-12 xl:mr-16 2xl:mr-24">
 		{
-			images
+			items
 				.filter((_, i) => i % 2 === 1)
-				.map((img) => (
+				.map((item) => (
 					<GaleryImage
-						img={img.data.image}
-						imgAlt={img.data.imageAlt}
-						title={img.data.title}
+						img={item.attributes.image.data.attributes}
+						imgAlt={item.attributes.title}
+						title={item.attributes.title}
 					/>
 				))
 		}
