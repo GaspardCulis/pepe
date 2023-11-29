@@ -1,15 +1,10 @@
 ---
-import { getCollection } from "astro:content";
-
 import Layout from "../../layouts/Layout.astro";
 import Testimony from "../../components/Testimony.astro";
-import fetchApi from "../../../lib/strapi";
-import type { default as TTestimony } from "../../interfaces/Testimony";
 
-const testimonies = await fetchApi<TTestimony[]>({
-	endpoint: "testimonies",
-	wrappedByKey: "data",
-});
+import { default as TTestimony } from "../../model/testimony";
+
+const testimonies = await TTestimony.getAll();
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>

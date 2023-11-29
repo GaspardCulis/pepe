@@ -1,11 +1,11 @@
 ---
-import type Testimony from "../interfaces/Testimony";
+import { default as TTestimony } from "../model/testimony";
 
 export interface Props {
-	data: Testimony;
+	data: TTestimony;
 }
 
-const data = Astro.props.data.attributes;
+const { data } = Astro.props;
 ---
 
 <div class="testimony shadow-lg rounded-lg select-none">
