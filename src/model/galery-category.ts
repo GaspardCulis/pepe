@@ -4,23 +4,27 @@ import type Image from "./image";
 export default class GaleryCategory {
 	private constructor(
 		readonly name: string,
-		readonly vignette: Image,
+		readonly vignette: Image | undefined,
 		readonly slug: string,
 	) {}
 
-	public static async getAll(): Promise<GaleryCategory[]> {
+	public static async getAll(
+		query_vignette: boolean = false,
+	): Promise<GaleryCategory[]> {
 		let out: GaleryCategory[] = [];
 
 		const results = await fetchStrapiApi({
 			endpoint: "galery-categories",
-			query: { populate: "vignette" },
+			query: query_vignette ? { populate: "vignette" } : undefined,
 		});
 
 		for (let result of results.data) {
 			out.push(
 				new GaleryCategory(
 					result.attributes.name,
-					toImage(result.attributes.vignette.data),
+					query_vignette
+						? toImage(result.attributes.vignette.data)
+						: undefined,
 					result.attributes.slug,
 				),
 			);
