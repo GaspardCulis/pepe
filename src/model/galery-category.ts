@@ -1,11 +1,11 @@
 import fetchStrapiApi, { toImage } from "../../lib/strapi";
-import type Image from "./image";
+import Image from "./image";
 
 export default class GaleryCategory {
 	private constructor(
 		readonly name: string,
-		readonly vignette: Image | undefined,
 		readonly slug: string,
+		readonly vignette: Image,
 	) {}
 
 	public static async getAll(
@@ -22,10 +22,10 @@ export default class GaleryCategory {
 			out.push(
 				new GaleryCategory(
 					result.attributes.name,
+					result.attributes.slug,
 					query_vignette
 						? toImage(result.attributes.vignette.data)
-						: undefined,
-					result.attributes.slug,
+						: Image.default(),
 				),
 			);
 		}

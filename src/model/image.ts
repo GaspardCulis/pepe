@@ -5,4 +5,8 @@ export default class Image {
 		readonly height: number,
 		readonly alt: string,
 	) {}
+
+	public static default(): Image {
+		return new Image("", 0, 0, "");
+	}
 }
