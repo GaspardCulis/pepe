@@ -40,16 +40,27 @@ export function toAbsoluteURL(url: string): string {
 	return import.meta.env.STRAPI_URL + url;
 }
 
-export function toImage(
-	strapi_image: StrapiImage,
-	format?: "png" | "jpg" | "webp",
-): Image {
+export function toImage(conf: {
+	strapi_image: StrapiImage;
+	size?: StrapiImageSize;
+	format?: "png" | "jpg" | "webp";
+}): Image {
+	if (conf.size) {
+		conf.strapi_image = {
+			id: conf.strapi_image.id,
+			attributes:
+				conf.strapi_image.attributes.formats![
+					conf.format as StrapiImageSize
+				],
+		};
+	}
+
 	return new Image(
-		toAbsoluteURL(strapi_image.attributes.url) +
-			(format ? `?format=${format}` : ""),
-		strapi_image.attributes.width,
-		strapi_image.attributes.height,
-		strapi_image.attributes.name,
+		toAbsoluteURL(conf.strapi_image.attributes.url) +
+			(conf.format ? `?format=${conf.format}` : ""),
+		conf.strapi_image.attributes.width,
+		conf.strapi_image.attributes.height,
+		conf.strapi_image.attributes.name,
 	);
 }
 
@@ -74,3 +85,5 @@ export interface StrapiImage {
 	id: number;
 	attributes: StrapiImageAttributes;
 }
+
+export type StrapiImageSize = "thumbnail" | "small" | "medium" | "large";

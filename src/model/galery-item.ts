@@ -1,4 +1,7 @@
-import fetchStrapiApi, { toImage } from "../../lib/strapi";
+import fetchStrapiApi, {
+	toImage,
+	type StrapiImageSize,
+} from "../../lib/strapi";
 import Image from "./image";
 
 export default class GaleryItem {
@@ -10,6 +13,9 @@ export default class GaleryItem {
 
 	public static async getMatchingCategory(
 		category: string, // No strong typing :(
+		options?: {
+			size?: StrapiImageSize;
+		},
 	): Promise<GaleryItem[]> {
 		let out: GaleryItem[] = [];
 
@@ -26,7 +32,11 @@ export default class GaleryItem {
 				new GaleryItem(
 					result.attributes.title,
 					result.attributes.description,
-					toImage(result.attributes.image.data, "webp"),
+					toImage({
+						strapi_image: result.attributes.image.data,
+						format: "webp",
+						size: options?.size,
+					}),
 				),
 			);
 		}

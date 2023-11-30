@@ -1,4 +1,7 @@
-import fetchStrapiApi, { toImage } from "../../lib/strapi";
+import fetchStrapiApi, {
+	toImage,
+	type StrapiImageSize,
+} from "../../lib/strapi";
 import Image from "./image";
 
 export default class GaleryCategory {
@@ -10,6 +13,7 @@ export default class GaleryCategory {
 
 	public static async getAll(
 		query_vignette: boolean = false,
+		size: StrapiImageSize | undefined = undefined,
 	): Promise<GaleryCategory[]> {
 		let out: GaleryCategory[] = [];
 
@@ -24,7 +28,11 @@ export default class GaleryCategory {
 					result.attributes.name,
 					result.attributes.slug,
 					query_vignette
-						? toImage(result.attributes.vignette.data, "webp")
+						? toImage({
+								strapi_image: result.attributes.vignette.data,
+								format: "webp",
+								size,
+						  })
 						: Image.default(),
 				),
 			);
@@ -36,6 +44,7 @@ export default class GaleryCategory {
 	public static async getBySlug(
 		slug: string,
 		query_vignette: boolean = false,
+		size: StrapiImageSize | undefined = undefined,
 	): Promise<GaleryCategory> {
 		const query: any = {
 			"filters[slug][$eq]": slug,
@@ -55,7 +64,11 @@ export default class GaleryCategory {
 			result.attributes.name,
 			result.attributes.slug,
 			query_vignette
-				? toImage(result.attributes.vignette.data, "webp")
+				? toImage({
+						strapi_image: result.attributes.vignette.data,
+						format: "webp",
+						size,
+				  })
 				: Image.default(),
 		);
 	}
