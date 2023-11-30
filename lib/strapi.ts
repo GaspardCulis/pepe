@@ -48,10 +48,7 @@ export function toImage(conf: {
 	if (conf.size) {
 		conf.strapi_image = {
 			id: conf.strapi_image.id,
-			attributes:
-				conf.strapi_image.attributes.formats![
-					conf.format as StrapiImageSize
-				],
+			attributes: conf.strapi_image.attributes.formats![conf.size],
 		};
 	}
 
