@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import GaleryCategory from "../../model/galery-category";
 
-const categories = await GaleryCategory.getAll(true);
+const categories = await GaleryCategory.getAll(true, "medium");
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>

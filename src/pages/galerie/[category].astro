@@ -19,7 +19,9 @@ const { category } = Astro.params;
 
 // Second request, that's a shame...
 const category_obj = await GaleryCategory.getBySlug(category);
-const items = await TGaleryItem.getMatchingCategory(category);
+const items = await TGaleryItem.getMatchingCategory(category, {
+	size: "medium",
+});
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
