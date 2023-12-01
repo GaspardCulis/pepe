@@ -12,7 +12,7 @@ export default class GaleryItem {
 		readonly image: Image,
 	) {}
 
-	public static async getAll(options: {
+	public static async getAll(options?: {
 		query?: Record<string, string>;
 		size?: StrapiImageSize;
 	}): Promise<GaleryItem[]> {
@@ -22,7 +22,7 @@ export default class GaleryItem {
 			endpoint: "galery-items",
 			query: {
 				populate: "image",
-				...options.query,
+				...options!.query,
 			},
 		});
 
@@ -46,7 +46,7 @@ export default class GaleryItem {
 
 	public static async get(
 		id: number,
-		options: {
+		options?: {
 			size?: StrapiImageSize;
 		},
 	): Promise<GaleryItem> {
