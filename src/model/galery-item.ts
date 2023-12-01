@@ -22,7 +22,7 @@ export default class GaleryItem {
 			endpoint: "galery-items",
 			query: {
 				populate: "image",
-				...options!.query,
+				...options?.query,
 			},
 		});
 
