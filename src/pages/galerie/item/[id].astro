@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+
+import { default as GaleryItem } from "../../../model/galery-item";
+import Layout from "../../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const items = await GaleryItem.getAll();
+
+	return items.map((item) => {
+		return {
+			params: { id: item.id },
+		};
+	});
+}
+
+const { id } = Astro.params;
+
+const item = await GaleryItem.get(id);
+---
+
+<Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
+	<div>jaaj {id}</div>
+	<Image
+		src={item.image.src}
+		width={item.image.width}
+		height={item.image.height}
+		alt={item.image.alt}
+		style={`view-transition-name: galery-item-${id};`}
+	/>
+</Layout>

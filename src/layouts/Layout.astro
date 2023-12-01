@@ -1,12 +1,14 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 export interface Props {
 	title: string;
 	navbar_selected: number;
+	transitions?: boolean;
 }
 
-const { title, navbar_selected } = Astro.props;
+const { title, navbar_selected, transitions } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +21,7 @@ const { title, navbar_selected } = Astro.props;
 		<link rel="stylesheet" href="/style.css" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		{transitions && <ViewTransitions />}
 	</head>
 	<body class="flex flex-col h-[100vh] bg-[#f2eee9]">
 		<header>
