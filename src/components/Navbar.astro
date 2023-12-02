@@ -12,7 +12,24 @@ const categories = await GaleryCategory.getAll();
 
 const pages: NavbarMenu[] = [
 	{ name: "Accueil", href: "/" },
-	{ name: "Parcours", href: "/parcours" },
+	{
+		name: "Un Potier",
+		href: "/parcours",
+		submenus: [
+			{
+				name: "Son parcours",
+				href: "/parcours",
+			},
+			{
+				name: "Expos et manifestations",
+				href: "/chronologie",
+			},
+			{
+				name: "Articles de presse",
+				href: "/parcours",
+			},
+		],
+	},
 	{
 		name: "Galerie",
 		href: "/galerie",
