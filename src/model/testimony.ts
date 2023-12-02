@@ -3,8 +3,8 @@ import fetchStrapiApi from "../../lib/strapi";
 export default class Testimony {
 	private constructor(
 		readonly author: string,
-		readonly author_role: string,
 		readonly content: string,
+		readonly date: string,
 	) {}
 
 	public static async getAll(): Promise<Testimony[]> {
@@ -18,8 +18,8 @@ export default class Testimony {
 			out.push(
 				new Testimony(
 					result.attributes.author,
-					result.attributes.aauthor_role,
 					result.attributes.content,
+					result.attributes.date,
 				),
 			);
 		}
