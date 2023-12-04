@@ -20,12 +20,43 @@ const item = await GaleryItem.get(id);
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
-	<div>jaaj {id}</div>
-	<Image
-		src={item.image.src}
-		width={item.image.width}
-		height={item.image.height}
-		alt={item.image.alt}
-		style={`view-transition-name: galery-item-${id};`}
-	/>
+	<main class="p-12 w-full flex justify-center">
+		<div
+			class="relative"
+			style={`view-transition-name: galery-item-${id};`}
+		>
+			<Image
+				src={item.image.src}
+				width={item.image.width}
+				height={item.image.height}
+				alt={item.image.alt}
+			/>
+			<div
+				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
+				onclick="
+				window.history.back()
+				"
+			>
+			</div>
+		</div>
+	</main>
 </Layout>
+<style>
+	.close:before,
+	.close:after {
+		position: absolute;
+		top: 1px;
+		left: 18px;
+		content: " ";
+		height: 38px;
+		width: 4px;
+		background-color: #333;
+		border-radius: 4px;
+	}
+	.close:before {
+		transform: rotate(45deg);
+	}
+	.close:after {
+		transform: rotate(-45deg);
+	}
+</style>
