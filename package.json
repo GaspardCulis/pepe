@@ -10,9 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/tailwind": "^5.0.3",
     "@emailjs/browser": "^3.11.0",
-    "astro": "^3.0.10",
+    "astro": "^4.0.1",
     "marked": "^11.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.1",
