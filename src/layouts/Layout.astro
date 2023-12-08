@@ -58,6 +58,21 @@ const { title, navbar_selected, transitions } = Astro.props;
 				],
 			}}
 		/>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "ProfilePage",
+				"dateCreated": "2023-12-08T12:34:00-05:00",
+				"dateModified": "2023-12-08T12:34:00-05:00",
+				"mainEntity": {
+					"@type": "Person",
+					"name": "Daniel Culis",
+					"identifier": "danielculis",
+					"description": "Potier d'art",
+					"image": "https://cms.gasdev.fr/uploads/jarre_a_la_corde_8223f65436.jpg"
+				}
+			}
+		</script>
 		{transitions && <ViewTransitions />}
 	</head>
 	<body class="flex flex-col h-[100vh] bg-[#f2eee9] overflow-x-hidden">
