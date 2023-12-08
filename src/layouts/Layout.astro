@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import { SEO } from "astro-seo";
+
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 export interface Props {
@@ -21,6 +23,38 @@ const { title, navbar_selected, transitions } = Astro.props;
 		<link rel="stylesheet" href="/style.css" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<SEO
+			title="Daniel Culis"
+			description="Un site mémorial du potier Daniel Culis"
+			openGraph={{
+				basic: {
+					title: "Daniel Culis",
+					type: "profile",
+					image: "https://cms.gasdev.fr/uploads/jarre_a_la_corde_8223f65436.jpg",
+					url: "https://danielculis.vercel.app",
+				},
+			}}
+			extend={{
+				meta: [
+					{
+						property: "og:type:profile:first_name",
+						content: "Daniel",
+					},
+					{
+						property: "og:type:profile:last_name",
+						content: "Culis",
+					},
+					{
+						property: "og:type:profile:username",
+						content: "Daniel Culis",
+					},
+					{
+						property: "og:type:profile:gender",
+						content: "male",
+					},
+				],
+			}}
+		/>
 		{transitions && <ViewTransitions />}
 	</head>
 	<body class="flex flex-col h-[100vh] bg-[#f2eee9] overflow-x-hidden">
