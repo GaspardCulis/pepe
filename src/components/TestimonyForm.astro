@@ -9,7 +9,7 @@
 		>
 			Témoigner
 		</h2>
-		<form id="form" class="space-y-8">
+		<form id="testimony-form" class="space-y-8" action="">
 			<div>
 				<label
 					for="name"
@@ -77,7 +77,7 @@
 
 	emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
 
-	const form = document.getElementById("form") as HTMLFormElement;
+	const form = document.getElementById("testimony-form") as HTMLFormElement;
 	const name_input = document.getElementById("name") as HTMLInputElement;
 	const message_input = document.getElementById(
 		"message",
@@ -95,13 +95,16 @@
 	) as HTMLLinkElement;
 
 	form.addEventListener("submit", (ev) => {
+		ev.stopPropagation();
+		ev.preventDefault();
+
 		submit_button.disabled = true;
 
 		emailjs
 			.sendForm(
 				import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
 				import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-				"#form",
+				"#testimony-form",
 			)
 			.then((_) => {
 				submit_button.classList.add("success");
@@ -118,8 +121,6 @@
 					1000,
 				);
 			});
-
-		ev.preventDefault();
 	});
 
 	manual_mail_link.addEventListener("click", (ev) => {
