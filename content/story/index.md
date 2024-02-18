@@ -1,3 +1,7 @@
+---
+title: Son parcours
+slug: /
+---
 
 # Son parcours
 

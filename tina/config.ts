@@ -66,6 +66,13 @@ export default defineConfig({
 				},
 				fields: [
 					{
+						type: "string",
+						name: "title",
+						label: "Titre de la page",
+						required: true,
+						isTitle: true,
+					},
+					{
 						type: "rich-text",
 						name: "body",
 						label: "Contenu",

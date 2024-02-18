@@ -1,3 +1,7 @@
+---
+title: Articles de presse
+slug: /articles
+---
 
 ## Articles
 

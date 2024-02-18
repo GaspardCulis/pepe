@@ -1,3 +1,7 @@
+---
+title: Expos et manifestations
+slug: /chronologie
+---
 
 # Chronologie
 
