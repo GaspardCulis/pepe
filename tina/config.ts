@@ -66,6 +66,9 @@ export default defineConfig({
 					filename: {
 						readonly: true,
 					},
+					router({ document }) {
+						return `/parcours/${document._sys.filename.replace("index", "")}`;
+					},
 				},
 				fields: [
 					{

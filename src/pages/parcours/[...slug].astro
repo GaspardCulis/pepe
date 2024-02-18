@@ -1,7 +1,7 @@
 ---
 import { client } from "../../../tina/__generated__/client";
+import { CMSMarkdown } from "../../components/cms/CMSMarkdown";
 
-import { TinaMarkdown } from "tinacms/dist/rich-text";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -16,20 +16,24 @@ export async function getStaticPaths() {
 						: p?.node?._sys.filename,
 			},
 			props: {
-				title: p?.node?.title,
-				content: p?.node?.body,
+				relativePath: p?.node?._sys.relativePath as string,
 			},
 		};
 	});
 }
 
-const { title, content } = Astro.props;
+const { relativePath } = Astro.props;
+
+const content = await client.queries.story({ relativePath });
 ---
 
-<Layout title={`Daniel Culis | ${title}`} navbar_selected={1}>
+<Layout
+	title={`Daniel Culis | ${content.data.story.title}`}
+	navbar_selected={1}
+>
 	<main
 		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
 	>
-		<TinaMarkdown content={content} />
+		<CMSMarkdown collection="story" field="body" {...content} client:tina />
 	</main>
 </Layout>
