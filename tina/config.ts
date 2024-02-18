@@ -21,7 +21,7 @@ export default defineConfig({
 	},
 	media: {
 		tina: {
-			mediaRoot: "",
+			mediaRoot: "cms",
 			publicFolder: "public",
 		},
 	},
@@ -78,6 +78,26 @@ export default defineConfig({
 						label: "Contenu",
 						required: true,
 						isBody: true,
+					},
+				],
+			},
+			{
+				name: "categories",
+				label: "Catégories de la galerie",
+				path: "content/categories",
+				fields: [
+					{
+						type: "string",
+						name: "name",
+						label: "Nom de la catégorie",
+						required: true,
+						isTitle: true,
+					},
+					{
+						type: "image",
+						name: "vignette",
+						label: "Vignette",
+						required: true,
 					},
 				],
 			},
