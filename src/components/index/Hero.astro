@@ -1,7 +1,11 @@
 ---
 import { Image } from "astro:assets";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { client } from "../../../tina/__generated__/client";
+
 import jarreImage from "../../assets/img/giga_jarre.jpg";
-import { Content } from "../../content/acceuil/citation.md";
+
+const citation = await client.queries.home({ relativePath: "citation.md" });
 ---
 
 <div class="h-fit -z-10 down-gradient overflow-visible">
@@ -23,7 +27,7 @@ import { Content } from "../../content/acceuil/citation.md";
 		<div
 			class="md-container hidden lg:block flex-grow my-4 pt-1 lg:pt-2 xl:pt-12 px-12 xl:px-44 prose max-w-none text-white text-center"
 		>
-			<Content />
+			<TinaMarkdown content={citation.data.home.quote} />
 		</div>
 	</div>
 	<Image
