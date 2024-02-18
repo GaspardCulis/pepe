@@ -1,27 +1,32 @@
 ---
-import GaleryCategory from "../../model/galery-category";
-import { default as TGaleryItem } from "../../model/galery-item";
+import { client } from "../../../tina/__generated__/client";
 
 import Layout from "../../layouts/Layout.astro";
 import GaleryItem from "../../components/GaleryItem.astro";
 
 export async function getStaticPaths() {
-	const categories = await GaleryCategory.getAll();
+	const categoriesConnection = await client.queries.categoriesConnection();
 
-	return categories.map((cat) => {
+	return categoriesConnection.data.categoriesConnection.edges?.map((cat) => {
 		return {
-			params: { category: cat.slug },
+			params: { category: cat?.node?._sys.filename },
+			props: {
+				relativePath: cat?.node?._sys.relativePath as string,
+			},
 		};
 	});
 }
 
-const { category } = Astro.params;
+const { relativePath } = Astro.props;
 
-// Second request, that's a shame...
-const category_obj = await GaleryCategory.getBySlug(category);
-const items = await TGaleryItem.getMatchingCategory(category, {
-	size: "medium",
-});
+const category_obj = await client.queries.categories({ relativePath });
+const galery_itemsConnection = await client.queries.galery_itemsConnection();
+
+const items: any[] = galery_itemsConnection.data.galery_itemsConnection
+	.edges!.filter(
+		(i) => i?.node?.category.name === category_obj.data.categories.name,
+	)
+	.map((i) => i?.node);
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
@@ -32,7 +37,7 @@ const items = await TGaleryItem.getMatchingCategory(category, {
 			<h1
 				class="pt-16 pb-6 ml-4 xl:pb-12 text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-bold"
 			>
-				{category_obj.name}
+				{category_obj.data.categories.name}
 			</h1>
 			{
 				items

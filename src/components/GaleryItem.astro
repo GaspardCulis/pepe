@@ -1,25 +1,18 @@
 ---
-import { Image } from "astro:assets";
-
-import { default as TGaleryItem } from "../model/galery-item";
-
 export interface Props {
-	data: TGaleryItem;
+	data: any;
 }
 
 const { data } = Astro.props;
 ---
 
 <a
-	href={`/galerie/item/${data.id}`}
+	href={`/galerie/item/${data._sys.filename}`}
 	class="galery-item flex-1 flex flex-col m-4 pb-8 aspect-[1/1]"
 >
 	<div class="flex">
-		<Image
-			src={data.image.src}
-			width={data.image.width}
-			height={data.image.height}
-			alt={data.title}
+		<img
+			src={data.image}
 			class="w-full h-full"
 			transition:name={`galery-item-${data.id}`}
 		/>
