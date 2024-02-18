@@ -3,7 +3,6 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export const CMSMarkdown = (props: { query: string, variables: object, data: any, collection: string, field: string }) => {
   const { data } = useTina(props);
-  console.log(props)
 
   return (
     <div data-tina-field={tinaField(data)}>
