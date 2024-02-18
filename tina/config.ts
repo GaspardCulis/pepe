@@ -51,6 +51,29 @@ export default defineConfig({
 					},
 				],
 			},
+			{
+				name: "story",
+				label: "Histoire",
+				path: "content/story",
+				ui: {
+					allowedActions: {
+						create: false,
+						delete: false,
+					},
+					filename: {
+						readonly: true,
+					},
+				},
+				fields: [
+					{
+						type: "rich-text",
+						name: "body",
+						label: "Contenu",
+						required: true,
+						isBody: true,
+					},
+				],
+			},
 		],
 	},
 });
