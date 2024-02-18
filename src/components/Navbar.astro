@@ -1,4 +1,6 @@
 ---
+import { client } from "../../tina/__generated__/client";
+
 import GaleryCategory from "../model/galery-category";
 import NavbarItem from "./NavbarItem.astro";
 
@@ -8,6 +10,7 @@ export interface Props {
 
 const { selected_page } = Astro.props;
 
+const storyConnection = await client.queries.storyConnection();
 const categories = await GaleryCategory.getAll();
 
 const pages: NavbarMenu[] = [
@@ -15,20 +18,14 @@ const pages: NavbarMenu[] = [
 	{
 		name: "Un Potier",
 		href: "/parcours",
-		submenus: [
-			{
-				name: "Son parcours",
-				href: "/parcours",
-			},
-			{
-				name: "Expos et manifestations",
-				href: "/chronologie",
-			},
-			{
-				name: "Articles de presse",
-				href: "/articles",
-			},
-		],
+		submenus: storyConnection.data.storyConnection.edges?.map((p) => {
+			return {
+				name: p?.node?.title as string,
+				href:
+					"/parcours" +
+					("/" + p?.node?._sys.filename).replace("/index", ""), // Hacky
+			};
+		}),
 	},
 	{
 		name: "Galerie",

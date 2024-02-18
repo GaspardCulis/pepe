@@ -1,0 +1,35 @@
+---
+import { client } from "../../../tina/__generated__/client";
+
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const storyConnection = await client.queries.storyConnection();
+
+	return storyConnection.data.storyConnection.edges?.map((p) => {
+		return {
+			params: {
+				slug:
+					p?.node?._sys.filename == "index"
+						? undefined
+						: p?.node?._sys.filename,
+			},
+			props: {
+				title: p?.node?.title,
+				content: p?.node?.body,
+			},
+		};
+	});
+}
+
+const { title, content } = Astro.props;
+---
+
+<Layout title={`Daniel Culis | ${title}`} navbar_selected={1}>
+	<main
+		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
+	>
+		<TinaMarkdown content={content} />
+	</main>
+</Layout>
