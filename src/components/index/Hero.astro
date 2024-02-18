@@ -27,7 +27,12 @@ const citation = await client.queries.home({ relativePath: "citation.md" });
 		<div
 			class="md-container hidden lg:block flex-grow my-4 pt-1 lg:pt-2 xl:pt-12 px-12 xl:px-44 prose max-w-none text-white text-center"
 		>
-			<CMSMarkdown client:tina {...citation} />
+			<CMSMarkdown
+				client:tina
+				collection="home"
+				field="quote"
+				{...citation}
+			/>
 		</div>
 	</div>
 	<Image
