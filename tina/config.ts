@@ -40,6 +40,9 @@ export default defineConfig({
 					filename: {
 						readonly: true,
 					},
+					router: () => {
+						return "/";
+					},
 				},
 				fields: [
 					{
