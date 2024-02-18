@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import client from "./__generated__/client";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -111,6 +112,15 @@ export default defineConfig({
 				name: "galeryItems",
 				label: "Elements de la Galerie",
 				path: "content/galery",
+				ui: {
+					async router(args) {
+						const { data } = await client.queries.galeryItems({
+							relativePath: args.document._sys.relativePath,
+						});
+
+						return `/galerie/${data.galeryItems.category._sys.filename}`;
+					},
+				},
 				fields: [
 					{
 						type: "string",
