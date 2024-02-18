@@ -108,7 +108,7 @@ export default defineConfig({
 				],
 			},
 			{
-				name: "galery_items",
+				name: "galeryItems",
 				label: "Elements de la Galerie",
 				path: "content/galery",
 				fields: [

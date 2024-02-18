@@ -6,30 +6,28 @@ import GaleryItem from "../../components/GaleryItem.astro";
 
 export async function getStaticPaths() {
 	const categoriesConnection = await client.queries.categoriesConnection();
+	const galeryItemsConnection = await client.queries.galeryItemsConnection();
 
 	return categoriesConnection.data.categoriesConnection.edges?.map((cat) => {
+		const galeryItemsIds =
+			galeryItemsConnection.data.galeryItemsConnection.edges
+				?.filter((item) => item?.node?.category.id === cat?.node?.id)
+				.map((item) => item?.node?._sys.relativePath);
+
 		return {
-			params: { category: cat?.node?._sys.filename },
+			params: { category: cat?.node?._sys.filename as string },
 			props: {
-				relativePath: cat?.node?._sys.relativePath as string,
+				name: cat?.node?.name as string,
+				items: galeryItemsIds as string[],
 			},
 		};
 	});
 }
 
-const { relativePath } = Astro.props;
-
-const category_obj = await client.queries.categories({ relativePath });
-const galery_itemsConnection = await client.queries.galery_itemsConnection();
-
-const items: any[] = galery_itemsConnection.data.galery_itemsConnection
-	.edges!.filter(
-		(i) => i?.node?.category.name === category_obj.data.categories.name,
-	)
-	.map((i) => i?.node);
+const { name, items } = Astro.props;
 ---
 
-<Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
+<Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions={true}>
 	<div
 		class="flex flex-col lg:flex-row-reverse w-3/4 lg:w-3/5 2xl:w-2/5 m-auto lg:mt-24"
 	>
@@ -37,19 +35,19 @@ const items: any[] = galery_itemsConnection.data.galery_itemsConnection
 			<h1
 				class="pt-16 pb-6 ml-4 xl:pb-12 text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-bold"
 			>
-				{category_obj.data.categories.name}
+				{name}
 			</h1>
 			{
 				items
 					.filter((_, i) => i % 2 === 0)
-					.map((item) => <GaleryItem data={item} />)
+					.map((item) => <GaleryItem relativePath={item} />)
 			}
 		</div>
 		<div class="right lg:mr-12 xl:mr-16 2xl:mr-24">
 			{
 				items
 					.filter((_, i) => i % 2 === 1)
-					.map((item) => <GaleryItem data={item} />)
+					.map((item) => <GaleryItem relativePath={item} />)
 			}
 		</div>
 	</div>
