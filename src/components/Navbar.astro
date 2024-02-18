@@ -1,7 +1,6 @@
 ---
 import { client } from "../../tina/__generated__/client";
 
-import GaleryCategory from "../model/galery-category";
 import NavbarItem from "./NavbarItem.astro";
 
 export interface Props {
@@ -11,7 +10,7 @@ export interface Props {
 const { selected_page } = Astro.props;
 
 const storyConnection = await client.queries.storyConnection();
-const categories = await GaleryCategory.getAll();
+const categoriesConnection = await client.queries.categoriesConnection();
 
 const pages: NavbarMenu[] = [
 	{ name: "Accueil", href: "/" },
@@ -30,12 +29,14 @@ const pages: NavbarMenu[] = [
 	{
 		name: "Galerie",
 		href: "/galerie",
-		submenus: categories.map((cat) => {
-			return {
-				name: cat.name,
-				href: `/galerie/${cat.slug}`,
-			};
-		}),
+		submenus: categoriesConnection.data.categoriesConnection.edges?.map(
+			(cat) => {
+				return {
+					name: cat?.node?.name as string,
+					href: `/galerie/${cat?.node?._sys.filename}`,
+				};
+			},
+		),
 	},
 	{
 		name: "Témoignages",
