@@ -107,6 +107,40 @@ export default defineConfig({
 					},
 				],
 			},
+			{
+				name: "galery_items",
+				label: "Elements de la Galerie",
+				path: "content/galery",
+				fields: [
+					{
+						type: "string",
+						name: "name",
+						label: "Nom",
+						required: true,
+						isTitle: true,
+					},
+					{
+						type: "image",
+						name: "image",
+						label: "Image",
+						required: true,
+					},
+					{
+						type: "reference",
+						name: "category",
+						label: "Catégorie",
+						collections: ["categories"],
+						required: true,
+					},
+					{
+						type: "rich-text",
+						name: "description",
+						label: "Description",
+						required: false,
+						isBody: true,
+					},
+				],
+			},
 		],
 	},
 });
