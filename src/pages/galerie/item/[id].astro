@@ -1,36 +1,34 @@
 ---
-import { Image } from "astro:assets";
+import { client } from "../../../../tina/__generated__/client";
 
-import { default as GaleryItem } from "../../../model/galery-item";
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-	const items = await GaleryItem.getAll();
+	const { data } = await client.queries.galeryItemsConnection();
+	console.log(data.galeryItemsConnection.edges);
 
-	return items.map((item) => {
+	return data.galeryItemsConnection.edges?.map((item) => {
 		return {
-			params: { id: item.id },
+			params: {
+				id: item?.node?._sys.filename,
+			},
+			props: {
+				item,
+			},
 		};
 	});
 }
 
-const { id } = Astro.params;
-
-const item = await GaleryItem.get(id);
+const { item } = Astro.props;
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
 	<main class="p-12 w-full flex justify-center">
 		<div
 			class="relative"
-			style={`view-transition-name: galery-item-${id};`}
+			style={`view-transition-name: galery-item-${item?.node?.id};`}
 		>
-			<Image
-				src={item.image.src}
-				width={item.image.width}
-				height={item.image.height}
-				alt={item.image.alt}
-			/>
+			<img src={item?.node?.image} alt={item?.node?._sys.filename} />
 			<div
 				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
 				onclick="
