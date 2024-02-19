@@ -1,11 +1,11 @@
 ---
 import { client } from "../../../../tina/__generated__/client";
+import { CMSMarkdown } from "../../../components/cms/CMSMarkdown";
 
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
 	const { data } = await client.queries.galeryItemsConnection();
-	console.log(data.galeryItemsConnection.edges);
 
 	return data.galeryItemsConnection.edges?.map((item) => {
 		return {
@@ -13,22 +13,23 @@ export async function getStaticPaths() {
 				id: item?.node?._sys.filename,
 			},
 			props: {
-				item,
+				relativePath: item?.node?._sys.relativePath,
 			},
 		};
 	});
 }
 
-const { item } = Astro.props;
+const { relativePath } = Astro.props;
+const item = await client.queries.galeryItems({relativePath});
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
-	<main class="p-12 w-full flex justify-center">
+	<main class="p-12 w-full flex flex-col place-items-center">
 		<div
-			class="relative"
-			style={`view-transition-name: galery-item-${item?.node?.id};`}
+			class="relative grow-0 w-fit"
+			style={`view-transition-name: "galery-item-${item.data.galeryItems._sys.filename}";`}
 		>
-			<img src={item?.node?.image} alt={item?.node?._sys.filename} />
+			<img src={item.data.galeryItems.image} alt={item.data.galeryItems._sys.filename} />
 			<div
 				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
 				onclick="
@@ -36,6 +37,11 @@ const { item } = Astro.props;
 				"
 			>
 			</div>
+		</div>
+		<div
+			class="pt-12 prose lg:prose-xl text-justify"
+		>
+			<CMSMarkdown collection="galeryItems" field="description" {...item} client:tina />
 		</div>
 	</main>
 </Layout>
