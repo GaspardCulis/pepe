@@ -14,37 +14,76 @@ export const CMSTestimony = (props: { query: string, variables: object, data: an
     setOverflows(isOverflowing);
   }, []);
 
+  const transformTransitionStyle = {
+		transition: "transform 800ms ease-in-out",
+		transitionDelay: "1s"
+	};
+
   return (
     <>
       <div
-        className={`content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem] ${expanded ? "expanded" : ""} ${overflows ? "overflows" : ""}`}
+        className={`border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem] ${expanded ? "expanded" : ""} ${overflows ? "overflows" : ""}`}
         data-tina-field={tinaField(data.testimonies, "content")}
         ref={contentRef}
+        style={
+          expanded ? {
+            maxHeight: "none"
+          } : overflows ? {
+            WebkitMaskImage: "linear-gradient(180deg, #000 80%, transparent)"
+          } : {}
+        }
       >
         <TinaMarkdown
           content={data.testimonies.content}
         />
       </div>
       <div
-        className="expand-wrapper w-full relative hidden -translate-y-10 cursor-pointer"
+        className="w-full relative hidden -translate-y-10 cursor-pointer"
+        style={
+          overflows ? {
+            display: "block"
+          } : {}
+        }
       >
         <div className="w-full absolute overflow-hidden flex justify-center">
           <div
-            className="expand-text w-fit text-center rounded-full bg-slate-500 px-4 py-1 text-base text-slate-200 translate-y-10"
+            className="w-fit text-center rounded-full bg-slate-500 px-4 py-1 text-base text-slate-200 translate-y-10"
             onClick={() => setExpanded(!expanded)}
+            style={
+            overflows ? {
+              transform: "translate(0rem)",
+              ...transformTransitionStyle
+            } : transformTransitionStyle
+          }
           >
-            <label className="expand-text-closed pointer-events-none"
+            <label
+              className="pointer-events-none"
+              style={
+                expanded ? {
+                  display: "none"
+                } : {
+                  display: "block"
+                }
+              }
             >Voir plus</label
             >
-            <label className="expand-text-opened pointer-events-none"
+            <label
+              className="pointer-events-none"
+              style={
+                expanded ? {
+                  display: "block"
+                } : {
+                  display: "none"
+                }
+              }
             >Voir moins</label
             >
           </div>
         </div>
       </div>
-      <div className="author_info text-center mb-12 p-6">
+      <div className="text-center mb-12 p-6">
         <h2
-          className="author not-prose text-3xl font-bold"
+          className="not-prose text-3xl font-bold"
           data-tina-field={tinaField(data.testimonies, "author")}
         >
           {data.testimonies.author}
