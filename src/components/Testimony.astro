@@ -1,41 +1,18 @@
 ---
-import { default as TTestimony } from "../model/testimony";
+import client from "../../tina/__generated__/client";
+import { CMSTestimony } from "./cms/CMSTestimony";
 
 export interface Props {
-	data: TTestimony;
+	relativePath: string;
 }
 
-const { data } = Astro.props;
+const { relativePath } = Astro.props;
+
+const data = await client.queries.testimonies({ relativePath });
 ---
 
 <div class="testimony shadow-lg rounded-lg select-none">
-	<div
-		class="content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem]"
-	>
-		{data.content}
-	</div>
-	<div
-		class="expand-wrapper w-full relative hidden -translate-y-10 cursor-pointer"
-	>
-		<div class="w-full absolute overflow-hidden flex justify-center">
-			<div
-				class="expand-text w-fit text-center rounded-full bg-slate-500 px-4 py-1 text-base text-slate-200 translate-y-10"
-			>
-				<label class="expand-text-closed pointer-events-none"
-					>Voir plus</label
-				>
-				<label class="expand-text-opened pointer-events-none"
-					>Voir moins</label
-				>
-			</div>
-		</div>
-	</div>
-	<div class="author_info text-center mb-12 p-6">
-		<h2 class="author not-prose text-3xl font-bold">
-			{data.author}
-		</h2>
-		<p class="not-prose text-gray-500 text-sm">{data.date}</p>
-	</div>
+	<CMSTestimony client:load {...data} />
 </div>
 <script>
 	for (let testimony of document.querySelectorAll(".testimony")) {

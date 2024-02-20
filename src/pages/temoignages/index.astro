@@ -1,19 +1,22 @@
 ---
+import client from "../../../tina/__generated__/client";
+
 import Layout from "../../layouts/Layout.astro";
 import Testimony from "../../components/Testimony.astro";
 
-import { default as TTestimony } from "../../model/testimony";
-
-const testimonies = await TTestimony.getAll();
+const testimoniesConnection = await client.queries.testimoniesConnection();
+const testimonies = testimoniesConnection.data.testimoniesConnection.edges?.map(
+	(t) => t?.node?._sys.relativePath,
+) as string[];
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
 	<main class="w-full flex flex-col items-center">
 		<div class="prose lg:prose-xl">
 			{
-				(testimonies || []).map((data) => (
+				(testimonies || []).map((t) => (
 					<div class="px-3 pt-6">
-						<Testimony data={data} />
+						<Testimony relativePath={t} />
 					</div>
 				))
 			}
