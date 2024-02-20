@@ -12,7 +12,7 @@ const data = await client.queries.testimonies({ relativePath });
 ---
 
 <div class="testimony shadow-lg rounded-lg select-none">
-	<CMSTestimony client:load {...data} />
+	<CMSTestimony client:tina {...data} />
 </div>
 <style is:inline>
 	.content.expanded {
