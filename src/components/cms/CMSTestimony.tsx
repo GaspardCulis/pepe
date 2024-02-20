@@ -1,14 +1,25 @@
+import { useState, useRef, useEffect } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export const CMSTestimony = (props: { query: string, variables: object, data: any }) => {
   const { data } = useTina(props);
+  const [expanded, setExpanded] = useState(false);
+  const [overflows, setOverflows] = useState(false);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const isOverflowing = contentRef.current?.scrollHeight! > contentRef.current?.clientHeight!;
+    setOverflows(isOverflowing);
+  }, []);
 
   return (
     <>
       <div
-        className="content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem]"
+        className={`content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem] ${expanded ? "expanded" : ""} ${overflows ? "overflows" : ""}`}
         data-tina-field={tinaField(data.testimonies, "content")}
+        ref={contentRef}
       >
         <TinaMarkdown
           content={data.testimonies.content}
@@ -20,6 +31,7 @@ export const CMSTestimony = (props: { query: string, variables: object, data: an
         <div className="w-full absolute overflow-hidden flex justify-center">
           <div
             className="expand-text w-fit text-center rounded-full bg-slate-500 px-4 py-1 text-base text-slate-200 translate-y-10"
+            onClick={() => setExpanded(!expanded)}
           >
             <label className="expand-text-closed pointer-events-none"
             >Voir plus</label

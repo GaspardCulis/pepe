@@ -14,44 +14,7 @@ const data = await client.queries.testimonies({ relativePath });
 <div class="testimony shadow-lg rounded-lg select-none">
 	<CMSTestimony client:load {...data} />
 </div>
-<script>
-	for (let testimony of document.querySelectorAll(".testimony")) {
-		const content = testimony.querySelector(".content") as HTMLDivElement;
-
-		if (
-			content.scrollHeight > content.clientHeight ||
-			content.scrollWidth > content.clientWidth
-		) {
-			testimony.classList.add("overflows");
-
-			const observer = new window.IntersectionObserver(([entry]) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add("inview");
-				} else {
-					entry.target.classList.remove("inview");
-				}
-			});
-			observer.observe(testimony);
-		}
-	}
-
-	function toggleExpand(target: HTMLElement) {
-		const content_element =
-			target.parentElement?.parentElement?.parentElement?.querySelector(
-				".content",
-			) as HTMLElement;
-		content_element.classList.toggle("expanded");
-
-		target.classList.toggle("expanded");
-	}
-
-	for (let button of document.querySelectorAll(".expand-text")) {
-		(button as HTMLDivElement).addEventListener("click", (ev) => {
-			toggleExpand(ev.target as HTMLElement);
-		});
-	}
-</script>
-<style>
+<style is:inline>
 	.content.expanded {
 		max-height: none;
 	}
@@ -79,21 +42,20 @@ const data = await client.queries.testimonies({ relativePath });
 		display: block;
 	}
 
-	.testimony.overflows > .content:not(.expanded) {
+	.content.overflows:not(.expanded) {
 		-webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
 	}
 
-	.testimony.overflows > .expand-wrapper {
+	.content.overflows ~ .expand-wrapper {
 		display: block;
+	}
+
+	.content.overflows ~ .expand-wrapper > div > .expand-text {
+		transform: translateY(0rem);
 	}
 
 	.expand-text {
 		transition: transform 800ms ease-in-out;
 		transition-delay: 1s;
-	}
-</style>
-<style is:inline>
-	.testimony.overflows.inview > .expand-wrapper > div > .expand-text {
-		transform: translateY(0rem);
 	}
 </style>
