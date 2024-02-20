@@ -151,6 +151,35 @@ export default defineConfig({
 					},
 				],
 			},
+			{
+				name: "testimonies",
+				label: "Témoignages",
+				path: "content/testimonies",
+				fields: [
+					{
+						type: "rich-text",
+						name: "content",
+						label: "Contenu",
+						required: true,
+						isBody: true,
+					},
+					{
+						type: "string",
+						name: "author",
+						label: "Auteur",
+						required: true,
+						isTitle: true,
+					},
+					{
+						type: "datetime",
+						name: "date",
+						label: "Date de publication",
+						ui: {
+							dateFormat: "DD-MM-YYYY",
+						},
+					},
+				],
+			},
 		],
 	},
 });
