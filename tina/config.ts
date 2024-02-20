@@ -155,6 +155,11 @@ export default defineConfig({
 				name: "testimonies",
 				label: "Témoignages",
 				path: "content/testimonies",
+				ui: {
+					router: () => {
+						return "/temoignages";
+					},
+				},
 				fields: [
 					{
 						type: "rich-text",
