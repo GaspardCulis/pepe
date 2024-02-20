@@ -5,7 +5,7 @@ export const CMSMarkdown = (props: { query: string, variables: object, data: any
   const { data } = useTina(props);
 
   return (
-    <div data-tina-field={tinaField(data)}>
+    <div data-tina-field={tinaField(data[props.collection], props.field)}>
       <TinaMarkdown
         content={data[props.collection][props.field]}
       />
