@@ -17,5 +17,8 @@ const tina = ({ directiveName = "tina" } = {}) => ({
 
 // https://astro.build/config
 export default defineConfig({
+	redirects: {
+		"/admin": "/admin/index.html",
+	},
 	integrations: [tailwind(), react(), tina()],
 });
