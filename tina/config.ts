@@ -1,5 +1,9 @@
 import { defineConfig } from "tinacms";
+import { UsernamePasswordAuthJSProvider } from "tinacms-authjs/dist/tinacms";
+import { LocalAuthProvider } from "tinacms";
 import client from "./__generated__/client";
+
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -10,11 +14,10 @@ const branch =
 
 export default defineConfig({
 	branch,
-
-	// Get this from tina.io
-	clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-	// Get this from tina.io
-	token: process.env.TINA_TOKEN,
+	contentApiUrlOverride: "/api/tina/gql",
+	authProvider: isLocal
+		? new LocalAuthProvider()
+		: new UsernamePasswordAuthJSProvider(),
 
 	build: {
 		outputFolder: "admin",
