@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-
 import react from "@astrojs/react";
+import node from "@astrojs/node";
 
 const tina = ({ directiveName = "tina" } = {}) => ({
 	name: "tina-cms",
@@ -17,8 +17,12 @@ const tina = ({ directiveName = "tina" } = {}) => ({
 
 // https://astro.build/config
 export default defineConfig({
+	output: "hybrid",
 	redirects: {
 		"/admin": "/admin/index.html",
 	},
 	integrations: [tailwind(), react(), tina()],
+	adapter: node({
+		mode: "standalone",
+	}),
 });
