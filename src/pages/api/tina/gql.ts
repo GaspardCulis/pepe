@@ -1,5 +1,6 @@
+export const prerender = false;
+
 import type { APIRoute } from "astro";
-import database from "../../../../tina/database";
 import { databaseRequest } from "../../../../lib/databaseConnection";
 
 export const ALL: APIRoute = async ({ request }) => {
