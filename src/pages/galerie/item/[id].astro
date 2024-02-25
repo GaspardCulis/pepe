@@ -13,23 +13,26 @@ export async function getStaticPaths() {
 				id: item?.node?._sys.filename,
 			},
 			props: {
-				relativePath: item?.node?._sys.relativePath,
+				relativePath: item?.node?._sys.relativePath as string,
 			},
 		};
 	});
 }
 
 const { relativePath } = Astro.props;
-const item = await client.queries.galeryItems({relativePath});
+const item = await client.queries.galeryItems({ relativePath });
 ---
 
-<Layout title="Daniel Culis | Galerie" navbar_selected={2} transitions>
+<Layout title="Daniel Culis | Galerie" navbar_selected={2}>
 	<main class="p-12 w-full flex flex-col place-items-center">
 		<div
 			class="relative grow-0 w-fit"
 			style={`view-transition-name: "galery-item-${item.data.galeryItems._sys.filename}";`}
 		>
-			<img src={item.data.galeryItems.image} alt={item.data.galeryItems._sys.filename} />
+			<img
+				src={item.data.galeryItems.image}
+				alt={item.data.galeryItems._sys.filename}
+			/>
 			<div
 				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
 				onclick="
@@ -38,10 +41,13 @@ const item = await client.queries.galeryItems({relativePath});
 			>
 			</div>
 		</div>
-		<div
-			class="pt-12 prose lg:prose-xl text-justify"
-		>
-			<CMSMarkdown collection="galeryItems" field="description" {...item} client:tina />
+		<div class="pt-12 prose lg:prose-xl text-justify">
+			<CMSMarkdown
+				collection="galeryItems"
+				field="description"
+				{...item}
+				client:tina
+			/>
 		</div>
 	</main>
 </Layout>
