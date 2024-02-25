@@ -7,7 +7,12 @@ interface ImportMetaEnv {
 
 	readonly PUBLIC_CONTACT_MAIL: string;
 
-	readonly STRAPI_URL: string;
+	readonly GITHUB_REPO: string;
+	readonly GITHUB_OWNER: string;
+	readonly GITHUB_BRANCH: string;
+	readonly GITHUB_PERSONAL_ACCESS_TOKEN: string;
+
+	readonly MONGODB_URI: string;
 }
 
 interface ImportMeta {
