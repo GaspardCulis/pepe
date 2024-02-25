@@ -1,11 +1,11 @@
 ---
-title: Son parcours
 slug: /
+title: Son parcours
 ---
 
 # Son parcours
 
-Daniel est né à Meaux en Seine et Marne en 1944. Il y passe toute son enfance. A seize ans, il s’engage dans l’armée et en 1962 après l’école militaire, il part sur la base militaire de Lann Bihoué comme mécanicien avion. Il y a là un atelier de poterie dans lequel il va découvrir une passion qui ne le quittera plus.
+Daniel est né à Meaux en Seine et Marne en 1944. Il y passe toute son enfance. A seize ans, il s’engage dans l’armée et en 1962 après l’école militaire, il part sur la base militaire de Lann Bihoué comme mécanicien avion. Il y a là un atelier de poterie dans lequel il va découvrir une passion qui ne le quittera pluse.
 
 Il quitte l’armée au bout de cinq ans pour se consacrer à la poterie.
 Disposant de peu de moyens mais d’une solide détermination, il construit son premier tour à pied qu’il équipe d’un moteur de machine à laver et travaille dans la cave du HLM de sa maman. Il apprend ainsi à tourner en autodidacte.
