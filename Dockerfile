@@ -19,4 +19,4 @@ COPY .env .
 
 # Run the project
 EXPOSE 4321
-CMD ["sh", "-c", "git pull && bunx tinacms build && bunx astro build && bunx astro preview --host"]
+CMD ["sh", "-c", "git pull && bunx tinacms build && bunx astro build && bunx astro preview --host 0.0.0.0"]
