@@ -1,6 +1,6 @@
 import { createDatabase, createLocalDatabase } from "@tinacms/datalayer";
 import { GitHubProvider } from "tinacms-gitprovider-github/dist/index.js";
-import redis from "upstash-redis-level";
+import mongodb from "mongodb-level";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -8,7 +8,7 @@ const branch = process.env.GITHUB_BRANCH as string;
 
 if (!branch) {
 	throw new Error(
-		"No branch found. Make sure that you have set the GITHUB_BRANCH environment variable.",
+		"No branch found. Make sure that you have set the GITHUB_BRANCH or process.env.VERCEL_GIT_COMMIT_REF environment variable.",
 	);
 }
 
@@ -23,12 +23,12 @@ export default isLocal
 				token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN as string,
 				branch,
 			}),
-			databaseAdapter: new redis.RedisLevel({
-				namespace: branch,
-				redis: {
-					url: process.env.KV_REST_API_URL as string,
-					token: process.env.KV_REST_API_TOKEN as string,
-				},
-				debug: process.env.DEBUG === "true" || false,
+			databaseAdapter: new mongodb.MongodbLevel<
+				string,
+				Record<string, any>
+			>({
+				collectionName: `tinacms-${branch}`,
+				dbName: "tinacms",
+				mongoUri: process.env.MONGODB_URI as string,
 			}),
 		});
