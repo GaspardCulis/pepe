@@ -11,6 +11,8 @@ RUN git clone "${APP_REPO_URL}" .
 # Install project dependencies
 RUN bun install
 RUN bun add sharp
+# Disable astro telemetry
+RUN bunx astro telemetry disable
 
 # Copy env variables
 COPY .env .
