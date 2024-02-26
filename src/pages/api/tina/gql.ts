@@ -38,7 +38,14 @@ export const ALL: APIRoute = async ({ request }) => {
 		});
 	}
 
-	const { query, variables } = await request.json();
+	const json = await request.json().catch((_e) => null);
+	if (json === null) {
+		return new Response(JSON.stringify({ status: "Invalid JSON" }), {
+			status: 502,
+		});
+	}
+
+	const { query, variables } = json;
 
 	return new Response(
 		JSON.stringify(await databaseRequest({ query, variables })),
