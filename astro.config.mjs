@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel/serverless";
+import node from "@astrojs/node";
 
 const tina = ({ directiveName = "tina" } = {}) => ({
 	name: "tina-cms",
@@ -22,5 +22,7 @@ export default defineConfig({
 		"/admin": "/admin/index.html",
 	},
 	integrations: [tailwind(), react(), tina()],
-	adapter: vercel(),
+	adapter: node({
+		mode: "standalone",
+	}),
 });
