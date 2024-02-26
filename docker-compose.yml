@@ -1,0 +1,27 @@
+services:
+  site:
+    restart: always
+    build:
+      context: .
+      target: site
+    ports:
+      - ${APP_PORT:-4321}:4321
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+    depends_on:
+      mongodb:
+        condition: service_completed_successfully
+    links:
+      - mongodb
+
+  mongodb:
+    image: docker.io/mongo:latest
+    restart: always
+    hostname: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
