@@ -16,4 +16,4 @@ COPY .env .
 
 # Run the project
 EXPOSE 4321
-CMD ["sh", "-c", "bunx tinacms build && bunx astro build && bun run preview"]
+CMD ["sh", "-c", "bunx tinacms build && bunx astro build && bunx astro preview --host"]
