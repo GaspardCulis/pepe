@@ -10,6 +10,7 @@ RUN git clone "${APP_REPO_URL}" .
 
 # Install project dependencies
 RUN bun install
+RUN bun add sharp
 
 # Copy env variables
 COPY .env .
