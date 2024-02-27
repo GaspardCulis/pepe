@@ -29,7 +29,28 @@ export default class CustomMediaStore implements MediaStore {
 	}
 
 	async list(options?: MediaListOptions | undefined): Promise<MediaList> {
-		throw new Error("Method not implemented.");
+		const accessToken = await this.logtoClient.getAccessToken(
+			this.logtoResource,
+		);
+		const request = await fetch(
+			`/api/tina/media?query=${encodeURIComponent(JSON.stringify(options || {}))}`,
+			{
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
+			},
+		);
+
+		const request_json = await request.json().catch((e) => null);
+		if (request_json === null) {
+			throw new Error("Invalid JSON received");
+		}
+
+		if (request.status != 200) {
+			throw new Error(request_json.error);
+		}
+
+		return request_json;
 	}
 
 	isStatic?: boolean | undefined;
