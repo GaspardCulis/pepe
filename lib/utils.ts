@@ -6,7 +6,7 @@ export function createLogToClient(): LogtoClient {
 		endpoint: "https://auth.gasdev.fr/",
 		appId: "irxbfn6981qpl0oxuiqqu",
 		resources: ["https://danielculis.fr/api"],
-		scopes: ["write:graphql"],
+		scopes: ["write:graphql", "read:media"],
 	});
 }
 
