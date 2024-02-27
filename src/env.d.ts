@@ -13,6 +13,13 @@ interface ImportMetaEnv {
 	readonly GITHUB_PERSONAL_ACCESS_TOKEN: string;
 
 	readonly MONGODB_URI: string;
+
+	readonly AWS_ACCESS_KEY_ID: string;
+	readonly AWS_SECRET_ACCESS_KEY: string;
+	readonly AWS_DEFAULT_REGION: string;
+	readonly AWS_ENDPOINT_URL: string;
+	readonly AWS_WEB_ENDPOINT_URL: string;
+	readonly AWS_BUCKET_NAME: string;
 }
 
 interface ImportMeta {
