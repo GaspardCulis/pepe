@@ -2,6 +2,7 @@ import { defineConfig } from "tinacms";
 import { LocalAuthProvider } from "tinacms";
 import client from "./__generated__/client";
 import AuthProvider from "../lib/AuthProvider";
+import CustomMediaStore from "../lib/MediaStore";
 
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
@@ -22,9 +23,8 @@ export default defineConfig({
 		publicFolder: "public",
 	},
 	media: {
-		tina: {
-			mediaRoot: "cms",
-			publicFolder: "public",
+		loadCustomStore: async () => {
+			return CustomMediaStore;
 		},
 	},
 	// See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
