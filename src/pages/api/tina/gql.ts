@@ -1,38 +1,20 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
+import { isAuthorized } from "../../../../lib/utils";
 import { databaseRequest } from "../../../../lib/databaseConnection";
-import { createRemoteJWKSet, jwtVerify } from "jose";
-
-const jwks = createRemoteJWKSet(new URL("https://auth.gasdev.fr/oidc/jwks"));
 
 export const ALL: APIRoute = async ({ request }) => {
-	const authorization = request.headers.get("authorization");
-
-	if (!authorization) {
-		return new Response("Authorization header missing", {
-			status: 500,
-		});
-	}
-
-	if (!authorization.startsWith("Bearer ")) {
-		return new Response(
-			"Authorization header is not in the Bearer scheme",
-			{
-				status: 501,
-			},
-		);
-	}
-
-	const token = authorization.slice(7);
-
-	const { payload } = await jwtVerify(token, jwks, {
-		issuer: "https://auth.gasdev.fr/oidc",
-		audience: "https://danielculis.fr/api/tina/gql",
+	const authorized = await isAuthorized(
+		request.headers,
+		"https://danielculis.fr/api",
+		["write:graphql"],
+	).catch((e) => {
+		console.error(e);
+		return false;
 	});
-	const scope = payload.scope as string;
 
-	if (!scope.split(" ").includes("write:pepe-tina-graphql")) {
+	if (!authorized) {
 		return new Response(JSON.stringify({ status: "Unautorized" }), {
 			status: 403,
 		});

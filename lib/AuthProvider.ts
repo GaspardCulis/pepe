@@ -18,7 +18,7 @@ export default class AuthProvider extends AbstractAuthProvider {
 
 	async getToken(): Promise<any> {
 		const accessToken = await this.getLogToClient().getAccessToken(
-			"https://danielculis.fr/api/tina/gql",
+			"https://danielculis.fr/api",
 		);
 		return { id_token: accessToken };
 	}
