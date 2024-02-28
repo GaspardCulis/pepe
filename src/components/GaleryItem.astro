@@ -10,7 +10,7 @@ const { data, index } = Astro.props;
 ---
 
 <a
-	href={`/galerie/item/${data.data.categories.items[index].image}`}
+	href={`/galerie/item/${data.data.categories._sys.filename}-${index}`}
 	class="galery-item flex-1 flex flex-col m-4 pb-8 aspect-[1/1]"
 >
 	<CMSGaleryItem client:tina {...data} index={index} />

@@ -5,33 +5,41 @@ import { CMSMarkdown } from "../../../components/cms/CMSMarkdown";
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-	const { data } = await client.queries.galeryItemsConnection();
+	const { data } = await client.queries.categoriesConnection();
 
-	return data.galeryItemsConnection.edges?.map((item) => {
-		return {
-			params: {
-				id: item?.node?._sys.filename,
-			},
-			props: {
-				relativePath: item?.node?._sys.relativePath as string,
-			},
-		};
+	const paths: any[] = [];
+
+	data.categoriesConnection.edges?.forEach((cat) => {
+		cat?.node?.items?.forEach((_, i) => {
+			
+			paths.push({
+				params: {
+					id: `${cat?.node?._sys.filename}-${i}`
+				},
+				props: {
+					relativePath: cat?.node?._sys.relativePath as string,
+					index: i
+				},
+			})
+		})
 	});
+
+	return paths;
 }
 
-const { relativePath } = Astro.props;
-const item = await client.queries.galeryItems({ relativePath });
+const { relativePath, index } = Astro.props;
+const category = await client.queries.categories({ relativePath });
+const item = category.data.categories.items[index];
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
 	<main class="p-12 w-full flex flex-col place-items-center">
 		<div
 			class="relative grow-0 w-fit"
-			style={`view-transition-name: "galery-item-${item.data.galeryItems._sys.filename}";`}
 		>
 			<img
-				src={item.data.galeryItems.image}
-				alt={item.data.galeryItems._sys.filename}
+				src={item.image}
+				alt={item.name}
 			/>
 			<div
 				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
@@ -43,9 +51,9 @@ const item = await client.queries.galeryItems({ relativePath });
 		</div>
 		<div class="pt-12 prose lg:prose-xl text-justify">
 			<CMSMarkdown
-				collection="galeryItems"
-				field="description"
-				{...item}
+				collection="categories"
+				field="item"
+				{...category}
 				client:tina
 			/>
 		</div>
