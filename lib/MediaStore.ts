@@ -48,7 +48,12 @@ export default class CustomMediaStore implements MediaStore {
 	}
 
 	async delete(media: Media): Promise<void> {
-		throw new Error("Method not implemented.");
+		await this.fetch(
+			`${this.API_ROUTE}?key=${encodeURIComponent(media.id)}`,
+			{
+				method: "DELETE",
+			},
+		);
 	}
 
 	async list(options?: MediaListOptions | undefined): Promise<MediaList> {

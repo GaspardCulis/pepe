@@ -9,7 +9,6 @@ import {
 	DeleteObjectCommand,
 	ListObjectsCommand,
 } from "@aws-sdk/client-s3";
-import { stat } from "fs/promises";
 
 const client = new S3Client({
 	region: import.meta.env.AWS_DEFAULT_REGION,
@@ -174,5 +173,30 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	} catch (e) {
 		return new Response("Failed to upload file to S3", { status: 500 });
+	}
+};
+
+export const DELETE: APIRoute = async ({ request }) => {
+	const key = new URL(request.url).searchParams.get("key");
+	if (!key) {
+		return new Response(
+			JSON.stringify({ error: "Missing key URL parameter" }),
+			{
+				status: 400,
+			},
+		);
+	}
+
+	try {
+		await client.send(
+			new DeleteObjectCommand({
+				Bucket: import.meta.env.AWS_BUCKET_NAME,
+				Key: key,
+			}),
+		);
+	} catch (e) {
+		return new Response("Failed to delete " + key, { status: 500 });
+	} finally {
+		return new Response();
 	}
 };
