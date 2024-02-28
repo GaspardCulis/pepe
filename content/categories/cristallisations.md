@@ -3,6 +3,8 @@ name: Cristallisations
 vignette: /cms/galerie/culis_poterie_3788_fd388c51c4.jpg
 items:
   - name: Vase
+    image: 'https://pepe-cms.s3web.gasdev.fr/galery/DSC_1614_d6b525bf1f.JPG'
+  - name: Vase
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/culis_poterie_3825_be5e624227.jpg'
   - name: Vase
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/culis_poterie_3788_fd388c51c4.jpg'
