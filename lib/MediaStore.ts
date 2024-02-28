@@ -60,7 +60,7 @@ export default class CustomMediaStore implements MediaStore {
 		const response = await this.fetch(
 			`${this.API_ROUTE}?query=${encodeURIComponent(JSON.stringify(options || {}))}`,
 		);
-		const response_json = await response.json().catch((e) => null);
+		const response_json = await response.json().catch((_e) => null);
 		if (response_json === null) {
 			throw new Error("Invalid JSON received");
 		}
@@ -84,5 +84,7 @@ export default class CustomMediaStore implements MediaStore {
 		});
 	}
 
-	isStatic?: boolean | undefined;
+	parse(media: Media): string {
+		return media.src!;
+	}
 }
