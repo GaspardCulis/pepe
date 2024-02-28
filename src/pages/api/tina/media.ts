@@ -9,6 +9,7 @@ import {
 	DeleteObjectCommand,
 	ListObjectsCommand,
 } from "@aws-sdk/client-s3";
+import { stat } from "fs/promises";
 
 const client = new S3Client({
 	region: import.meta.env.AWS_DEFAULT_REGION,
@@ -106,4 +107,72 @@ export const GET: APIRoute = async ({ request }) => {
 	};
 
 	return new Response(JSON.stringify(response_json));
+};
+
+export const POST: APIRoute = async ({ request }) => {
+	const formData = await request.formData();
+
+	const directory = formData.get("directory") as string;
+	const filename = formData.get("filename") as string;
+	const file = formData.get("file") as File;
+	const key = path.join(
+		directory.replace(/^\//, "").replace(/\/$/, ""),
+		filename,
+	);
+
+	console.log("[POST] /media: Starting to upload " + key);
+
+	let buffer: Buffer;
+	try {
+		var t0 = performance.now();
+		const array_buffer = await file.arrayBuffer();
+		buffer = Buffer.from(array_buffer);
+		console.log(
+			"[POST] /media: Loading file took " +
+				Math.round(performance.now() - t0) +
+				"ms",
+		);
+	} catch (e) {
+		console.error("[POST] /media: Failed to load client file: ", e);
+		return new Response("Failed to load file", { status: 500 });
+	}
+
+	const command = new PutObjectCommand({
+		Bucket: import.meta.env.AWS_BUCKET_NAME,
+		Key: key,
+		Body: buffer,
+	});
+
+	try {
+		console.log("[POST] /media: Starting to upload file to S3");
+		const t0 = performance.now();
+		await client.send(command);
+		console.log(
+			"[POST] /media: Uploading file to S3 took " +
+				Math.round(performance.now() - t0) +
+				"ms",
+		);
+
+		const webEndpointURL = new URL(import.meta.env.AWS_WEB_ENDPOINT_URL);
+		webEndpointURL.hostname = `${import.meta.env.AWS_BUCKET_NAME}.${webEndpointURL.hostname}`;
+		webEndpointURL.pathname = key;
+		const src = webEndpointURL.toString();
+
+		return new Response(
+			JSON.stringify({
+				id: key,
+				type: "file",
+				filename,
+				directory,
+				src,
+				thumbnails: {
+					"75x75": src,
+					"400x400": src,
+					"1000x1000": src,
+				},
+			}),
+		);
+	} catch (e) {
+		return new Response("Failed to upload file to S3", { status: 500 });
+	}
 };
