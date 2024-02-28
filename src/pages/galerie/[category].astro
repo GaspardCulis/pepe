@@ -6,25 +6,22 @@ import GaleryItem from "../../components/GaleryItem.astro";
 
 export async function getStaticPaths() {
 	const categoriesConnection = await client.queries.categoriesConnection();
-	const galeryItemsConnection = await client.queries.galeryItemsConnection();
 
 	return categoriesConnection.data.categoriesConnection.edges?.map((cat) => {
-		const galeryItemsIds =
-			galeryItemsConnection.data.galeryItemsConnection.edges
-				?.filter((item) => item?.node?.category.id === cat?.node?.id)
-				.map((item) => item?.node?._sys.relativePath);
-
 		return {
 			params: { category: cat?.node?._sys.filename as string },
 			props: {
-				name: cat?.node?.name as string,
-				items: galeryItemsIds as string[],
+				relativePath: cat?.node?._sys.relativePath as string,
 			},
 		};
 	});
 }
 
-const { name, items } = Astro.props;
+const { relativePath } = Astro.props;
+
+const category = await client.queries.categories({ relativePath });
+const name = category.data.categories.name;
+const item_indexes = (category.data.categories.items || []).map((_, i) => i);
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
@@ -38,16 +35,16 @@ const { name, items } = Astro.props;
 				{name}
 			</h1>
 			{
-				items
-					.filter((_, i) => i % 2 === 0)
-					.map((item) => <GaleryItem relativePath={item}  />)
+				item_indexes
+					.filter((i) => i % 2 === 0)
+					.map((i) => <GaleryItem data={category} index={i} />)
 			}
 		</div>
 		<div class="right lg:mr-12 xl:mr-16 2xl:mr-24">
 			{
-				items
-					.filter((_, i) => i % 2 === 1)
-					.map((item) => <GaleryItem relativePath={item} />)
+				item_indexes
+					.filter((i) => i % 2 === 1)
+					.map((i) => <GaleryItem data={category} index={i} />)
 			}
 		</div>
 	</div>

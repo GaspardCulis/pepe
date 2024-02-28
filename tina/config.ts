@@ -114,8 +114,13 @@ export default defineConfig({
 					{
 						type: "object",
 						name: "items",
-						label: "Objets",
+						label: "Elements",
 						list: true,
+						ui: {
+							itemProps(item) {
+								return { label: item?.name };
+							},
+						},
 						fields: [
 							{
 								type: "string",

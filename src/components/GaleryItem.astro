@@ -4,17 +4,16 @@ import { client } from "../../tina/__generated__/databaseClient";
 import { CMSGaleryItem } from "../components/cms/CMSGaleryItem";
 
 export interface Props {
-	relativePath: string;
+	data: any;
+	index: number;
 }
 
-const { relativePath } = Astro.props;
-
-const data = await client.queries.galeryItems({ relativePath });
+const { data, index } = Astro.props;
 ---
 
 <a
-	href={`/galerie/item/${data.data.galeryItems._sys.filename}`}
+	href={`/galerie/item/${data.data.categories.items[index].image}`}
 	class="galery-item flex-1 flex flex-col m-4 pb-8 aspect-[1/1]"
 >
-	<CMSGaleryItem client:tina {...data} />
+	<CMSGaleryItem client:tina {...data} index={index} />
 </a>
