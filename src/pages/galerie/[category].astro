@@ -6,9 +6,9 @@ import GaleryItem from "../../components/GaleryItem.astro";
 import { CMSLabel } from "../../components/cms/CMSLabel.tsx";
 
 export async function getStaticPaths() {
-	const categoriesConnection = await client.queries.categoriesConnection();
+	const {data} = await client.queries.categoriesConnection();
 
-	return categoriesConnection.data.categoriesConnection.edges?.map((cat) => {
+	return data.categoriesConnection.edges?.map((cat) => {
 		return {
 			params: { category: cat?.node?._sys.filename as string },
 			props: {
