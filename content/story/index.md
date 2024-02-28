@@ -11,7 +11,7 @@ Il quitte l’armée au bout de cinq ans pour se consacrer à la poterie.
 Disposant de peu de moyens mais d’une solide détermination, il construit son premier tour à pied qu’il équipe d’un moteur de machine à laver et travaille dans la cave du HLM de sa maman. Il apprend ainsi à tourner en autodidacte.
 En 1971 il rencontre et se marie avec Jacky. Ensemble, ils s’installent à Ocquerre petit hameau proche de Meaux où Daniel installe son premier vrai atelier. Il produit et commence à vendre ses premières pièces tout en travaillant en parallèle à l’usine pour assurer un revenu à la famille. En 1972, il fait sa première exposition à Lizy sur Ourcq un village voisin. Il commence aussi à donner des cours. Il faut néanmoins encore cumuler à cela les emplois alimentaires pour assurer des revenus suffisants.
 
-![Daniel tourne](https://cms.gasdev.fr/uploads/uploads_65679a3cea9f31_12912996_recov_image00000_57a0ba93e9.webp)
+![Daniel tourne](https://pepe-cms.s3web.gasdev.fr/story/daniel_tourne.webp)
 
 En 1974 Jacky et Daniel décident de descendre s’installer dans la Drôme d’où est originaire Jacky. Ils trouvent une maison à Montélier au pied du Vercors.
 Dans un premier temps l’atelier est installé dans une vieille bergerie sans eau mais avec l’électricité nécessaire pour faire fonctionner le four ! L’atelier sera ensuite rapatrié à la maison.
@@ -21,7 +21,7 @@ Son goût pour la transmission et le partage ne le quittera jamais et il enseign
 Jacky est là aussi. En plus de s’occuper de la maison et des trois enfants, elle donne des cours de poterie pour les enfants. Elle sera toujours là pour soutenir Daniel dans son activité toujours à ses cotés lors des expositions.
 Avec d’autres artisans, Jacky et Daniel organisent l’exposition artisanale de Montélier qui se tiendra chaque année entre 1976 et 1983.
 
-![Daniel](https://cms.gasdev.fr/uploads/potier_en_slip_84053be7a1.jpg?format=webp)
+![Daniel](https://pepe-cms.s3web.gasdev.fr/story/potier_en_slip.webp)
 
 A partir de 1979, c’est à Montélier qu’il va commencer ses recherches sur les émaux cristallisés. A cette époque la documentation sur le sujet n’est pas ce qu’elle peut être actuellement et le travail sera long et nécessitera acharnement et détermination !
 Son goût pour la forme, le galbe, la ligne, le conduise aussi à travailler à cette période sur des formes modelées contemporaines en terre brute.
@@ -37,11 +37,11 @@ Il reçoit le titre de Maître Artisan en 1991.
 A cette époque, il participe à de nombreuses expositions céramiques prestigieuses aux cotés de potiers renommés comme Robert Deblander, Dominique Pouchain, Denis Caraty, Marc Uzan et d’autres encore…
 Il participera ainsi à de nombreuses reprises au marché des Tupiniers de Lyon et exposera aux différentes éditions de la biennale des métiers d’art de Villeurbanne.
 
-![Vase cristallisé](https://cms.gasdev.fr/uploads/culis_poterie_3806_dd2555520a.jpg?format=webp)
+![Vase cristallisé](https://pepe-cms.s3web.gasdev.fr/galery/culis_poterie_3806_dd2555520a.jpg)
 
 Dans ces années 90, ne souhaitant pas se borner à un seul horizon, aussi cristallisé soit-il, sa curiosité l’amène à s’intéresser à la technique des jarres à la corde. Son goût pour les défis le conduit à réaliser pour différentes communes des jarres monumentales nécessitant jusqu’à 600kg de terre. La taille de ces pièces impose une cuisson au bois dans des fosses creusées spécialement. Réalisée en public la cuisson assure un spectacle et une animation inoubliable !
 
-![Jarre à la corde](https://cms.gasdev.fr/uploads/jarre_a_la_corde_8223f65436.jpg?format=webp)
+![Jarre à la corde](https://pepe-cms.s3web.gasdev.fr/galery/jarre_a_la_corde_8223f65436.jpg)
 
 Cette période de production artistique prolifique ne l’empêche pas de continuer à enseigner et à transmettre.
 En plus des cours qu’il continue à donner dans son atelier, il sera formateur pour la maison de la terre à Dieulefit pendant quelques années.
