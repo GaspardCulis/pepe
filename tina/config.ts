@@ -1,6 +1,5 @@
 import { defineConfig } from "tinacms";
 import { LocalAuthProvider } from "tinacms";
-import client from "./__generated__/client";
 import AuthProvider from "../lib/AuthProvider";
 import CustomMediaStore from "../lib/MediaStore";
 
@@ -91,8 +90,13 @@ export default defineConfig({
 			},
 			{
 				name: "categories",
-				label: "Catégories de la galerie",
+				label: "Elements de la galerie",
 				path: "content/categories",
+				ui: {
+					router: ({ document }) => {
+						return `/galerie/${document._sys.filename}`;
+					},
+				},
 				fields: [
 					{
 						type: "string",
@@ -107,48 +111,33 @@ export default defineConfig({
 						label: "Vignette",
 						required: true,
 					},
-				],
-			},
-			{
-				name: "galeryItems",
-				label: "Elements de la Galerie",
-				path: "content/galery",
-				ui: {
-					async router(args) {
-						const { data } = await client.queries.galeryItems({
-							relativePath: args.document._sys.relativePath,
-						});
-
-						return `/galerie/${data.galeryItems.category._sys.filename}`;
-					},
-				},
-				fields: [
 					{
-						type: "string",
-						name: "name",
-						label: "Nom",
-						required: true,
-						isTitle: true,
-					},
-					{
-						type: "image",
-						name: "image",
-						label: "Image",
-						required: true,
-					},
-					{
-						type: "reference",
-						name: "category",
-						label: "Catégorie",
-						collections: ["categories"],
-						required: true,
-					},
-					{
-						type: "rich-text",
-						name: "description",
-						label: "Description",
-						required: false,
-						isBody: true,
+						type: "object",
+						name: "items",
+						label: "Objets",
+						list: true,
+						fields: [
+							{
+								type: "string",
+								name: "name",
+								label: "Nom",
+								required: true,
+								isTitle: true,
+							},
+							{
+								type: "image",
+								name: "image",
+								label: "Image",
+								required: true,
+							},
+							{
+								type: "rich-text",
+								name: "description",
+								label: "Description",
+								required: false,
+								isBody: true,
+							},
+						],
 					},
 				],
 			},
