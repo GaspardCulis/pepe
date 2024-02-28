@@ -19,17 +19,17 @@ const client = new S3Client({
 	},
 });
 
+const API_AUDIENCE = "https://danielculis.fr/api";
+
 export const GET: APIRoute = async ({ request }) => {
-	const authorized = await isAuthorized(
-		request.headers,
-		"https://danielculis.fr/api",
-		["read:media"],
-	).catch((e) => {
+	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
+		"read:media",
+	]).catch((e) => {
 		console.error(e);
 		return false;
 	});
 	if (!authorized) {
-		return new Response(JSON.stringify({ error: "Unautorized" }), {
+		return new Response("Unautorized", {
 			status: 403,
 		});
 	}
@@ -109,6 +109,18 @@ export const GET: APIRoute = async ({ request }) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
+		"write:media",
+	]).catch((e) => {
+		console.error(e);
+		return false;
+	});
+	if (!authorized) {
+		return new Response("Unautorized", {
+			status: 403,
+		});
+	}
+
 	const formData = await request.formData();
 
 	const directory = formData.get("directory") as string;
@@ -177,6 +189,18 @@ export const POST: APIRoute = async ({ request }) => {
 };
 
 export const DELETE: APIRoute = async ({ request }) => {
+	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
+		"write:media",
+	]).catch((e) => {
+		console.error(e);
+		return false;
+	});
+	if (!authorized) {
+		return new Response("Unautorized", {
+			status: 403,
+		});
+	}
+
 	const key = new URL(request.url).searchParams.get("key");
 	if (!key) {
 		return new Response(
