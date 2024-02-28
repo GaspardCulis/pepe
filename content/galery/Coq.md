@@ -1,6 +1,0 @@
----
-name: Coq
-image: /cms/galerie/DSC_1641_962de01590.JPG
-category: content/categories/modelage-et-contemporain.md
----
-
