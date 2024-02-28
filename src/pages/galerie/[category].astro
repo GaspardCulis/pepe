@@ -40,14 +40,14 @@ const { name, items } = Astro.props;
 			{
 				items
 					.filter((_, i) => i % 2 === 0)
-					.map((item) => <GaleryItem relativePath={item}  />)
+					.map((item) => <GaleryItem relativePath={item} client:visible />)
 			}
 		</div>
 		<div class="right lg:mr-12 xl:mr-16 2xl:mr-24">
 			{
 				items
 					.filter((_, i) => i % 2 === 1)
-					.map((item) => <GaleryItem relativePath={item} />)
+					.map((item) => <GaleryItem relativePath={item} client:visible />)
 			}
 		</div>
 	</div>
