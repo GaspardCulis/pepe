@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import * as crypto from "crypto";
+import { spawn } from "node:child_process";
 import type { APIRoute } from "astro";
 
 const verify_signature = (req: Request, payload: object) => {
@@ -23,7 +24,49 @@ export const POST: APIRoute = async ({ request }) => {
 		return new Response("Unauthorized", { status: 401 });
 	}
 
-	console.log("Github callback: ", payload);
+	// Pull the latest changes
+	const pullProcess = spawn("git", ["pull"]);
+	pullProcess.on("data", (data) => {
+		console.error(`/api/tina/pushcallback: pullProcess -> stderr: ${data}`);
+	});
 
-	return new Response();
+	try {
+		const code: number = await new Promise((resolve, reject) => {
+			pullProcess.once("close", resolve);
+			pullProcess.once("error", reject);
+		});
+		if (code != 0) {
+			return new Response(
+				`Pull process exited with non-zero error code: (${code})`,
+				{ status: 500 },
+			);
+		}
+	} catch (e) {
+		return new Response(`Error: ${(e as Error).message}`, { status: 500 });
+	}
+
+	// Rebuild project
+	const buildProcess = spawn("npm", ["run", "build"]);
+	buildProcess.on("data", (data) => {
+		console.error(
+			`/api/tina/pushcallback: buildProcess -> stderr: ${data}`,
+		);
+	});
+
+	try {
+		const code: number = await new Promise((resolve, reject) => {
+			buildProcess.once("close", resolve);
+			buildProcess.once("error", reject);
+		});
+		if (code != 0) {
+			return new Response(
+				`Build process exited with non-zero error code: (${code})`,
+				{ status: 500 },
+			);
+		}
+	} catch (e) {
+		return new Response(`Error: ${(e as Error).message}`, { status: 500 });
+	}
+
+	return new Response("Success");
 };
