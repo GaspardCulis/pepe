@@ -17,6 +17,7 @@
 		"@emailjs/browser": "^3.11.0",
 		"@logto/browser": "^2.2.3",
 		"@tinacms/datalayer": "^1.2.32",
+		"@types/bun": "^1.0.8",
 		"astro": "^4.0.1",
 		"astro-seo": "^0.8.0",
 		"jose": "^5.2.2",
