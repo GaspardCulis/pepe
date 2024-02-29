@@ -1,13 +1,13 @@
 ---
-title: Articles de presse
 slug: /articles
+title: Articles de presse
 ---
 
 ## Articles
 
 ### Dauphiné 2016
 
-[![dauphiné.png](https://cms.gasdev.fr/uploads/image_ff8e273605.png)](https://www.ledauphine.com/drome/2016/01/10/il-etait-une-fois-daniel-culis-l-artiste-potier-ceramiste)
+[![dauphiné.png](https://cms.gasdev.fr/uploads/image_ff8e273605.png)](https://pepe-cms.s3web.gasdev.fr/story/daniel_tourne.webp)
 
 ### 1990 Dauphiné libéré
 
