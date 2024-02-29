@@ -46,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
 	}
 
 	// Rebuild project
-	const buildProcess = spawn("npm", ["run", "build"]);
+	const buildProcess = spawn("bun", ["run", "build"]);
 	buildProcess.on("data", (data) => {
 		console.error(
 			`/api/tina/pushcallback: buildProcess -> stderr: ${data}`,
