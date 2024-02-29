@@ -35,7 +35,7 @@ export default class AuthProvider extends AbstractAuthProvider {
 		props?: Record<string, string> | undefined,
 	): Promise<any> {
 		this.getLogToClient().signIn(
-			`${document.location.origin}/api/tina/auth`,
+			`${document.location.origin}/auth/callback`,
 		);
 	}
 }
