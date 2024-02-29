@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ request }) => {
 
 	// Pull the latest changes
 	const pullProcess = spawn("git", ["pull"]);
-	pullProcess.on("data", (data) => {
+	pullProcess.stderr.on("data", (data) => {
 		console.error(`/api/tina/pushcallback: pullProcess -> stderr: ${data}`);
 	});
 
@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
 
 	// Rebuild project
 	const buildProcess = spawn("bun", ["run", "build"]);
-	buildProcess.on("data", (data) => {
+	buildProcess.stderr.on("data", (data) => {
 		console.error(
 			`/api/tina/pushcallback: buildProcess -> stderr: ${data}`,
 		);
