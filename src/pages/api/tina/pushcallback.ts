@@ -23,8 +23,7 @@ export const POST: APIRoute = async ({ request }) => {
 		return new Response("Unauthorized", { status: 401 });
 	}
 
-	const request_json = await request.json();
-	console.log("Github callback: ", request_json);
+	console.log("Github callback: ", payload);
 
 	return new Response();
 };
