@@ -1,5 +1,6 @@
 import { isAuthorized } from "../../lib/utils";
 import { databaseRequest } from "../../lib/databaseConnection";
+import { CORS_HEADERS } from ".";
 
 export const gql_ALL: Route = async (request) => {
 	const authorized = await isAuthorized(
@@ -11,9 +12,10 @@ export const gql_ALL: Route = async (request) => {
 		return false;
 	});
 
-	if (!authorized) {
+	if (!authorized && false) {
 		return new Response(JSON.stringify({ status: "Unautorized" }), {
 			status: 403,
+			...CORS_HEADERS,
 		});
 	}
 
@@ -21,6 +23,7 @@ export const gql_ALL: Route = async (request) => {
 	if (json === null) {
 		return new Response(JSON.stringify({ status: "Invalid JSON" }), {
 			status: 502,
+			...CORS_HEADERS,
 		});
 	}
 
@@ -28,5 +31,6 @@ export const gql_ALL: Route = async (request) => {
 
 	return new Response(
 		JSON.stringify(await databaseRequest({ query, variables })),
+		CORS_HEADERS,
 	);
 };

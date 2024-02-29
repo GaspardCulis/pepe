@@ -14,7 +14,7 @@ const branch =
 
 export default defineConfig({
 	branch,
-	contentApiUrlOverride: "/api/tina/gql",
+	contentApiUrlOverride: "http://localhost:3000/api/gql",
 	authProvider: isLocal ? new LocalAuthProvider() : new AuthProvider(),
 
 	build: {
