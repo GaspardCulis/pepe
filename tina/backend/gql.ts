@@ -1,10 +1,7 @@
-export const prerender = false;
+import { isAuthorized } from "../../lib/utils";
+import { databaseRequest } from "../../lib/databaseConnection";
 
-import type { APIRoute } from "astro";
-import { isAuthorized } from "../../../../lib/utils";
-import { databaseRequest } from "../../../../lib/databaseConnection";
-
-export const ALL: APIRoute = async ({ request }) => {
+export const gql_ALL: Route = async (request) => {
 	const authorized = await isAuthorized(
 		request.headers,
 		"https://danielculis.fr/api",
