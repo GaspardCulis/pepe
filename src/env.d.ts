@@ -11,6 +11,7 @@ interface ImportMetaEnv {
 	readonly GITHUB_OWNER: string;
 	readonly GITHUB_BRANCH: string;
 	readonly GITHUB_PERSONAL_ACCESS_TOKEN: string;
+	readonly GITHUB_WEBHOOK_SECRET: string;
 
 	readonly MONGODB_URI: string;
 
