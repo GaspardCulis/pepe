@@ -1,4 +1,5 @@
 import LogtoClient from "@logto/browser";
+import { spawn } from "node:child_process";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 
 export function createLogToClient(): LogtoClient {
@@ -60,4 +61,46 @@ export async function isAuthorized(
 	}
 
 	return valid_scopes;
+}
+
+export async function handleGithubPush() {
+	// Pull the latest changes
+	const pullProcess = spawn("git", ["pull"]);
+	pullProcess.stderr.on("data", (data) => {
+		console.error(`handleGithubPush: pullProcess -> stderr: ${data}`);
+	});
+
+	try {
+		const code: number = await new Promise((resolve, reject) => {
+			pullProcess.once("close", resolve);
+			pullProcess.once("error", reject);
+		});
+		if (code != 0) {
+			throw new Error(
+				`Pull process exited with non-zero error code: (${code})`,
+			);
+		}
+	} catch (e) {
+		return new Error(`Error: ${(e as Error).message}`);
+	}
+
+	// Rebuild project
+	const buildProcess = spawn("bun", ["run", "build"]);
+	buildProcess.stderr.on("data", (data) => {
+		console.error(`handleGithubPush: buildProcess -> stderr: ${data}`);
+	});
+
+	try {
+		const code: number = await new Promise((resolve, reject) => {
+			buildProcess.once("close", resolve);
+			buildProcess.once("error", reject);
+		});
+		if (code != 0) {
+			return new Error(
+				`Build process exited with non-zero error code: (${code})`,
+			);
+		}
+	} catch (e) {
+		return new Error(`Error: ${(e as Error).message}`);
+	}
 }
