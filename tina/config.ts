@@ -12,9 +12,17 @@ const branch =
 	process.env.HEAD ||
 	"main";
 
+const backendUrl =
+	process.env.BACKEND_URL ||
+	(document.location.protocol === "http:"
+		? "http://localhost:3000"
+		: document.location.origin);
+
+console.log(backendUrl);
+
 export default defineConfig({
 	branch,
-	contentApiUrlOverride: `${process.env.BACKEND_URL}/api/gql`,
+	contentApiUrlOverride: `${backendUrl}/api/gql`,
 	authProvider: isLocal ? new LocalAuthProvider() : new AuthProvider(),
 
 	build: {
