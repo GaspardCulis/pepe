@@ -1,8 +1,8 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 
-import * as gql from "./gql";
-import * as media from "./media";
+import * as gql from "./routes/gql";
+import * as media from "./routes/media";
 
 new Elysia()
 	.use(cors({ methods: "*" }))
