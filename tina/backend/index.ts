@@ -5,7 +5,7 @@ import * as gql from "./gql";
 import * as media from "./media";
 
 new Elysia()
-	.use(cors())
+	.use(cors({ methods: "*" }))
 	.group("/api", (app) =>
 		app
 			.post("/gql", gql.POST)
