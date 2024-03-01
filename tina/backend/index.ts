@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 
-import { auth } from "./plugins/auth";
+import { auth } from "./middleware/auth";
 
 import * as gql from "./routes/gql";
 import * as media from "./routes/media";
