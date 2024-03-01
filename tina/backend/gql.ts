@@ -2,7 +2,7 @@ import { isAuthorized } from "../../lib/utils";
 import { databaseRequest } from "../../lib/databaseConnection";
 import type { Handler } from "elysia";
 
-export const gql: Handler = async ({ request }) => {
+export const POST: Handler = async ({ request }) => {
 	const authorized = await isAuthorized(
 		request.headers,
 		"https://danielculis.fr/api",

@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 
-import { gql } from "./gql";
+import * as gql from "./gql";
 
-new Elysia().use(cors()).post("/api/gql", gql).listen(3000);
+new Elysia().use(cors()).post("/api/gql", gql.POST).listen(3000);
