@@ -6,22 +6,42 @@ import { auth } from "./plugins/auth";
 import * as gql from "./routes/gql";
 import * as media from "./routes/media";
 
+const authConfig = {
+	remote_url: "https://auth.gasdev.fr/oidc/jwks",
+	issuer_url: "https://auth.gasdev.fr/oidc",
+	audience: "https://danielculis.fr/api",
+};
+
 new Elysia()
 	.use(cors({ methods: "*" }))
-	.use(
-		auth({
-			remote_url: "https://auth.gasdev.fr/oidc/jwks",
-			issuer_url: "https://auth.gasdev.fr/oidc",
-		}),
-	)
 	.group("/api", (app) =>
 		app
-			.post("/gql", gql.POST)
+			.post("/gql", gql.POST, {
+				beforeHandle: auth({
+					...authConfig,
+					scopes: ["write:graphql"],
+				}),
+			})
 			.group("/media", (app) =>
 				app
-					.get("", media.GET)
-					.post("", media.POST)
-					.delete("", media.DELETE),
+					.get("", media.GET, {
+						beforeHandle: auth({
+							...authConfig,
+							scopes: ["read:media"],
+						}),
+					})
+					.post("", media.POST, {
+						beforeHandle: auth({
+							...authConfig,
+							scopes: ["write:media"],
+						}),
+					})
+					.delete("", media.DELETE, {
+						beforeHandle: auth({
+							...authConfig,
+							scopes: ["write:media"],
+						}),
+					}),
 			),
 	)
 	.listen(3000);

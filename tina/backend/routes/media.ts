@@ -1,7 +1,6 @@
 export const prerender = false;
 
 import path from "path";
-import { isAuthorized } from "../../../lib/utils";
 import type { Handler } from "elysia";
 import {
 	S3Client,
@@ -19,21 +18,7 @@ const client = new S3Client({
 	},
 });
 
-const API_AUDIENCE = "https://danielculis.fr/api";
-
 export const GET: Handler = async ({ request }) => {
-	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
-		"read:media",
-	]).catch((e) => {
-		console.error(e);
-		return false;
-	});
-	if (!authorized) {
-		return new Response("Unautorized", {
-			status: 403,
-		});
-	}
-
 	const query = new URL(request.url).searchParams.get("query");
 	if (!query) {
 		return new Response(
@@ -109,18 +94,6 @@ export const GET: Handler = async ({ request }) => {
 };
 
 export const POST: Handler = async ({ request }) => {
-	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
-		"write:media",
-	]).catch((e) => {
-		console.error(e);
-		return false;
-	});
-	if (!authorized) {
-		return new Response("Unautorized", {
-			status: 403,
-		});
-	}
-
 	const formData = await request.formData();
 
 	const directory = formData.get("directory") as string;
@@ -189,18 +162,6 @@ export const POST: Handler = async ({ request }) => {
 };
 
 export const DELETE: Handler = async ({ request }) => {
-	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
-		"write:media",
-	]).catch((e) => {
-		console.error(e);
-		return false;
-	});
-	if (!authorized) {
-		return new Response("Unautorized", {
-			status: 403,
-		});
-	}
-
 	const key = new URL(request.url).searchParams.get("key");
 	if (!key) {
 		return new Response(

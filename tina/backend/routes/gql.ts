@@ -1,23 +1,7 @@
-import { isAuthorized } from "../../../lib/utils";
 import { databaseRequest } from "../../../lib/databaseConnection";
 import type { Handler } from "elysia";
 
 export const POST: Handler = async ({ request }) => {
-	const authorized = await isAuthorized(
-		request.headers,
-		"https://danielculis.fr/api",
-		["write:graphql"],
-	).catch((e) => {
-		console.error(e);
-		return false;
-	});
-
-	if (!authorized) {
-		return new Response(JSON.stringify({ status: "Unautorized" }), {
-			status: 403,
-		});
-	}
-
 	const json = await request.json().catch((_e) => null);
 	if (json === null) {
 		return new Response(JSON.stringify({ status: "Invalid JSON" }), {
