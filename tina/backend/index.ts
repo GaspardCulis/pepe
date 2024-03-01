@@ -6,8 +6,14 @@ import * as media from "./media";
 
 new Elysia()
 	.use(cors())
-	.post("/api/gql", gql.POST)
-	.get("/api/media", media.GET)
-	.post("/api/media", media.POST)
-	.delete("/api/media", media.DELETE)
+	.group("/api", (app) =>
+		app
+			.post("/gql", gql.POST)
+			.group("/media", (app) =>
+				app
+					.get("", media.GET)
+					.post("", media.POST)
+					.delete("", media.DELETE),
+			),
+	)
 	.listen(3000);
