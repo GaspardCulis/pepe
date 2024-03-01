@@ -3,7 +3,7 @@ import { gql_ALL } from "./gql";
 export const CORS_HEADERS = {
 	headers: {
 		"Access-Control-Allow-Origin": "*",
-		"Access-Control-Allow-Methods": "OPTIONS, POST",
+		"Access-Control-Allow-Methods": "OPTIONS, GET, POST",
 		"Access-Control-Allow-Headers": "Content-Type, Authorization",
 	},
 };
