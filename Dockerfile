@@ -14,7 +14,7 @@ RUN apk --no-cache add git vips
 
 # Clone the project
 ARG APP_REPO_URL=https://github.com/GaspardCulis/pepe
-RUN git clone "${APP_REPO_URL}" .
+RUN git clone --depth=1 "${APP_REPO_URL}" .
 
 # Install project dependencies
 RUN bun install
@@ -36,4 +36,4 @@ CMD ["bunx", "astro", "preview"]
 
 FROM base as backend
 
-CMD ["bun", "run", "tina/backend/index.ts"]
+CMD ["bun", "run", "/home/bun/app/tina/backend/index.ts"]
