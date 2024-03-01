@@ -5,6 +5,7 @@ import { auth } from "./middleware/auth";
 
 import * as gql from "./routes/gql";
 import * as media from "./routes/media";
+import * as pushcallback from "./routes/pushcallback";
 
 const authConfig = {
 	remote_url: "https://auth.gasdev.fr/oidc/jwks",
@@ -16,6 +17,7 @@ const app = new Elysia()
 	.use(cors({ methods: "*" }))
 	.group("/api", (app) =>
 		app
+			.post("/pushcallback", pushcallback.POST)
 			.post("/gql", gql.POST, {
 				beforeHandle: auth({
 					...authConfig,
