@@ -12,7 +12,7 @@ const authConfig = {
 	audience: "https://danielculis.fr/api",
 };
 
-new Elysia()
+const app = new Elysia()
 	.use(cors({ methods: "*" }))
 	.group("/api", (app) =>
 		app
@@ -45,3 +45,5 @@ new Elysia()
 			),
 	)
 	.listen(3000);
+
+console.log(`🦊 Elysia is running at ${app.server?.url}`);
