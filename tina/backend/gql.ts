@@ -12,7 +12,7 @@ export const POST: Handler = async ({ request }) => {
 		return false;
 	});
 
-	if (!authorized && false) {
+	if (!authorized) {
 		return new Response(JSON.stringify({ status: "Unautorized" }), {
 			status: 403,
 		});
