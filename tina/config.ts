@@ -14,7 +14,7 @@ const branch =
 
 export default defineConfig({
 	branch,
-	contentApiUrlOverride: "http://localhost:3000/api/gql",
+	contentApiUrlOverride: `${import.meta.env.BACKEND_URL}/api/gql`,
 	authProvider: isLocal ? new LocalAuthProvider() : new AuthProvider(),
 
 	build: {
