@@ -1,8 +1,8 @@
 export const prerender = false;
 
 import path from "path";
-import type { APIRoute } from "astro";
-import { isAuthorized } from "../../../../lib/utils";
+import { isAuthorized } from "../../lib/utils";
+import type { Handler } from "elysia";
 import {
 	S3Client,
 	PutObjectCommand,
@@ -21,7 +21,7 @@ const client = new S3Client({
 
 const API_AUDIENCE = "https://danielculis.fr/api";
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: Handler = async ({ request }) => {
 	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
 		"read:media",
 	]).catch((e) => {
@@ -108,7 +108,7 @@ export const GET: APIRoute = async ({ request }) => {
 	return new Response(JSON.stringify(response_json));
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: Handler = async ({ request }) => {
 	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
 		"write:media",
 	]).catch((e) => {
@@ -188,7 +188,7 @@ export const POST: APIRoute = async ({ request }) => {
 	}
 };
 
-export const DELETE: APIRoute = async ({ request }) => {
+export const DELETE: Handler = async ({ request }) => {
 	const authorized = await isAuthorized(request.headers, API_AUDIENCE, [
 		"write:media",
 	]).catch((e) => {

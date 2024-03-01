@@ -12,7 +12,7 @@ import { createLogToClient } from "./utils";
 export default class CustomMediaStore implements MediaStore {
 	accept = DEFAULT_MEDIA_UPLOAD_TYPES;
 
-	private API_ROUTE = "/api/tina/media";
+	private API_ROUTE = "http://localhost:3000/api/media";
 
 	private logtoClient: LogtoClient;
 	private logtoResource: string = "https://danielculis.fr/api";
