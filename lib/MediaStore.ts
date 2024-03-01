@@ -9,10 +9,16 @@ import type {
 import { DEFAULT_MEDIA_UPLOAD_TYPES } from "tinacms";
 import { createLogToClient } from "./utils";
 
+const backendUrl =
+	process.env.BACKEND_URL ||
+	(document.location.protocol === "http:"
+		? "http://localhost:3000"
+		: document.location.origin);
+
 export default class CustomMediaStore implements MediaStore {
 	accept = DEFAULT_MEDIA_UPLOAD_TYPES;
 
-	private API_ROUTE = `${import.meta.env.BACKEND_URL}/api/media`;
+	private API_ROUTE = `${backendUrl}/api/media`;
 
 	private logtoClient: LogtoClient;
 	private logtoResource: string = "https://danielculis.fr/api";
