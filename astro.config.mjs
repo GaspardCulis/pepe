@@ -5,7 +5,7 @@ import react from "@astrojs/react";
 const tina = ({ directiveName = "tina" } = {}) => ({
 	name: "tina-cms",
 	hooks: {
-		"astro:config:setup": ({ addClientDirective, opts }) => {
+		"astro:config:setup": ({ addClientDirective }) => {
 			addClientDirective({
 				name: directiveName,
 				entrypoint: "./client-directives/tina.mjs",
@@ -17,8 +17,5 @@ const tina = ({ directiveName = "tina" } = {}) => ({
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	redirects: {
-		"/admin": "/admin/index.html",
-	},
 	integrations: [tailwind(), react(), tina()],
 });
