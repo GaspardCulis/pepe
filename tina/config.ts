@@ -18,8 +18,6 @@ const backendUrl =
 		? "http://localhost:3000"
 		: document.location.origin);
 
-console.log(backendUrl);
-
 export default defineConfig({
 	branch,
 	contentApiUrlOverride: `${backendUrl}/api/gql`,
