@@ -1,18 +1,43 @@
 services:
-  site:
-    restart: always
+  data:
     build:
       context: .
-      target: site
-    ports:
-      - ${APP_PORT:-4321}:4321
+      target: data
     environment:
       - MONGODB_URI=mongodb://mongodb:27017
+    volumes:
+      - data:/home/bun/app
     depends_on:
       mongodb:
         condition: service_completed_successfully
     links:
       - mongodb
+
+  frontend:
+    build:
+      context: .
+      target: frontend
+    ports:
+      - ${APP_PORT:-4321}:4321
+    volumes:
+      - data:/home/bun/app
+    depends-on:
+      data:
+        condition:
+          service_healthy
+
+  backend:
+    build:
+      context: .
+      target: backend
+    ports:
+      - ${BACKEND_PORT:-3000}:3000
+    volumes:
+      - data:/home/bun/app
+    depends-on:
+      data:
+        condition:
+          service_healthy
 
   mongodb:
     image: docker.io/mongo:latest
@@ -24,4 +49,5 @@ services:
       - mongodb:/data/db
 
 volumes:
+  data:
   mongodb:
