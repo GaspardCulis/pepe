@@ -21,6 +21,10 @@ interface ImportMetaEnv {
 	readonly AWS_ENDPOINT_URL: string;
 	readonly AWS_WEB_ENDPOINT_URL: string;
 	readonly AWS_BUCKET_NAME: string;
+
+	readonly AUTH_REMOTE_URL: string;
+	readonly AUTH_ISSUER_URL: string;
+	readonly AUTH_API_AUDIENCE: string;
 }
 
 interface ImportMeta {

@@ -8,9 +8,9 @@ import * as media from "./routes/media";
 import * as pushcallback from "./routes/pushcallback";
 
 const authConfig = {
-	remote_url: "https://auth.gasdev.fr/oidc/jwks",
-	issuer_url: "https://auth.gasdev.fr/oidc",
-	audience: "https://danielculis.fr/api",
+	remote_url: import.meta.env.AUTH_REMOTE_URL,
+	issuer_url: import.meta.env.AUTH_ISSUER_URL,
+	audience: import.meta.env.AUTH_API_AUDIENCE,
 };
 
 const app = new Elysia()
