@@ -1,5 +1,5 @@
-import { isAuthorized } from "../../lib/utils";
-import { databaseRequest } from "../../lib/databaseConnection";
+import { isAuthorized } from "../../../lib/utils";
+import { databaseRequest } from "../../../lib/databaseConnection";
 import type { Handler } from "elysia";
 
 export const POST: Handler = async ({ request }) => {

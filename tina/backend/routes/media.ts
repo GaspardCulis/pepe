@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import path from "path";
-import { isAuthorized } from "../../lib/utils";
+import { isAuthorized } from "../../../lib/utils";
 import type { Handler } from "elysia";
 import {
 	S3Client,
