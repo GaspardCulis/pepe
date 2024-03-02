@@ -12,11 +12,7 @@ const branch =
 	process.env.HEAD ||
 	"main";
 
-const backendUrl =
-	process.env.BACKEND_URL ||
-	(document.location.protocol === "http:"
-		? "http://localhost:3000"
-		: document.location.origin);
+export const backendUrl = "http://localhost:3000";
 
 export default defineConfig({
 	branch,

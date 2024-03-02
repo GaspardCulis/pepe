@@ -8,12 +8,7 @@ import type {
 } from "tinacms";
 import { DEFAULT_MEDIA_UPLOAD_TYPES } from "tinacms";
 import { createLogToClient } from "./utils";
-
-const backendUrl =
-	process.env.BACKEND_URL ||
-	(document.location.protocol === "http:"
-		? "http://localhost:3000"
-		: document.location.origin);
+import { backendUrl } from "../tina/config";
 
 export default class CustomMediaStore implements MediaStore {
 	accept = DEFAULT_MEDIA_UPLOAD_TYPES;
