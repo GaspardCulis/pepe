@@ -25,8 +25,6 @@ interface ImportMetaEnv {
 	readonly AUTH_REMOTE_URL: string;
 	readonly AUTH_ISSUER_URL: string;
 	readonly AUTH_API_AUDIENCE: string;
-
-	readonly BACKEND_URL: string;
 }
 
 interface ImportMeta {
