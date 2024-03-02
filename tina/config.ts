@@ -13,6 +13,7 @@ const branch =
 	"main";
 
 export const backendUrl = "http://localhost:3000";
+export const siteUrl = "https://danielculis.fr";
 
 export default defineConfig({
 	branch,
@@ -44,7 +45,7 @@ export default defineConfig({
 						readonly: true,
 					},
 					router: () => {
-						return "/";
+						return siteUrl;
 					},
 				},
 				fields: [
@@ -70,7 +71,7 @@ export default defineConfig({
 						readonly: true,
 					},
 					router({ document }) {
-						return `/parcours/${document._sys.filename.replace("index", "")}`;
+						return `${siteUrl}/parcours/${document._sys.filename.replace("index", "")}`;
 					},
 				},
 				fields: [
@@ -96,7 +97,7 @@ export default defineConfig({
 				path: "content/categories",
 				ui: {
 					router: ({ document }) => {
-						return `/galerie/${document._sys.filename}`;
+						return `${siteUrl}/galerie/${document._sys.filename}`;
 					},
 				},
 				fields: [
@@ -154,7 +155,7 @@ export default defineConfig({
 				path: "content/testimonies",
 				ui: {
 					router: () => {
-						return "/temoignages";
+						return `${siteUrl}/temoignages`;
 					},
 				},
 				fields: [
