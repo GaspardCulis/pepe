@@ -25,7 +25,7 @@ export default defineConfig({
 
 	build: {
 		outputFolder: "admin",
-		publicFolder: "public",
+		publicFolder: "tina/backend",
 	},
 	media: {
 		loadCustomStore: async () => {
