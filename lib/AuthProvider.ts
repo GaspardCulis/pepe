@@ -35,7 +35,7 @@ export default class AuthProvider extends AbstractAuthProvider {
 		props?: Record<string, string> | undefined,
 	): Promise<any> {
 		this.getLogToClient().signIn(
-			`${document.location.origin}/admin/auth/callback`,
+			`${document.location.origin}/auth/callback`,
 		);
 	}
 }

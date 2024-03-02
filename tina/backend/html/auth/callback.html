@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<script type="module">
-			import LogtoClientfrom from "https://cdn.jsdelivr.net/npm/@logto/browser@2.2.3/+esm";
+			import LogtoClient from "https://cdn.jsdelivr.net/npm/@logto/browser@2.2.3/+esm";
 
 			const logtoClient = new LogtoClient({
 				endpoint: "https://auth.gasdev.fr/",
@@ -15,10 +15,10 @@
 			try {
 				await logtoClient.handleSignInCallback(window.location.href);
 				bodyElement.innerText = "Logged in !";
-				window.location.href = "/admin";
+				window.location.href = "/admin/";
 			} catch {
 				bodyElement.innerText = "Failed to log in, redirecting...";
-				setTimeout(() => (window.location.href = "/admin"), 1000);
+				setTimeout(() => (window.location.href = "/admin/"), 1000);
 			}
 		</script>
 	</head>

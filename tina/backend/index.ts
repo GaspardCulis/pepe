@@ -22,6 +22,10 @@ const app = new Elysia()
 			prefix: "/admin",
 		}),
 	)
+	.get("/auth/callback", ({ set }) => {
+		set.headers["Content-Type"] = "text/html; charset=utf8";
+		return Bun.file("tina/backend/html/auth/callback.html");
+	})
 	.group("/api", (app) =>
 		app
 			.post("/pushcallback", pushcallback.POST)
