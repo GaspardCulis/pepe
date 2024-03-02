@@ -1,5 +1,6 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
+import { staticPlugin } from "@elysiajs/static";
 
 import { auth } from "./middleware/auth";
 
@@ -15,6 +16,12 @@ const authConfig = {
 
 const app = new Elysia()
 	.use(cors({ methods: "*" }))
+	.use(
+		staticPlugin({
+			assets: "tina/backend/admin",
+			prefix: "/admin",
+		}),
+	)
 	.group("/api", (app) =>
 		app
 			.post("/pushcallback", pushcallback.POST)
