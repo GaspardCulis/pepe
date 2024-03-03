@@ -3,6 +3,7 @@ import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
 
 import { auth } from "./middleware/auth";
+import { proxy } from "./plugins/proxy";
 
 import * as gql from "./routes/gql";
 import * as media from "./routes/media";
@@ -22,6 +23,12 @@ const app = new Elysia()
 		staticPlugin({
 			assets: "tina/backend/admin",
 			prefix: "/admin",
+		}),
+	)
+	.use(
+		proxy({
+			siteUrl,
+			route: "/*",
 		}),
 	)
 	.get("/auth/callback", ({ set }) => {
@@ -59,26 +66,6 @@ const app = new Elysia()
 					}),
 			),
 	)
-	.get("/*", async ({ request }) => {
-		const requestUrl = new URL(request.url);
-		const redirectUrl = new URL(requestUrl.pathname, siteUrl);
-
-		request.headers.set("host", new URL(siteUrl).host);
-
-		const siteResponse = await fetch(redirectUrl, {
-			headers: request.headers,
-		});
-
-		const responseHeaders = new Headers(siteResponse.headers);
-		responseHeaders.delete("content-encoding");
-
-		const responseBuffer = await siteResponse.arrayBuffer();
-
-		return new Response(responseBuffer, {
-			status: siteResponse.status,
-			headers: responseHeaders,
-		});
-	})
 	.listen(3000);
 
 console.log(`🦊🦙 Elysia Tina backend is running at ${app.server?.url}`);
