@@ -14,6 +14,8 @@ const authConfig = {
 	audience: import.meta.env.AUTH_API_AUDIENCE,
 };
 
+const siteUrl = "https://danielculis.fr";
+
 const app = new Elysia()
 	.use(cors({ methods: "*" }))
 	.use(
@@ -57,6 +59,26 @@ const app = new Elysia()
 					}),
 			),
 	)
+	.get("/*", async ({ request }) => {
+		const requestUrl = new URL(request.url);
+		const redirectUrl = new URL(requestUrl.pathname, siteUrl);
+
+		request.headers.set("host", new URL(siteUrl).host);
+
+		const siteResponse = await fetch(redirectUrl, {
+			headers: request.headers,
+		});
+
+		const responseHeaders = new Headers(siteResponse.headers);
+		responseHeaders.delete("content-encoding");
+
+		const responseBuffer = await siteResponse.arrayBuffer();
+
+		return new Response(responseBuffer, {
+			status: siteResponse.status,
+			headers: responseHeaders,
+		});
+	})
 	.listen(3000);
 
 console.log(`🦊🦙 Elysia Tina backend is running at ${app.server?.url}`);
