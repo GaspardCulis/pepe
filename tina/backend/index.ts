@@ -15,7 +15,7 @@ const authConfig = {
 	audience: import.meta.env.AUTH_API_AUDIENCE,
 };
 
-const siteUrl = "https://danielculis.fr";
+const siteUrl = import.meta.env.SITE;
 
 const app = new Elysia()
 	.use(cors({ methods: "*" }))
