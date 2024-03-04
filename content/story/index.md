@@ -37,11 +37,11 @@ Il reçoit le titre de Maître Artisan en 1991.
 A cette époque, il participe à de nombreuses expositions céramiques prestigieuses aux cotés de potiers renommés comme Robert Deblander, Dominique Pouchain, Denis Caraty, Marc Uzan et d’autres encore…
 Il participera ainsi à de nombreuses reprises au marché des Tupiniers de Lyon et exposera aux différentes éditions de la biennale des métiers d’art de Villeurbanne.
 
-![Vase cristallisé](https://pepe-cms.s3web.gasdev.fr/galery/culis_poterie_3806_dd2555520a.jpg)
+![Vase cristallisé](https://pepe-cms.s3web.gasdev.fr/galery/culis_poterie_3806_dd2555520a.webp)
 
 Dans ces années 90, ne souhaitant pas se borner à un seul horizon, aussi cristallisé soit-il, sa curiosité l’amène à s’intéresser à la technique des jarres à la corde. Son goût pour les défis le conduit à réaliser pour différentes communes des jarres monumentales nécessitant jusqu’à 600kg de terre. La taille de ces pièces impose une cuisson au bois dans des fosses creusées spécialement. Réalisée en public la cuisson assure un spectacle et une animation inoubliable !
 
-![Jarre à la corde](https://pepe-cms.s3web.gasdev.fr/galery/jarre_a_la_corde_8223f65436.jpg)
+![Jarre à la corde](https://pepe-cms.s3web.gasdev.fr/galery/jarre_a_la_corde_8223f65436.webp)
 
 Cette période de production artistique prolifique ne l’empêche pas de continuer à enseigner et à transmettre.
 En plus des cours qu’il continue à donner dans son atelier, il sera formateur pour la maison de la terre à Dieulefit pendant quelques années.
