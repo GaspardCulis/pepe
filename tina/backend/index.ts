@@ -28,7 +28,7 @@ const app = new Elysia()
 	.use(
 		proxy({
 			siteUrl,
-			route: "/*",
+			route: "/proxy/*",
 		}),
 	)
 	.get("/auth/callback", ({ set }) => {
