@@ -91,7 +91,7 @@ export const CMSTestimony = (props: { query: string, variables: object, data: an
         <p
           className="not-prose text-gray-500 text-sm"
           data-tina-field={tinaField(data.testimonies, "date")}
-        >{data.testimonies.date ? new Date(data.testimonies.date).toLocaleDateString() : ""}</p>
+        >{data.testimonies.date ? new Date(data.testimonies.date).toLocaleDateString("FR-fr") : ""}</p>
       </div>
     </>
   );
