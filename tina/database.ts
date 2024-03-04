@@ -6,7 +6,7 @@ const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
 const branch = process.env.GITHUB_BRANCH as string;
 
-if (!branch) {
+if (!(branch || isLocal)) {
 	throw new Error(
 		"No branch found. Make sure that you have set the GITHUB_BRANCH or process.env.VERCEL_GIT_COMMIT_REF environment variable.",
 	);
