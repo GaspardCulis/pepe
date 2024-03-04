@@ -4,6 +4,8 @@ services:
       context: .
     ports:
       - ${BACKEND_PORT:-3000}:3000
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
     depends-on:
       mongo-db:
         condition:
