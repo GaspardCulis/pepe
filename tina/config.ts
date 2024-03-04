@@ -47,7 +47,7 @@ export default defineConfig({
 						readonly: true,
 					},
 					router: () => {
-						return "/proxy/";
+						return "/";
 					},
 				},
 				fields: [
@@ -73,7 +73,7 @@ export default defineConfig({
 						readonly: true,
 					},
 					router({ document }) {
-						return `/proxy/parcours/${document._sys.filename.replace("index", "")}`;
+						return `/parcours/${document._sys.filename.replace("index", "")}`;
 					},
 				},
 				fields: [
@@ -99,7 +99,7 @@ export default defineConfig({
 				path: "content/categories",
 				ui: {
 					router: ({ document }) => {
-						return `/proxy/galerie/${document._sys.filename}`;
+						return `/galerie/${document._sys.filename}`;
 					},
 				},
 				fields: [
@@ -157,7 +157,7 @@ export default defineConfig({
 				path: "content/testimonies",
 				ui: {
 					router: () => {
-						return "/proxy/temoignages";
+						return "/temoignages";
 					},
 				},
 				fields: [

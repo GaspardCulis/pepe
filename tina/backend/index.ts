@@ -28,7 +28,7 @@ const app = new Elysia()
 	.use(
 		proxy({
 			siteUrl,
-			route: "/proxy/*",
+			route: "/*",
 		}),
 	)
 	.get("/", ({ set }) => (set.redirect = "/admin/"))
