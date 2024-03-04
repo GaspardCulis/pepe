@@ -12,7 +12,13 @@ const branch =
 	process.env.HEAD ||
 	"main";
 
-export const backendUrl = "http://localhost:3000";
+export const backendUrl = process.env.BACKEND_URL;
+
+if (!backendUrl) {
+	throw new Error(
+		"BACKEND_URL enviroment variable not found, make sure you define it.",
+	);
+}
 
 export default defineConfig({
 	branch,
