@@ -12,13 +12,7 @@ const branch =
 	process.env.HEAD ||
 	"main";
 
-export const backendUrl = process.env.BACKEND_URL;
-
-if (!backendUrl) {
-	throw new Error(
-		"BACKEND_URL enviroment variable not found, make sure you define it.",
-	);
-}
+export const backendUrl = document.location.origin;
 
 export default defineConfig({
 	branch,
