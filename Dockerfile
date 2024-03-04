@@ -8,7 +8,7 @@ LABEL maintainer="gasdev.lp@gmail.com" \
 RUN apk update
 
 # Install dependencies
-RUN apk --no-cache add git
+RUN apk --no-cache add git vips
 
 # Clone the project
 ARG APP_REPO_URL=https://github.com/GaspardCulis/pepe
@@ -16,6 +16,7 @@ RUN git clone --depth=1 "${APP_REPO_URL}" .
 
 # Install project dependencies
 RUN bun install
+RUN bun install sharp
 
 # Copy env variables
 COPY .env .
