@@ -31,7 +31,6 @@ const app = new Elysia()
 			route: "/*",
 		}),
 	)
-	.get("/", ({ set }) => (set.redirect = "/admin/"))
 	.get("/auth/callback", ({ set }) => {
 		set.headers["Content-Type"] = "text/html; charset=utf8";
 		return Bun.file("tina/backend/html/auth/callback.html");
