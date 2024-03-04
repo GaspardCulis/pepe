@@ -110,7 +110,7 @@ export const POST: Handler = async ({ request }) => {
 	// Load image from client
 	let buffer: Buffer;
 	try {
-		var t0 = performance.now();
+		const t0 = performance.now();
 		const array_buffer = await file.arrayBuffer();
 		buffer = Buffer.from(array_buffer);
 		console.log(
@@ -125,7 +125,7 @@ export const POST: Handler = async ({ request }) => {
 
 	// Optimize image
 	try {
-		var t0 = performance.now();
+		const t0 = performance.now();
 		buffer = await sharp(buffer).webp({ quality: 80 }).toBuffer();
 		const { dir, name } = path.parse(key);
 		key = path.format({ dir, name, ext: ".webp" });
