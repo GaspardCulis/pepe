@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import path from "path";
+import sharp from "sharp";
 import type { Handler } from "elysia";
 import {
 	S3Client,
@@ -99,13 +100,14 @@ export const POST: Handler = async ({ request }) => {
 	const directory = formData.get("directory") as string;
 	const filename = formData.get("filename") as string;
 	const file = formData.get("file") as File;
-	const key = path.join(
+	let key = path.join(
 		directory.replace(/^\//, "").replace(/\/$/, ""),
 		filename,
 	);
 
 	console.log("[POST] /media: Starting to upload " + key);
 
+	// Load image from client
 	let buffer: Buffer;
 	try {
 		var t0 = performance.now();
@@ -121,6 +123,26 @@ export const POST: Handler = async ({ request }) => {
 		return new Response("Failed to load file", { status: 500 });
 	}
 
+	// Optimize image
+	try {
+		var t0 = performance.now();
+		buffer = await sharp(buffer).webp({ quality: 80 }).toBuffer();
+		const { dir, name } = path.parse(key);
+		key = path.format({ dir, name, ext: ".webp" });
+		console.log(
+			"[POST] /media: Optimizing image took " +
+				Math.round(performance.now() - t0) +
+				"ms",
+		);
+	} catch (e) {
+		console.error(
+			"[POST] /media: Failed to optimize image with sharp: ",
+			e,
+		);
+		return new Response("Failed to process image", { status: 500 });
+	}
+
+	// Upload image to S3
 	const command = new PutObjectCommand({
 		Bucket: import.meta.env.AWS_BUCKET_NAME,
 		Key: key,
