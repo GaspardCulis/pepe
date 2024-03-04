@@ -12,7 +12,10 @@ const branch =
 	process.env.HEAD ||
 	"main";
 
-export const backendUrl = document.location.origin;
+export const backendUrl =
+	typeof window === "undefined"
+		? process.env.BACKEND_URL
+		: document.location.origin;
 
 export default defineConfig({
 	branch,
