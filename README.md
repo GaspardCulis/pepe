@@ -1,4 +1,12 @@
-# Le site web du grandpa 🚂
+<h1 align="center" style="margin-top: 0px;">pepe</h1>
+
+<p align="center">Le site web du grandpa 🚂</p>
+
+<div align="center">
+    <a href="https://uptime.gasdev.fr/status/pepe"><img src="https://uptime.gasdev.fr/api/badge/10/uptime/24" alt="CMS Backend uptime"></a>
+</div>
+
+# 
 
 ### Technologies utilisées :
 
