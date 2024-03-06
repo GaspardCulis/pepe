@@ -8,7 +8,7 @@ LABEL maintainer="gasdev.lp@gmail.com" \
 RUN apk update
 
 # Install dependencies
-RUN apk --no-cache add git vips
+RUN apk --no-cache add curl git vips
 
 # Clone the project
 ARG APP_REPO_URL=https://github.com/GaspardCulis/pepe
