@@ -12,6 +12,8 @@ services:
           service_completed_successfully
     links:
       - mongodb
+    healthcheck:
+      test: curl -f http://localhost:3000 || exit 1
   mongodb:
     image: docker.io/mongo:latest
     restart: always
