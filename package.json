@@ -18,7 +18,7 @@
 		"@elysiajs/stream": "^0.8.0",
 		"@emailjs/browser": "^3.11.0",
 		"@logto/browser": "^2.2.3",
-		"@tinacms/datalayer": "^1.2.32",
+		"@tinacms/datalayer": "1.2.34",
 		"@types/bun": "^1.0.8",
 		"astro": "^4.0.1",
 		"astro-seo": "^0.8.0",
@@ -32,12 +32,12 @@
 		"react-dom": "^18.2.0",
 		"sass": "^1.66.1",
 		"tailwindcss": "^3.3.3",
-		"tinacms": "^1.5.28",
-		"tinacms-gitprovider-github": "^1.0.3"
+		"tinacms": "^1.6.3",
+		"tinacms-gitprovider-github": "^1.0.5"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.10",
-		"@tinacms/cli": "^1.5.39",
+		"@tinacms/cli": "1.5.45",
 		"@types/node": "^20.11.19",
 		"@types/nodemailer": "^6.4.13",
 		"@types/react": "^18.2.56",
