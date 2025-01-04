@@ -3,44 +3,26 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "tinacms dev -c 'astro dev'",
+		"dev": "astro dev",
 		"start": "astro dev --host",
-		"build": "tinacms dev -c 'astro build'",
+		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/react": "^3.0.10",
 		"@astrojs/tailwind": "^5.0.3",
-		"@aws-sdk/client-s3": "^3.621.0",
-		"@elysiajs/cors": "^0.8.0",
-		"@elysiajs/static": "^0.8.1",
-		"@elysiajs/stream": "^0.8.0",
 		"@emailjs/browser": "^3.11.0",
-		"@logto/browser": "^2.2.3",
-		"@tinacms/datalayer": "1.2.34",
-		"@types/bun": "^1.0.8",
 		"astro": "^4.0.1",
 		"astro-seo": "^0.8.0",
-		"elysia": "^0.8.17",
-		"jose": "^5.2.2",
 		"marked": "^11.0.0",
-		"mongodb-level": "^0.0.4",
 		"prettier": "^3.0.3",
 		"prettier-plugin-astro": "^0.12.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
 		"sass": "^1.66.1",
-		"tailwindcss": "^3.3.3",
-		"tinacms": "^1.6.3",
-		"tinacms-gitprovider-github": "^1.0.5"
+		"tailwindcss": "^3.3.3"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.10",
-		"@tinacms/cli": "1.5.45",
 		"@types/node": "^20.11.19",
-		"@types/nodemailer": "^6.4.13",
-		"@types/react": "^18.2.56",
-		"@types/react-dom": "^18.2.19"
+		"@types/nodemailer": "^6.4.13"
 	}
 }
