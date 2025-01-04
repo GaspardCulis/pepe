@@ -19,7 +19,7 @@ const pages: NavbarMenu[] = [
 		submenus: stories.map((story) => {
 			return {
 				name: story.data.title,
-				href: "/parcours" + ("/" + story.id).replace("/index", ""), // Hacky
+				href: "/parcours" + story.id.replace("index", ""), // Hacky
 			};
 		}),
 	},
