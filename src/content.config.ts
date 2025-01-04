@@ -15,7 +15,7 @@ const categories = defineCollection({
 });
 
 const story = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/story" }),
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/story" }),
     schema: z.object({
         slug: z.string(),
         title: z.string()
