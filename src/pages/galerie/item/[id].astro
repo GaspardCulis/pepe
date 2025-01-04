@@ -1,46 +1,42 @@
 ---
-import { client } from "../../../../tina/__generated__/databaseClient";
-import { CMSMarkdown } from "../../../components/cms/CMSMarkdown";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-	const { data } = await client.queries.categoriesConnection();
+	const categories = await getCollection("categories");
 
-	const paths: any[] = [];
+	const paths: {
+		params: { id: string };
+		props: { category: CollectionEntry<"categories">; index: number };
+	}[] = [];
 
-	data.categoriesConnection.edges?.forEach((cat) => {
-		cat?.node?.items?.forEach((_, i) => {
-			
+	categories.forEach((category) => {
+		category.data.items.forEach((_, index) => {
 			paths.push({
 				params: {
-					id: `${cat?.node?._sys.filename}-${i}`
+					id: `${category.id}-${index}`,
 				},
 				props: {
-					relativePath: cat?.node?._sys.relativePath as string,
-					index: i
+					category,
+					index,
 				},
-			})
-		})
+			});
+		});
 	});
 
 	return paths;
 }
 
-const { relativePath, index } = Astro.props;
-const category = await client.queries.categories({ relativePath });
-const item = category.data.categories.items[index];
+const { category, index } = Astro.props;
+const item = category.data.items[index];
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
 	<main class="p-12 w-full flex flex-col place-items-center">
-		<div
-			class="relative grow-0 w-fit"
-		>
-			<img
-				src={item.image}
-				alt={item.name}
-			/>
+		<div class="relative grow-0 w-fit">
+			<Image src={item.image} alt={item.name} inferSize />
 			<div
 				class="close absolute left-4 top-4 w-12 h-12 bg-gray-600 border-gray-700 border-4 rounded-lg opacity-[0.3] hover:opacity-[1] cursor-pointer"
 				onclick="
@@ -50,12 +46,7 @@ const item = category.data.categories.items[index];
 			</div>
 		</div>
 		<div class="pt-12 prose lg:prose-xl text-justify">
-			<CMSMarkdown
-				collection="categories"
-				field="item"
-				{...category}
-				client:tina
-			/>
+			{item.description}
 		</div>
 	</main>
 </Layout>

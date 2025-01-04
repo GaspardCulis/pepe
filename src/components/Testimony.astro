@@ -1,16 +1,129 @@
 ---
-import { client } from "../../tina/__generated__/databaseClient";
-import { CMSTestimony } from "./cms/CMSTestimony";
+import { render, type CollectionEntry } from "astro:content";
 
 export interface Props {
-	relativePath: string;
+	testimony: CollectionEntry<"testimonies">;
 }
 
-const { relativePath } = Astro.props;
-
-const data = await client.queries.testimonies({ relativePath });
+const { testimony } = Astro.props;
+const { Content } = await render(testimony);
 ---
 
 <div class="testimony shadow-lg rounded-lg select-none">
-	<CMSTestimony client:visible {...data} />
+	<div
+		class="content border-b-2 px-16 py-8 text-center overflow-hidden max-h-[32rem]"
+	>
+		<Content />
+	</div>
+	<div
+		class="expand-wrapper w-full relative hidden -translate-y-10 cursor-pointer"
+	>
+		<div class="w-full absolute overflow-hidden flex justify-center">
+			<div
+				class="expand-text w-fit text-center rounded-full bg-slate-500 px-4 py-1 text-base text-slate-200 translate-y-10"
+			>
+				<label class="expand-text-closed pointer-events-none"
+					>Voir plus</label
+				>
+				<label class="expand-text-opened pointer-events-none"
+					>Voir moins</label
+				>
+			</div>
+		</div>
+	</div>
+	<div class="author_info text-center mb-12 p-6">
+		<h2 class="author not-prose text-3xl font-bold">
+			{testimony.data.author}
+		</h2>
+		{
+			testimony.data.date && (
+				<p class="not-prose text-gray-500 text-sm">
+					{testimony.data.date!.toString()}
+				</p>
+			)
+		}
+	</div>
 </div>
+<script>
+	for (let testimony of document.querySelectorAll(".testimony")) {
+		const content = testimony.querySelector(".content") as HTMLDivElement;
+
+		if (
+			content.scrollHeight > content.clientHeight ||
+			content.scrollWidth > content.clientWidth
+		) {
+			testimony.classList.add("overflows");
+
+			const observer = new window.IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("inview");
+				} else {
+					entry.target.classList.remove("inview");
+				}
+			});
+			observer.observe(testimony);
+		}
+	}
+
+	function toggleExpand(target: HTMLElement) {
+		const content_element =
+			target.parentElement?.parentElement?.parentElement?.querySelector(
+				".content",
+			) as HTMLElement;
+		content_element.classList.toggle("expanded");
+
+		target.classList.toggle("expanded");
+	}
+
+	for (let button of document.querySelectorAll(".expand-text")) {
+		(button as HTMLDivElement).addEventListener("click", (ev) => {
+			toggleExpand(ev.target as HTMLElement);
+		});
+	}
+</script>
+<style>
+	.content.expanded {
+		max-height: none;
+	}
+
+	.expand-text-closed {
+		display: block;
+	}
+	.expand-text-opened {
+		display: none;
+	}
+
+	.content.expanded
+		~ .expand-wrapper
+		> div
+		> .expand-text
+		> .expand-text-closed {
+		display: none;
+	}
+
+	.content.expanded
+		~ .expand-wrapper
+		> div
+		> .expand-text
+		> .expand-text-opened {
+		display: block;
+	}
+
+	.testimony.overflows > .content:not(.expanded) {
+		-webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
+	}
+
+	.testimony.overflows > .expand-wrapper {
+		display: block;
+	}
+
+	.expand-text {
+		transition: transform 800ms ease-in-out;
+		transition-delay: 200ms;
+	}
+</style>
+<style is:inline>
+	.testimony.overflows.inview > .expand-wrapper > div > .expand-text {
+		transform: translateY(0rem);
+	}
+</style>

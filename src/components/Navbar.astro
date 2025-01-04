@@ -1,6 +1,5 @@
 ---
-import { client } from "../../tina/__generated__/databaseClient";
-
+import { getCollection } from "astro:content";
 import NavbarItem from "./NavbarItem.astro";
 
 export interface Props {
@@ -9,34 +8,30 @@ export interface Props {
 
 const { selected_page } = Astro.props;
 
-const storyConnection = await client.queries.storyConnection();
-const categoriesConnection = await client.queries.categoriesConnection();
+const stories = await getCollection("story");
+const categories = await getCollection("categories");
 
 const pages: NavbarMenu[] = [
 	{ name: "Accueil", href: "/" },
 	{
 		name: "Un Potier",
 		href: "/parcours",
-		submenus: storyConnection.data.storyConnection.edges?.map((p) => {
+		submenus: stories.map((story) => {
 			return {
-				name: p?.node?.title as string,
-				href:
-					"/parcours" +
-					("/" + p?.node?._sys.filename).replace("/index", ""), // Hacky
+				name: story.data.title,
+				href: "/parcours" + story.id.replace("index", ""), // Hacky
 			};
 		}),
 	},
 	{
 		name: "Galerie",
 		href: "/galerie",
-		submenus: categoriesConnection.data.categoriesConnection.edges?.map(
-			(cat) => {
-				return {
-					name: cat?.node?.name as string,
-					href: `/galerie/${cat?.node?._sys.filename}`,
-				};
-			},
-		),
+		submenus: categories.map((cat) => {
+			return {
+				name: cat.data.name as string,
+				href: `/galerie/${cat.id}`,
+			};
+		}),
 	},
 	{
 		name: "Témoignages",
