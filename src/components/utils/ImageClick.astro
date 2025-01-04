@@ -1,0 +1,21 @@
+---
+import { getImage } from "astro:assets";
+
+export interface Props {
+	src: string;
+	alt: string;
+}
+
+const { src, alt } = Astro.props;
+
+const image = await getImage({ src, format: "webp", inferSize: true });
+---
+
+<a href={image.src}>
+	<img
+		src={image.src}
+		{alt}
+		width={image.attributes["width"]}
+		height={image.attributes["height"]}
+	/>
+</a>
