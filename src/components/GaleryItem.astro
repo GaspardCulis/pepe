@@ -1,17 +1,34 @@
 ---
-import { CMSGaleryItem } from "../components/cms/CMSGaleryItem";
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 
 export interface Props {
-	data: any;
+	category: CollectionEntry<"categories">;
 	index: number;
 }
 
-const { data, index } = Astro.props;
+const { category, index } = Astro.props;
+const item = category.data.items.at(index)!;
 ---
 
 <a
-	href={`/galerie/item/${data.data.categories._sys.filename}-${index}`}
+	href={`/galerie/item/${category.id}-${index}`}
 	class="galery-item flex-1 flex flex-col m-4 pb-8 aspect-[1/1]"
 >
-	<CMSGaleryItem client:tina {...data} index={index} />
+	<div class="flex">
+		<Image
+			src={item.image}
+			alt={item.name}
+			class="w-full h-full"
+			inferSize
+			densities={[1.5, 2]}
+		/>
+	</div>
+	<div class="flex flex-col">
+		<h2
+			class="text-md pt-3 xl:pt-5 xl:text-xl hover:underline hover:underline-offset-4 font-bold"
+		>
+			{item.name}
+		</h2>
+	</div>
 </a>

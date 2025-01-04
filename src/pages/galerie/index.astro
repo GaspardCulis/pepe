@@ -1,9 +1,10 @@
 ---
-import { client } from "../../../tina/__generated__/databaseClient";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 import Layout from "../../layouts/Layout.astro";
 
-const categoriesConnection = await client.queries.categoriesConnection();
+const categories = await getCollection("categories");
 ---
 
 <Layout title="Daniel Culis | Galerie" navbar_selected={2}>
@@ -15,27 +16,27 @@ const categoriesConnection = await client.queries.categoriesConnection();
 		</h1>
 		<div class="flex flex-wrap xl:space-x-8">
 			{
-				categoriesConnection.data.categoriesConnection.edges?.map(
-					(cat) => (
-						<a
-							href={`/galerie/${cat?.node?._sys.filename}`}
-							class="category flex-1 flex flex-col m-4 pb-8"
-						>
-							<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
-								<img
-									src={cat?.node?.vignette}
-									alt={cat?.node?._sys.filename}
-									class="w-full h-full object-cover"
-								/>
-							</div>
-							<div class="flex flex-col">
-								<h2 class="text-md pt-3 xl:pt-5 xl:text-xl hover:underline hover:underline-offset-4 font-bold">
-									{cat?.node?.name}
-								</h2>
-							</div>
-						</a>
-					),
-				)
+				categories.map((cat) => (
+					<a
+						href={`/galerie/${cat.id}`}
+						class="category flex-1 flex flex-col m-4 pb-8"
+					>
+						<div class="flex items-center truncate aspect-[2/3] min-w-[200px]">
+							<Image
+								src={cat.data.vignette}
+								alt={cat.data.name}
+								class="w-full h-full object-cover"
+								inferSize
+								densities={[1.5, 2]}
+							/>
+						</div>
+						<div class="flex flex-col">
+							<h2 class="text-md pt-3 xl:pt-5 xl:text-xl hover:underline hover:underline-offset-4 font-bold">
+								{cat.data.name}
+							</h2>
+						</div>
+					</a>
+				))
 			}
 		</div>
 	</main>

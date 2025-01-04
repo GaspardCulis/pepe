@@ -1,13 +1,10 @@
 ---
-import { client } from "../../../tina/__generated__/databaseClient";
+import { getCollection } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 import Testimony from "../../components/Testimony.astro";
 
-const testimoniesConnection = await client.queries.testimoniesConnection();
-const testimonies = testimoniesConnection.data.testimoniesConnection.edges?.map(
-	(t) => t?.node?._sys.relativePath,
-) as string[];
+const testimonies = await getCollection("testimonies");
 ---
 
 <Layout title="Daniel Culis | Témoignages" navbar_selected={3}>
@@ -16,7 +13,7 @@ const testimonies = testimoniesConnection.data.testimoniesConnection.edges?.map(
 			{
 				(testimonies || []).map((t) => (
 					<div class="px-3 pt-6">
-						<Testimony relativePath={t} />
+						<Testimony testimony={t} />
 					</div>
 				))
 			}

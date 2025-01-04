@@ -1,39 +1,32 @@
 ---
-import { client } from '../../../tina/__generated__/databaseClient'
-import { CMSMarkdown } from "../../components/cms/CMSMarkdown";
+import { getCollection, render } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-	const storyConnection = await client.queries.storyConnection();
+	const stories = await getCollection("story");
 
-	return storyConnection.data.storyConnection.edges?.map((p) => {
+	return stories.map((story) => {
 		return {
 			params: {
-				slug:
-					p?.node?._sys.filename == "index"
-						? undefined
-						: p?.node?._sys.filename,
+				slug: story.id == "index" ? undefined : story.id,
 			},
 			props: {
-				relativePath: p?.node?._sys.relativePath as string,
+				story,
 			},
 		};
 	});
 }
 
-const { relativePath } = Astro.props;
+const { story } = Astro.props;
 
-const content = await client.queries.story({ relativePath });
+const { Content } = await render(story);
 ---
 
-<Layout
-	title={`Daniel Culis | ${content.data.story.title}`}
-	navbar_selected={1}
->
+<Layout title={`Daniel Culis | ${story.data.title}`} navbar_selected={1}>
 	<main
 		class="m-auto pt-12 w-3/4 lg:w-3/5 2xl:w-2/5 prose lg:prose-xl text-justify"
 	>
-		<CMSMarkdown collection="story" field="body" {...content} client:tina />
+		<Content />
 	</main>
 </Layout>

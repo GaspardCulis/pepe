@@ -5,4 +5,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
 	output: "static",
 	integrations: [tailwind()],
+	image: {
+		domains: ["pepe-cms.s3web.gasdev.fr"]
+	}
 });
