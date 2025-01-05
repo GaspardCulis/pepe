@@ -65,10 +65,10 @@ items:
   - name: Vase
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152725.jpg'
     description: ''
-  - name: Bol
+  - name: Coupe
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152727.jpg'
     description: ''
-  - name: Bol
+  - name: Coupe
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152728.jpg'
     description: ''
   - name: Goutte
@@ -80,10 +80,10 @@ items:
   - name: Vase
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152731.jpg'
     description: ''
-  - name: Assiette
+  - name: Plat
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152732.jpg'
     description: ''
-  - name: Assiette
+  - name: Plat
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152733.jpg'
     description: ''
   - name: Vase
@@ -92,7 +92,7 @@ items:
   - name: Goutte
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152735.jpg'
     description: ''
-  - name: Assiette
+  - name: Plat
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152736.jpg'
     description: ''
   - name: Goutte
@@ -152,7 +152,7 @@ items:
   - name: Vase
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152763.jpg'
     description: ''
-  - name: Assiette
+  - name: Plat
     image: 'https://pepe-cms.s3web.gasdev.fr/galery/cristallisations/P1152764.jpg'
     description: ''
   - name: Vase
