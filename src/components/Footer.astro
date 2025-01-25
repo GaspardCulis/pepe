@@ -3,8 +3,14 @@
 ---
 
 <footer class="flex content-center justify-between pb-10 pt-10">
-	<p class="text-sm text-gray-500">© 2023 Gaspard Culis</p>
-	<a href="https://github.com/GaspardCulis/pepe">
+	<p class="text-sm text-gray-500">
+		© 2023 Gaspard Culis | Photos <a
+			class="inline underline"
+			target="_blank"
+			href="https://rise4motion.com/">Rise4motion</a
+		>
+	</p>
+	<a id="github-link" href="https://github.com/GaspardCulis/pepe">
 		<img
 			src="/icon/github-mark.svg"
 			alt="Github icon"
@@ -19,11 +25,14 @@
 		margin-left: 5%;
 	}
 
-	a {
-		transition: 0.2s;
+	#github-link {
 		margin-right: 5%;
 		width: 20px;
 		height: 20px;
+	}
+
+	a {
+		transition: 0.2s;
 		filter: brightness(100%);
 	}
 
