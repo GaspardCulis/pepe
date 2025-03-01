@@ -1,13 +1,16 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
     output: "static",
-    integrations: [tailwind(), mdx()],
+    integrations: [mdx()],
     image: {
         domains: ["pepe-cms.s3web.gasdev.fr"]
+    },
+    vite: {
+        plugins: [tailwindcss()]
     }
 });
