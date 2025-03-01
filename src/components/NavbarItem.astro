@@ -12,7 +12,7 @@ const { selected, data } = Astro.props;
 		selected ? (
 			<a
 				href={data.href}
-				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl z-20 rounded bg-gray-900 sm:bg-transparent sm:text-orange-300 sm:p-0 font-bold"
+				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl z-20 rounded-sm bg-gray-900 sm:bg-transparent sm:text-orange-300 sm:p-0 font-bold"
 				aria-current="page"
 			>
 				{data.name}
@@ -20,7 +20,7 @@ const { selected, data } = Astro.props;
 		) : (
 			<a
 				href={data.href}
-				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl z-20 hover:bg-gray-900 rounded sm:hover:bg-transparent sm:hover:text-orange-300 sm:p-0"
+				class="block py-2 pr-4 pl-3 text-white text-lg lg:text-xl z-20 hover:bg-gray-900 rounded-sm sm:hover:bg-transparent sm:hover:text-orange-300 sm:p-0"
 			>
 				{data.name}
 			</a>
